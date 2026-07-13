@@ -1,5 +1,12 @@
-# Contenu placeholder — phase 3 (socle technique)
+# Contenu — infos pratiques
 
-Les fichiers de ce dossier contiennent des **valeurs d'exemple**, nécessaires pour que le site compile et pour valider le modèle de données (§D.3 de l'étude). Aucune de ces valeurs n'est une information réelle sur MFP Sport.
+`infos-pratiques.json` alimente le footer, la page Contact et le Schema.org.
 
-À remplacer en phase 4 (préparation du contenu) par les informations validées par Maxime — voir `docs/etude-refonte.md` §B.2 et §B.3 pour la liste des éléments à confirmer (téléphone, horaires actuels, etc.).
+État au 13/07/2026 :
+
+- **Adresse, e-mail, liens Sportigo, Instagram** : confirmés.
+- **Horaires** : repris de l'ancien site (données 2024) — **à reconfirmer** par Maxime.
+- **Téléphone** : inconnu → laissé vide (le numéro n'apparaît nulle part tant qu'il
+  n'est pas renseigné). Remplir la valeur `telephone` pour l'afficher automatiquement.
+
+`temoignages.json` : vide, en attente de témoignages réels avec accord écrit (§B.3).

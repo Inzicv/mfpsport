@@ -12,7 +12,9 @@ const year = new Date().getFullYear();
       {infos && (
         <address>
           {infos.data.adresse}<br />
-          <a href={`tel:${infos.data.telephone}`}>{infos.data.telephone}</a><br />
+          {infos.data.telephone && (
+            <><a href={`tel:${infos.data.telephone}`}>{infos.data.telephone}</a><br /></>
+          )}
           <a href={`mailto:${infos.data.email}`}>{infos.data.email}</a>
         </address>
       )}

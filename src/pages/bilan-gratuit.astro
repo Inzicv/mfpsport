@@ -4,20 +4,58 @@ import Cta from '../components/Cta.astro';
 ---
 
 <Layout
-  title="Bilan gratuit"
-  description="Réservez votre séance d'essai et votre bilan gratuit chez MFP Sport à Arles."
+  title="Votre bilan gratuit"
+  description="Réservez votre séance d'essai et votre bilan initial gratuit chez MFP Sport à Arles : séance accompagnée, échange avec un coach, définition de vos objectifs. Sans engagement."
 >
-  <section class="page">
-    <h1>Votre bilan est offert</h1>
-    <p><em>Contenu en préparation (phase 4) — déroulé de la séance, pour qui, sans engagement.</em></p>
-    <Cta />
-  </section>
+  <header class="page-hero">
+    <h1>Votre premier bilan est offert</h1>
+    <p>
+      Une séance d'essai accompagnée, un échange avec un coach et une première évaluation —
+      sans engagement. Le point de départ de votre progression.
+    </p>
+  </header>
+
+  <div class="page prose">
+    <h2>Ce que comprend votre séance</h2>
+    <ul>
+      <li>Une séance de sport accompagnée par un coach.</li>
+      <li>Un échange pour comprendre votre parcours et vos attentes.</li>
+      <li>Une première évaluation de votre condition physique.</li>
+      <li>La définition de vos objectifs.</li>
+      <li>Une orientation vers la formule ou le suivi le plus adapté à votre profil.</li>
+    </ul>
+
+    <h2>Pour qui ?</h2>
+    <p>
+      Pour tout le monde, quel que soit votre niveau : que vous repreniez le sport après une
+      longue pause, que vous visiez une remise en forme, ou que vous soyez un sportif confirmé
+      cherchant à passer un cap. Aucun niveau n'est requis — le bilan sert justement à partir
+      du bon point.
+    </p>
+
+    <h2>Comment ça se passe ?</h2>
+    <ol>
+      <li>Vous réservez votre créneau en ligne via Sportigo.</li>
+      <li>Vous venez au centre, à Arles — prévoyez une tenue de sport.</li>
+      <li>Vous repartez avec une vision claire de vos objectifs et des étapes pour les atteindre.</li>
+    </ol>
+
+    <p class="reassurance">
+      Sans engagement. Sans pression. Un simple point de départ, offert.
+    </p>
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
 </Layout>
 
 <style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  .reassurance {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-blue-deep);
+    font-size: 1.2rem;
+    margin-top: 2rem;
   }
 </style>

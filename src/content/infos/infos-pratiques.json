@@ -1,16 +1,16 @@
 {
   "infos-pratiques": {
-    "adresse": "15 Chemin des Moines, 13200 Arles — PLACEHOLDER, à valider",
-    "telephone": "+33 0 00 00 00 00",
+    "adresse": "15 Chemin des Moines, 13200 Arles",
+    "telephone": "",
     "email": "contact@mfpsport.com",
     "horaires": [
-      { "jour": "Lundi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Mardi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Mercredi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Jeudi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Vendredi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Samedi", "plage": "PLACEHOLDER — à confirmer (§B.2)" },
-      { "jour": "Dimanche", "plage": "Fermé — à confirmer" }
+      { "jour": "Lundi", "plage": "8h – 20h" },
+      { "jour": "Mardi", "plage": "8h – 20h" },
+      { "jour": "Mercredi", "plage": "8h – 20h" },
+      { "jour": "Jeudi", "plage": "8h – 20h" },
+      { "jour": "Vendredi", "plage": "8h – 20h" },
+      { "jour": "Samedi", "plage": "8h – 13h" },
+      { "jour": "Dimanche", "plage": "Fermé" }
     ],
     "reseaux": {
       "instagram": "https://www.instagram.com/mfpsport/"

@@ -1,23 +1,80 @@
 ---
-// À réécrire à partir du texte existant (voir docs/audit/contenus-pages-extraits.txt) :
-// l'ancienne version contient un placeholder "[votre email de contact]" non résolu.
+// Réécrite à partir de la version de l'ancien site (le placeholder
+// « [votre email de contact] » est remplacé par l'e-mail confirmé).
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const infos = await getEntry('infos', 'infos-pratiques');
+const email = infos!.data.email;
 ---
 
 <Layout
   title="Politique de confidentialité"
-  description="Politique de confidentialité du site MFP Sport."
+  description="Politique de confidentialité du site MFP Sport : données collectées, utilisation, droits et cookies."
+  noindex
 >
-  <section class="page">
+  <div class="page prose">
     <h1>Politique de confidentialité</h1>
-    <p><em>Contenu à réécrire en phase 4 à partir de la version existante (placeholder e-mail à corriger).</em></p>
-  </section>
-</Layout>
+    <p>
+      Chez MFP Sport, nous accordons une grande importance à la protection de vos données
+      personnelles. Cette politique explique comment nous collectons, utilisons et protégeons
+      vos informations lorsque vous visitez notre site <strong>mfpsport.com</strong>.
+    </p>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+    <h2>1. Informations collectées</h2>
+    <p>Nous pouvons collecter et traiter les types de données suivants :</p>
+    <ul>
+      <li><strong>Données d'identification</strong> : nom, prénom, adresse e-mail, téléphone, lorsque vous nous contactez.</li>
+      <li><strong>Données de navigation</strong> : données techniques éventuellement collectées à des fins de mesure d'audience.</li>
+    </ul>
+    <p>
+      Les réservations, inscriptions et paiements sont gérés par la plateforme externe
+      Sportigo, qui applique sa propre politique de confidentialité.
+    </p>
+
+    <h2>2. Utilisation des données</h2>
+    <ul>
+      <li>Répondre à vos demandes via nos moyens de contact.</li>
+      <li>Améliorer notre site et nos services.</li>
+      <li>Respecter nos obligations légales.</li>
+    </ul>
+
+    <h2>3. Partage des données</h2>
+    <p>
+      MFP Sport ne partage pas vos données personnelles avec des tiers sans votre consentement,
+      sauf auprès de nos prestataires techniques (hébergement, plateforme de réservation) ou
+      lorsque la loi l'exige.
+    </p>
+
+    <h2>4. Sécurité des données</h2>
+    <p>
+      Nous mettons en œuvre des mesures techniques et organisationnelles pour protéger vos
+      données contre toute perte, vol ou accès non autorisé.
+    </p>
+
+    <h2>5. Vos droits</h2>
+    <p>
+      Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement,
+      d'opposition et de portabilité de vos données. Pour les exercer, contactez-nous à
+      <a href={`mailto:${email}`}>{email}</a>.
+    </p>
+
+    <h2>6. Cookies</h2>
+    <p>
+      Notre site limite au maximum l'usage de cookies. Vous pouvez configurer votre navigateur
+      pour les refuser ; certaines fonctionnalités pourraient alors ne pas fonctionner
+      normalement.
+    </p>
+
+    <h2>7. Modifications</h2>
+    <p>
+      Cette politique peut être mise à jour. Toute modification sera publiée sur cette page.
+    </p>
+
+    <h2>8. Contact</h2>
+    <p>
+      Pour toute question relative à cette politique, écrivez-nous à
+      <a href={`mailto:${email}`}>{email}</a>.
+    </p>
+  </div>
+</Layout>
