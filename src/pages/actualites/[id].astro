@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const actualites = await getCollection('actualites');
+  return actualites.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={entry.data.titre} description={entry.data.chapo}>
+  <article class="page">
+    <h1>{entry.data.titre}</h1>
+    <p class="date">{entry.data.date.toLocaleDateString('fr-FR')}</p>
+    <Content />
+  </article>
+</Layout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .date {
+    color: var(--color-slate);
+    font-size: 0.9rem;
+  }
+</style>

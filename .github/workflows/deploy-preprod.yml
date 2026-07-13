@@ -1,0 +1,48 @@
+name: Déploiement préproduction (mfpsport.fr)
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-preprod
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build Astro (préproduction — noindex)
+        run: npm run build
+        env:
+          SITE_URL: https://mfpsport.fr
+          PREPROD: 'true'
+
+      - name: Copier le .htaccess de préproduction (auth + noindex)
+        run: cp ovh/preprod.htaccess dist/.htaccess
+
+      # Mêmes secrets que la production ; server-dir pointe vers le dossier
+      # du multisite mfpsport.fr sur l'hébergement OVH.
+      - name: Déployer sur OVH (SFTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          username: ${{ secrets.OVH_FTP_USERNAME }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ./preprod/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.htpasswd

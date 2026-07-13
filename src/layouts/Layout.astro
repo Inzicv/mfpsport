@@ -1,0 +1,69 @@
+---
+// Layout de base — gère SEO (title/meta), Open Graph et le schema.org HealthClub
+// commun à toutes les pages. Voir docs/etude-refonte.md §D.1 et §H.6.
+import '../styles/global.css';
+import { getEntry } from 'astro:content';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** true sur toutes les pages de la préprod : injecte un <meta name="robots" content="noindex"> */
+  noindex?: boolean;
+}
+
+// La préprod entière est en noindex (build avec PREPROD=true — voir
+// .github/workflows/deploy-preprod.yml), qu'une page le précise ou non.
+const { title, description, noindex = process.env.PREPROD === 'true' } = Astro.props;
+
+const infos = await getEntry('infos', 'infos-pratiques');
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthClub',
+  name: 'MFP Sport',
+  url: Astro.site?.toString(),
+  telephone: infos?.data.telephone,
+  email: infos?.data.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: infos?.data.adresse,
+    addressLocality: 'Arles',
+    addressCountry: 'FR',
+  },
+  sameAs: [infos?.data.reseaux.instagram, infos?.data.reseaux.facebook].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{title} | MFP Sport</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} | MFP Sport`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

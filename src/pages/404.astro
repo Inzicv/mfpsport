@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+---
+
+<Layout title="Page introuvable" description="Cette page n'existe pas ou a été déplacée." noindex>
+  <section class="page">
+    <h1>Page introuvable</h1>
+    <p>Cette page n'existe pas ou a été déplacée.</p>
+    <p><a href="/">Retour à l'accueil</a></p>
+    <Cta />
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem);
+    text-align: center;
+  }
+</style>

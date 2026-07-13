@@ -1,0 +1,7 @@
+# À déployer sur mfpsport.fr UNIQUEMENT après la bascule du .com (étape 11
+# du plan de migration, docs/etude-refonte.md §I) — remplace preprod.htaccess.
+# Redirige tout le domaine .fr vers .com, sans perte de chemin.
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)?mfpsport\.fr$ [NC]
+RewriteRule ^(.*)$ https://mfpsport.com/$1 [R=301,L]
