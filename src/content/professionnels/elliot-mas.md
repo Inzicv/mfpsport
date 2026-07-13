@@ -1,6 +1,7 @@
 ---
 nom: Elliot Mas
 role: Ostéopathe D.O.
+photo: ../../assets/images/portrait-elliot-mas-osteopathe.jpg
 diplomes:
   - Diplôme d'ostéopathe (D.O.)
 specialites:

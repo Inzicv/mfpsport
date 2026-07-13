@@ -7,17 +7,20 @@ import { glob, file } from 'astro/loaders';
 
 const professionnels = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/professionnels' }),
-  schema: z.object({
-    nom: z.string(),
-    role: z.string(),
-    photo: z.string().optional(),
-    diplomes: z.array(z.string()).default([]),
-    specialites: z.array(z.string()).default([]),
-    joursPresence: z.string().optional(),
-    lienRdv: z.string().url().optional(),
-    ordre: z.number().default(0),
-    actif: z.boolean().default(true),
-  }),
+  // `image()` fait passer les portraits par l'optimiseur Astro (WebP/AVIF,
+  // dimensions déclarées). Le chemin dans le frontmatter est relatif au fichier .md.
+  schema: ({ image }) =>
+    z.object({
+      nom: z.string(),
+      role: z.string(),
+      photo: image().optional(),
+      diplomes: z.array(z.string()).default([]),
+      specialites: z.array(z.string()).default([]),
+      joursPresence: z.string().optional(),
+      lienRdv: z.string().url().optional(),
+      ordre: z.number().default(0),
+      actif: z.boolean().default(true),
+    }),
 });
 
 const actualites = defineCollection({

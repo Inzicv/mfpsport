@@ -3,6 +3,8 @@
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import heroImg from '../assets/images/preparation-physique-sprint-arles.jpg';
 
 const actualites = (await getCollection('actualites'))
   .filter((a) => a.data.publie)
@@ -35,12 +37,23 @@ const etapes = [
   description="MFP Sport à Arles : accompagnement sportif premium et humain — entraînement, nutrition, récupération et préparation mentale. Réservez votre bilan gratuit."
 >
   <section class="hero">
-    <h1>Votre préparation physique, encadrée par des professionnels — à Arles</h1>
-    <p>
-      Un accompagnement sportif personnalisé, premium et pluridisciplinaire : entraînement,
-      nutrition, récupération et préparation mentale.
-    </p>
-    <Cta />
+    <Image
+      class="hero__img"
+      src={heroImg}
+      alt="Séance de préparation physique en sprint résisté à MFP Sport, Arles"
+      loading="eager"
+      widths={[640, 1024, 1600]}
+      sizes="100vw"
+    />
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1>Votre préparation physique, encadrée par des professionnels — à Arles</h1>
+      <p>
+        Un accompagnement sportif personnalisé, premium et pluridisciplinaire : entraînement,
+        nutrition, récupération et préparation mentale.
+      </p>
+      <Cta />
+    </div>
   </section>
 
   <section class="profils">
@@ -116,10 +129,37 @@ const etapes = [
 
 <style>
   .hero {
-    background: var(--color-blue-night);
+    position: relative;
     color: #fff;
     padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem);
     text-align: center;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      rgba(11, 39, 64, 0.72),
+      rgba(11, 39, 64, 0.82)
+    );
+  }
+
+  .hero__content {
+    max-width: 55rem;
+    margin-inline: auto;
   }
 
   .hero h1 {

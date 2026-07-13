@@ -1,6 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
+import { Image } from 'astro:assets';
+import vertimax from '../assets/images/entrainement-vertimax-mfp-sport.jpg';
+import plan from '../assets/images/plan-salle-mfp-sport-arles.jpg';
 ---
 
 <Layout
@@ -31,6 +34,14 @@ import Cta from '../components/Cta.astro';
       travail fonctionnel et la mobilité.
     </p>
 
+    <Image
+      class="media"
+      src={plan}
+      alt="Plan de la salle MFP Sport à Arles : zone d'entraînement, piste, zone fonctionnelle et box praticiens"
+      widths={[480, 768]}
+      sizes="(max-width: 44rem) 100vw, 44rem"
+    />
+
     <h2>Les outils de musculation</h2>
     <p>
       La salle est équipée d'un Half Rack WIIT Pro et d'une cage de cross-training à trois
@@ -52,6 +63,14 @@ import Cta from '../components/Cta.astro';
       magnétiques Voltra, le Battle4Run The Crab (course et résistance), les BlazePods
       (réactivité, vitesse, coordination) et la K Box4 pour l'entraînement excentrique.
     </p>
+
+    <Image
+      class="media"
+      src={vertimax}
+      alt="Entraînement sur VertiMax à MFP Sport, développement de l'explosivité"
+      widths={[480, 768]}
+      sizes="(max-width: 44rem) 100vw, 44rem"
+    />
 
     <h2>Les outils de mesure et de tests</h2>
     <p>

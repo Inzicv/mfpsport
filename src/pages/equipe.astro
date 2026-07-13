@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 
 const pros = (await getCollection('professionnels'))
   .filter((p) => p.data.actif)
@@ -9,6 +10,14 @@ const pros = (await getCollection('professionnels'))
 const rendus = await Promise.all(
   pros.map(async (p) => ({ data: p.data, Content: (await render(p)).Content }))
 );
+
+const initiales = (nom: string) =>
+  nom
+    .split(' ')
+    .map((m) => m[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 ---
 
 <Layout
@@ -29,6 +38,19 @@ const rendus = await Promise.all(
         <ul class="equipe__grid">
           {rendus.map(({ data, Content }) => (
             <li class="pro">
+              {data.photo ? (
+                <Image
+                  class="pro__photo"
+                  src={data.photo}
+                  alt={`${data.nom}, ${data.role} chez MFP Sport`}
+                  width={120}
+                  height={120}
+                />
+              ) : (
+                <span class="pro__photo pro__photo--placeholder" aria-hidden="true">
+                  {initiales(data.nom)}
+                </span>
+              )}
               <h2>{data.nom}</h2>
               <p class="pro__role">{data.role}</p>
               {data.diplomes.length > 0 && (
@@ -75,6 +97,25 @@ const rendus = await Promise.all(
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     padding: 1.75rem;
+  }
+
+  .pro__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .pro__photo--placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-blue-night);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
   }
 
   .pro__role {
