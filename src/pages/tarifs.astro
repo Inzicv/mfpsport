@@ -1,0 +1,76 @@
+---
+// Les tarifs affichés proviennent exclusivement de la collection `offres` —
+// jamais de valeurs codées en dur ici. Voir docs/etude-refonte.md §B.1 :
+// plusieurs points tarifaires restent à valider par Maxime avant publication.
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const offres = (await getCollection('offres')).sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<Layout
+  title="Tarifs"
+  description="Les formules MFP Sport à Arles : abonnements, cours collectifs, préparation physique individuelle. Bilan gratuit offert."
+>
+  <section class="page">
+    <h1>Les tarifs</h1>
+    {
+      offres.length === 0 ? (
+        <p><em>Grille tarifaire en préparation (phase 4, en attente de validation des tarifs par Maxime — §B.1).</em></p>
+      ) : (
+        <ul class="offres__grid">
+          {offres.map((o) => (
+            <li>
+              <h3>{o.data.nom}</h3>
+              <p class="offres__prix">
+                {o.data.prix} € <span>/ {o.data.unite}</span>
+              </p>
+              {o.data.idealPour && <p><strong>Idéal pour :</strong> {o.data.idealPour}</p>}
+              <ul>
+                {o.data.inclusions.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .offres__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .offres__grid > li {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+  }
+
+  .offres__prix {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-blue-deep);
+  }
+
+  .offres__prix span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--color-slate);
+  }
+</style>

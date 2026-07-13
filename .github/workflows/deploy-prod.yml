@@ -1,0 +1,46 @@
+name: Déploiement production (mfpsport.com)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build Astro (production)
+        run: npm run build
+        env:
+          SITE_URL: https://mfpsport.com
+
+      - name: Copier le .htaccess de production
+        run: cp ovh/.htaccess dist/.htaccess
+
+      # Secrets requis (Settings → Secrets and variables → Actions) :
+      #   OVH_FTP_SERVER, OVH_FTP_USERNAME, OVH_FTP_PASSWORD
+      - name: Déployer sur OVH (SFTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          username: ${{ secrets.OVH_FTP_USERNAME }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./dist/
+          server-dir: ./www/
+          exclude: |
+            **/.git*
+            **/.git*/**

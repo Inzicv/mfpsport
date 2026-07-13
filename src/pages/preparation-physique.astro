@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const pros = (await getCollection('professionnels')).filter(
+  (p) => p.data.actif && p.data.specialites.includes('preparation-physique')
+);
+---
+
+<Layout
+  title="Préparation physique & coaching sportif à Arles"
+  description="Préparation physique personnalisée à Arles : bilans, tests physiques, coaching individuel et équipements haute performance."
+>
+  <section class="page">
+    <h1>Préparation physique</h1>
+    <p><em>Contenu en préparation (phase 4) — équipements, méthode, bilans, tests physiques.</em></p>
+    {
+      pros.length > 0 && (
+        <ul>
+          {pros.map((p) => (
+            <li>{p.data.nom}</li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+</style>

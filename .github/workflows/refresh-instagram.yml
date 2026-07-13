@@ -1,0 +1,42 @@
+name: Rafraîchissement du fil Instagram
+
+on:
+  schedule:
+    # Lundi et jeudi, 6h du matin (UTC) — voir docs/etude-refonte.md §D.8.
+    - cron: '0 6 * * 1,4'
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Secrets requis (Settings → Secrets and variables → Actions) :
+      #   INSTAGRAM_ACCESS_TOKEN, INSTAGRAM_USER_ID
+      # En leur absence, le script sort en succès sans rien modifier.
+      - name: Récupérer les derniers posts Instagram
+        run: node scripts/refresh-instagram.mjs
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+
+      - name: Committer les posts mis à jour (si changement)
+        run: |
+          git config user.name "mfpsport-bot"
+          git config user.email "bot@mfpsport.com"
+          git add src/content/instagram public/instagram
+          if git diff --cached --quiet; then
+            echo "Aucun changement — le fil Instagram est déjà à jour."
+          else
+            git commit -m "Fil Instagram : rafraîchissement automatique"
+            git push origin main
+          fi

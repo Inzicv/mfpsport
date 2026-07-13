@@ -1,0 +1,148 @@
+---
+// Navigation principale — voir docs/etude-refonte.md §E (arborescence) et §G.4.
+import { getEntry } from 'astro:content';
+import Cta from './Cta.astro';
+
+const infos = await getEntry('infos', 'infos-pratiques');
+
+const nav = [
+  { href: '/le-centre/', label: 'Le centre' },
+  {
+    href: '/preparation-physique/',
+    label: 'Nos pôles',
+    children: [
+      { href: '/preparation-physique/', label: 'Entraînement' },
+      { href: '/nutrition/', label: 'Nutrition' },
+      { href: '/recuperation/', label: 'Récupération' },
+      { href: '/preparation-mentale/', label: 'Mental' },
+    ],
+  },
+  { href: '/equipe/', label: "L'équipe" },
+  { href: '/tarifs/', label: 'Tarifs' },
+  { href: '/equipes-clubs/', label: 'Équipes & clubs' },
+  { href: '/actualites/', label: 'Actualités' },
+  { href: '/contact/', label: 'Contact' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="/" class="site-header__logo">MFP Sport</a>
+
+    <nav class="site-header__nav" aria-label="Navigation principale">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+              {item.children && (
+                <ul class="site-header__submenu">
+                  {item.children.map((child) => (
+                    <li>
+                      <a href={child.href}>{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      {infos && (
+        <a class="site-header__espace-client" href={infos.data.lienEspaceClient} rel="noopener">
+          Espace client
+        </a>
+      )}
+      <Cta />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem clamp(1rem, 4vw, 3rem);
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(11, 39, 64, 0.06);
+  }
+
+  .site-header__logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-blue-night);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-header__nav ul {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-header__nav > ul > li {
+    position: relative;
+  }
+
+  .site-header__nav a {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .site-header__nav a:hover {
+    color: var(--color-blue-deep);
+  }
+
+  .site-header__submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: var(--shadow-card);
+    padding: 0.5rem 0;
+    min-width: 12rem;
+    border-radius: var(--radius-md);
+    z-index: 10;
+  }
+
+  .site-header__nav > ul > li:hover .site-header__submenu,
+  .site-header__nav > ul > li:focus-within .site-header__submenu {
+    display: flex;
+  }
+
+  .site-header__submenu a {
+    padding: 0.4rem 1rem;
+    display: block;
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-header__espace-client {
+    font-size: 0.875rem;
+    color: var(--color-slate);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .site-header__nav {
+      display: none;
+    }
+  }
+</style>

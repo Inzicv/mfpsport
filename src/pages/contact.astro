@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const infos = await getEntry('infos', 'infos-pratiques');
+---
+
+<Layout
+  title="Contact"
+  description="Contactez MFP Sport à Arles : adresse, téléphone, horaires, accès."
+>
+  <section class="page">
+    <h1>Contact</h1>
+    {infos && (
+      <address>
+        {infos.data.adresse}<br />
+        <a href={`tel:${infos.data.telephone}`}>{infos.data.telephone}</a><br />
+        <a href={`mailto:${infos.data.email}`}>{infos.data.email}</a>
+      </address>
+    )}
+    <p><em>Carte et formulaire de contact en préparation (phase 4).</em></p>
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+</style>

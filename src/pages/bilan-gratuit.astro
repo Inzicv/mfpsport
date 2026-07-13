@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+---
+
+<Layout
+  title="Bilan gratuit"
+  description="Réservez votre séance d'essai et votre bilan gratuit chez MFP Sport à Arles."
+>
+  <section class="page">
+    <h1>Votre bilan est offert</h1>
+    <p><em>Contenu en préparation (phase 4) — déroulé de la séance, pour qui, sans engagement.</em></p>
+    <Cta />
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+</style>

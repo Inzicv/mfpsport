@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const actualites = (await getCollection('actualites'))
+  .filter((a) => a.data.publie)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Actualités" description="Les actualités de MFP Sport à Arles.">
+  <section class="page">
+    <h1>Actualités</h1>
+    {
+      actualites.length === 0 ? (
+        <p><em>Aucune actualité publiée pour le moment.</em></p>
+      ) : (
+        <ul>
+          {actualites.map((a) => (
+            <li>
+              <a href={`/actualites/${a.id}/`}>{a.data.titre}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+</style>

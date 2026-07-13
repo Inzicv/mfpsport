@@ -1,0 +1,16 @@
+---
+// Le bouton d'appel à l'action principal, cohérent sur tout le site.
+// Voir docs/etude-refonte.md §6 et §G.4 — ne jamais dupliquer ce style ailleurs.
+import { getEntry } from 'astro:content';
+
+interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = 'Réserver mon bilan gratuit', class: className = '' } = Astro.props;
+const infos = await getEntry('infos', 'infos-pratiques');
+const href = infos?.data.lienReservationBilan ?? '#';
+---
+
+<a class:list={['cta', className]} href={href} rel="noopener">{label}</a>

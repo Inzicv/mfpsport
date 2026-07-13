@@ -1,0 +1,90 @@
+/* Design tokens — voir docs/etude-refonte.md §G.2 (palette) et §G.3 (typographie). */
+
+:root {
+  /* Palette dérivée du logo MFP Sport */
+  --color-blue-deep: #005ca9;    /* primaire : titres forts, liens, marque */
+  --color-blue-night: #0b2740;   /* titrage, footer, fonds sombres */
+  --color-blue-light: #4fb8e7;   /* icônes, hover, accents */
+  --color-ink: #111417;          /* texte courant */
+  --color-paper: #f6f9fc;        /* fond de page */
+  --color-slate: #5b6b7a;        /* texte secondaire, légendes */
+
+  /* Accent réservé exclusivement au CTA de conversion et aux badges "Offert" */
+  --color-cta: #ff8a3d;
+  --color-cta-hover: #e97527;
+
+  --font-heading: 'Archivo', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --shadow-card: 0 4px 20px rgba(11, 39, 64, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+  color: var(--color-blue-night);
+}
+
+h1 {
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--color-blue-deep);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Le bouton CTA de conversion — la seule utilisation autorisée de l'orange. */
+.cta {
+  display: inline-block;
+  background: var(--color-cta);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.85em 1.75em;
+  border-radius: var(--radius-md);
+  transition: background-color 0.15s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: var(--color-cta-hover);
+}

@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const pros = (await getCollection('professionnels'))
+  .filter((p) => p.data.actif)
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+<Layout
+  title="L'équipe"
+  description="Rencontrez l'équipe pluridisciplinaire de MFP Sport à Arles : coachs, préparateurs physiques, diététiciens, ostéopathes."
+>
+  <section class="page">
+    <h1>L'équipe</h1>
+    {
+      pros.length === 0 ? (
+        <p><em>Fiches de l'équipe en préparation (phase 4).</em></p>
+      ) : (
+        <ul class="equipe__grid">
+          {pros.map((p) => (
+            <li>
+              <h3>{p.data.nom}</h3>
+              <p>{p.data.role}</p>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .page {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+
+  .equipe__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .equipe__grid li {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 1.5rem;
+  }
+</style>

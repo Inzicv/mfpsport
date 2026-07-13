@@ -1,0 +1,86 @@
+---
+import { getEntry } from 'astro:content';
+
+const infos = await getEntry('infos', 'infos-pratiques');
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div>
+      <p class="site-footer__brand">MFP Sport</p>
+      {infos && (
+        <address>
+          {infos.data.adresse}<br />
+          <a href={`tel:${infos.data.telephone}`}>{infos.data.telephone}</a><br />
+          <a href={`mailto:${infos.data.email}`}>{infos.data.email}</a>
+        </address>
+      )}
+    </div>
+
+    <nav aria-label="Liens utiles">
+      <ul>
+        <li><a href="/equipes-clubs/">Équipes &amp; clubs</a></li>
+        <li><a href="/actualites/">Actualités</a></li>
+        <li><a href="/praticiens/">Rejoindre l'équipe (praticiens)</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label="Mentions">
+      <ul>
+        <li><a href="/mentions-legales/">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite/">Politique de confidentialité</a></li>
+        {infos?.data.reseaux.instagram && (
+          <li><a href={infos.data.reseaux.instagram} rel="noopener">Instagram</a></li>
+        )}
+      </ul>
+    </nav>
+  </div>
+
+  <p class="site-footer__copy">© {year} MFP Sport — 15 Chemin des Moines, 13200 Arles</p>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-blue-night);
+    color: #dbe6f0;
+    padding: 3rem clamp(1rem, 4vw, 3rem) 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .site-footer__brand {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #fff;
+    font-size: 1.1rem;
+  }
+
+  .site-footer a {
+    color: #dbe6f0;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .site-footer__copy {
+    font-size: 0.8rem;
+    color: #93a7b8;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+  }
+</style>

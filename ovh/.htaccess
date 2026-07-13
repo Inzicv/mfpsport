@@ -1,0 +1,45 @@
+# Configuration Apache — production (mfpsport.com)
+# Déployé par .github/workflows/deploy-prod.yml à la racine du site.
+# Voir docs/etude-refonte.md §D.5 et §H.8.
+
+# --- HTTPS forcé ---
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Redirections 301 depuis l'ancien site WordPress (§H.8) ---
+Redirect 301 /notre-centre/ /le-centre/
+Redirect 301 /entrainement-sport-preparation-physique-arles/ /preparation-physique/
+Redirect 301 /nutrition-sport-arles/ /nutrition/
+Redirect 301 /mental/ /preparation-mentale/
+Redirect 301 /equipes/ /equipes-clubs/
+Redirect 301 /hall-of-fame/ /actualites/
+Redirect 301 /ouverture/ /actualites/ouverture-9-septembre/
+Redirect 301 /coach-maxime/ /equipe/
+Redirect 410 /fts/my-feed/
+Redirect 410 /fts/my-feed-2/
+# /pros/ conservée sous /praticiens/ — voir §A.6 (recrutement de praticiens)
+Redirect 301 /pros/ /praticiens/
+
+# --- En-têtes de sécurité ---
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Autorise le widget Sportigo (script + iframe) en plus des ressources du site.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://standalone.api.sportigo.fr; frame-src https://mfpsport.sportigo.fr https://mfpsport.sportigo.club; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; connect-src 'self' https://standalone.api.sportigo.fr"
+</IfModule>
+
+# --- Cache des assets fingerprintés (Astro ajoute un hash au nom de fichier) ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# --- Erreur 404 personnalisée (page générée par Astro) ---
+ErrorDocument 404 /404.html

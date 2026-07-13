@@ -1,0 +1,135 @@
+---
+// Accueil — structure définie en docs/etude-refonte.md §G.5.
+// Les textes ci-dessous sont des placeholders de structure (phase 3, socle
+// technique) : la rédaction définitive intervient en phase 4, après
+// validation du contenu par Maxime.
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import { getCollection } from 'astro:content';
+
+const actualites = (await getCollection('actualites'))
+  .filter((a) => a.data.publie)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+
+const poles = [
+  { numero: '01', nom: 'Entraînement', href: '/preparation-physique/' },
+  { numero: '02', nom: 'Nutrition', href: '/nutrition/' },
+  { numero: '03', nom: 'Récupération', href: '/recuperation/' },
+  { numero: '04', nom: 'Mental', href: '/preparation-mentale/' },
+];
+---
+
+<Layout
+  title="Salle de sport & coaching personnalisé à Arles"
+  description="MFP Sport à Arles : accompagnement sportif premium et humain — entraînement, nutrition, récupération et préparation mentale. Réservez votre bilan gratuit."
+>
+  <section class="hero">
+    <h1>Votre préparation physique, encadrée par des professionnels — à Arles</h1>
+    <p>
+      Un accompagnement sportif personnalisé, premium et pluridisciplinaire : entraînement,
+      nutrition, récupération et préparation mentale.
+    </p>
+    <Cta />
+  </section>
+
+  <section class="poles">
+    <h2>4 piliers de la réussite sportive</h2>
+    <ul class="poles__grid">
+      {
+        poles.map((pole) => (
+          <li>
+            <a href={pole.href}>
+              <span class="poles__numero">{pole.numero}</span>
+              <span>{pole.nom}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="actualites">
+    <h2>Actualités</h2>
+    {
+      actualites.length === 0 ? (
+        <p><em>Aucune actualité publiée pour le moment.</em></p>
+      ) : (
+        <ul>
+          {actualites.map((a) => (
+            <li>
+              <a href={`/actualites/${a.id}/`}>{a.data.titre}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section class="cta-final">
+    <h2>Prêt·e à faire le point ?</h2>
+    <p>Votre bilan est offert, sans engagement.</p>
+    <Cta />
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    background: var(--color-blue-night);
+    color: #fff;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem);
+    text-align: center;
+  }
+
+  .hero h1 {
+    color: #fff;
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
+  .hero p {
+    max-width: 55ch;
+    margin: 1rem auto 2rem;
+    color: #dbe6f0;
+  }
+
+  section {
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+    max-width: 72rem;
+    margin-inline: auto;
+  }
+
+  .poles__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .poles__grid a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: var(--color-blue-night);
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .poles__numero {
+    font-size: 2rem;
+    color: var(--color-blue-light);
+  }
+
+  .cta-final {
+    text-align: center;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+</style>

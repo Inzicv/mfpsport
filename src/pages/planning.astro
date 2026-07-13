@@ -1,0 +1,50 @@
+---
+// Widget Sportigo — chargement différé pour préserver les Core Web Vitals.
+// Voir docs/etude-refonte.md §D.1 et §H.9.
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Planning & réservation"
+  description="Consultez le planning des cours collectifs MFP Sport à Arles et réservez directement en ligne."
+>
+  <section class="page">
+    <h1>Planning &amp; réservation</h1>
+    <div id="sportigo-container"></div>
+  </section>
+
+  <script>
+    // Chargé après l'interaction/scroll pour ne pas dégrader le LCP/INP.
+    function loadSportigo() {
+      if (document.getElementById('sportigo-script')) return;
+      const script = document.createElement('script');
+      script.id = 'sportigo-script';
+      script.src = 'https://standalone.api.sportigo.fr/component-standalone.js';
+      script.onload = () => {
+        // @ts-expect-error — fourni par le script Sportigo
+        initComponent('Appointment', 'sportigo-container', 'fbdc1b68-78f4-4713-953b-52f6235045c6', {
+          colored: true,
+          readonly: false,
+        });
+      };
+      document.body.appendChild(script);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        loadSportigo();
+        observer.disconnect();
+      }
+    });
+    const target = document.getElementById('sportigo-container');
+    if (target) observer.observe(target);
+  </script>
+</Layout>
+
+<style>
+  .page {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  }
+</style>
