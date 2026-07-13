@@ -1,0 +1,53 @@
+[editor] Mouvement Force Performance
+[text] Rejoins la team
+[text] Séparateur
+[title] Votre programme
+[title] Adapté à vos besoins
+[editor] Quels que soient votre âge, votre niveau de forme physique ou vos objectifs. Que vous soyez débutant ou athlète confirmé, nous vous accueillons dans un environnement convivial et inclusif, où chacun peut progresser à son rythme. Nos équipements et nos services sont adaptés pour répondre aux besoins de tous, afin que vous puissiez vous sentir à l’aise et soutenu dans votre parcours de remise en forme.
+[description_text] Renforcer le corps et l’esprit pour atteindre un bien-être optimal
+[title_text] Remise en forme
+[description_text] Atteindre l'équilibre entre nutrition et exercice pour améliorer votre santé
+[title_text] Perte de poids
+[description_text] Pour renforcer le cœur, améliorer l'endurance et brûler des calories
+[title_text] Cardio Fitness
+[description_text] Développer la force, la puissance et la tonicité du corps
+[title_text] Renforcement Musculaire
+[description_text] Entraînement ciblé pour optimiser la performance et prévenir les blessures
+[title_text] Préparation Physique
+[description_text] Progressez en toute sécurité
+[title_text] Prévention blessure
+[text] Séparateur
+[title] Découvrez nos cours collectifs !
+[editor] Envie de vous entraîner dans une ambiance motivante ? Nos cours collectifs sont l’occasion parfaite de progresser en petit groupe, encadré par des professionnels. Que vous soyez débutant ou confirmé, chaque séance est adaptée à votre niveau et à vos objectifs. Venez partager l’énergie du groupe et profitez d’un entraînement dynamique !
+[text] Inscrivez-vous
+[text] Séparateur
+[title] 01 - Entrainement
+[title] 02 - Nutrition
+[title] 03 - Récupération
+[title] 04 - Mental
+[editor] Une infrastructure pour répondre aux
+[title] 4 Piliers de la réussite sportive
+[editor] Notre centre sportif vous offre une approche complète et équilibrée à travers ses quatre pôles – Entraînement, Nutrition, Récupération et Préparation Mentale. Chaque pôle joue un rôle essentiel dans votre progression, et leur complémentarité garantit une optimisation globale de vos performances. Entraînement : La base de votre condition physique, avec des séances adaptées pour développer force, endurance et agilité. Nutrition : Un soutien personnalisé pour maximiser vos résultats d'entraînement grâce à une alimentation adaptée. Récupération : Des soins avancés pour prévenir les blessures et favoriser une récupération rapide, essentielle à la longévité de vos performances. Préparation Mentale : Un accompagnement ciblé pour renforcer votre mental et vous aider à surmonter les défis de la compétition.
+[text] Séparateur
+[title] QUI SOMMES-NOUS ?
+[title] Une équipe d'experts à votre service
+[title] Maxime favier
+[editor] Directeur du centre
+[editor] Arlésien et amoureux du sport depuis toujours, Maxime Favier avait à cœur de répondre aux nombreuses problématiques rencontrées par les sportifs arlésiens. Son expérience en tant que raseteur, évoluant pendant 15 ans au plus haut niveau, ainsi que sa proximité avec le milieu sportif associatif ont mis en évidence les difficultés rencontrées par les sportifs de tous niveaux : s’entraîner efficacement dans un lieu dédié, bénéficier du suivi de kinés du sport, ou encore travailler efficacement sur leur récupération. Tout ceci l’a logiquement amené, à la fin de sa carrière professionnelle, à vouloir s’engager dans l’encadrement sportif. Pour cela, il a repris ses études en 2015, obtenant un Brevet Professionnel de la Jeunesse, de l’Éducation Populaire et du Sport , suivi d’une formation de Préparateur physique pour sportifs de haut niveau aux CREPS de Montpellier. En plus de la prise en charge physique de nombreux sportifs issus d’horizons variés, il est intervenu dans plusieurs structures sportives en tant que préparateur physique ou responsable du suivi médico-sportif, notamment à la Fédération Française de Course Camarguaise, à l'Académie de Tennis du Pays d'Arles ou encore à la Arles Youth Ballet Company, pour ne citer qu’eux. Après trois ans passés au centre de kinésithérapie Neos Santé, où il était en charge de la réathlétisation des patients, c’est avec enthousiasme qu'il se lance aujourd'hui dans cette nouvelle aventure.
+[text] Séparateur
+[title] Planning Coaching et Cours Collectifs
+[text] Reserver
+[text] Séparateur
+[title] Témoignages
+[title] Ils parlent de nous
+[editor] Merci à tous les sportifs que nous avons accompagné ♡
+[text] Séparateur
+
+===== MENU =====
+(dyn) | 1
+(dyn) | 7
+(dyn) | 4
+(dyn) | 5
+(dyn) | 3
+(dyn) | 2
+(dyn) | 6
