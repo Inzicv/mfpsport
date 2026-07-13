@@ -4,13 +4,19 @@ name: Déploiement production (mfpsport.com)
 # Tant que la refonte n'est pas validée, mfpsport.com reste servi par le
 # WordPress actuel : on NE déploie JAMAIS automatiquement en prod. La bascule
 # (étape 10 du plan de migration, docs/etude-refonte.md §I) se fera en lançant
-# ce workflow à la main, en connaissance de cause.
+# ce workflow à la main, en connaissance de cause — et écrasera le WordPress
+# dans ./www/. À ne lancer qu'après validation complète en préproduction.
 on:
   workflow_dispatch: {}
 
 concurrency:
   group: deploy-prod
   cancel-in-progress: true
+
+env:
+  FTP_HOST: ftp.cluster127.hosting.ovh.net
+  FTP_USER: mfpspou
+  REMOTE_DIR: ./www/
 
 jobs:
   build-and-deploy:
@@ -33,17 +39,17 @@ jobs:
       - name: Copier le .htaccess de production
         run: cp ovh/.htaccess dist/.htaccess
 
-      # Secrets requis (Settings → Secrets and variables → Actions) :
-      #   OVH_FTP_SERVER, OVH_FTP_USERNAME, OVH_FTP_PASSWORD
+      - name: Installer lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Déployer sur OVH (SFTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OVH_FTP_SERVER }}
-          username: ${{ secrets.OVH_FTP_USERNAME }}
-          password: ${{ secrets.OVH_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./dist/
-          server-dir: ./www/
-          exclude: |
-            **/.git*
-            **/.git*/**
+        env:
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          lftp -e "set sftp:auto-confirm yes; \
+                   set net:max-retries 2; \
+                   set net:timeout 20; \
+                   open sftp://$FTP_HOST; \
+                   user $FTP_USER $FTP_PASSWORD; \
+                   mirror -R --verbose ./dist/ $REMOTE_DIR; \
+                   bye"

@@ -9,6 +9,14 @@ concurrency:
   group: deploy-preprod
   cancel-in-progress: true
 
+env:
+  # Hôte et identifiant OVH ne sont pas des secrets ; seul le mot de passe l'est.
+  FTP_HOST: ftp.cluster127.hosting.ovh.net
+  FTP_USER: mfpspou
+  # Dossier du multisite mfpsport.fr sur l'hébergement (à mapper dans le
+  # manager OVH). JAMAIS ./www/ (qui sert le WordPress de mfpsport.com).
+  REMOTE_DIR: ./preprod/
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -31,18 +39,20 @@ jobs:
       - name: Copier le .htaccess de préproduction (auth + noindex)
         run: cp ovh/preprod.htaccess dist/.htaccess
 
-      # Mêmes secrets que la production ; server-dir pointe vers le dossier
-      # du multisite mfpsport.fr sur l'hébergement OVH.
+      - name: Installer lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      # Dépôt via SFTP (port 22). OVH mutualisé refuse le FTPS explicite, d'où
+      # l'abandon de la méthode FTPS. `mirror -R` envoie dist/ vers REMOTE_DIR ;
+      # pas de --delete pour ne rien supprimer par erreur lors des premiers essais.
       - name: Déployer sur OVH (SFTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OVH_FTP_SERVER }}
-          username: ${{ secrets.OVH_FTP_USERNAME }}
-          password: ${{ secrets.OVH_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./dist/
-          server-dir: ./preprod/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.htpasswd
+        env:
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          lftp -e "set sftp:auto-confirm yes; \
+                   set net:max-retries 2; \
+                   set net:timeout 20; \
+                   open sftp://$FTP_HOST; \
+                   user $FTP_USER $FTP_PASSWORD; \
+                   mirror -R --verbose --exclude-glob .htpasswd ./dist/ $REMOTE_DIR; \
+                   bye"

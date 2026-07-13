@@ -25,24 +25,31 @@ npm run astro check
 - `scripts/refresh-instagram.mjs` — récupère les derniers posts Instagram (§D.8).
 - `.github/workflows/` — build + déploiement automatique.
 
-## Déploiement — secrets GitHub requis
+## Déploiement — secret GitHub requis
+
+Le déploiement se fait en **SFTP** (OVH mutualisé refuse le FTPS explicite). L'hôte
+(`ftp.cluster127.hosting.ovh.net`) et l'identifiant (`mfpspou`) ne sont pas secrets et
+sont écrits dans les workflows ; seul le mot de passe est un secret.
 
 À configurer dans *Settings → Secrets and variables → Actions* du repo :
 
 | Secret | Description |
 |---|---|
-| `OVH_FTP_SERVER` | Hôte FTPS de l'hébergement OVH mutualisé |
-| `OVH_FTP_USERNAME` | Identifiant FTP OVH |
-| `OVH_FTP_PASSWORD` | Mot de passe FTP OVH |
-| `INSTAGRAM_ACCESS_TOKEN` | Jeton longue durée de l'app Meta liée au compte Instagram pro de la salle (optionnel — en son absence, le fil Instagram n'est simplement pas rafraîchi) |
+| `OVH_FTP_PASSWORD` | Mot de passe du compte FTP/SFTP OVH `mfpspou` |
+| `INSTAGRAM_ACCESS_TOKEN` | Jeton longue durée de l'app Meta liée au compte Instagram pro (optionnel — sans lui, le fil Instagram n'est pas rafraîchi) |
 | `INSTAGRAM_USER_ID` | Identifiant du compte Instagram (optionnel, idem) |
 
 Deux branches pilotent le déploiement :
 
-- `main` → build → dépôt dans `www/` sur OVH → **mfpsport.com**
-- `develop` → build (avec balise `noindex` et auth basique) → dépôt dans `preprod/` sur
-  OVH → **mfpsport.fr**
+- `develop` → build (`noindex` + auth basique) → dépôt SFTP dans `preprod/` → **mfpsport.fr**
+  (automatique à chaque push).
+- `main` → **déclenchement manuel uniquement** (`workflow_dispatch`) → dépôt SFTP dans `www/`
+  → **mfpsport.com**. Ce dossier sert actuellement le WordPress : ne lancer ce workflow
+  qu'au moment de la bascule finale, après validation en préproduction.
 
-Le fichier `.htpasswd` de la préproduction (couple identifiant/mot de passe pour l'auth
-Apache de `ovh/preprod.htaccess`) doit être généré séparément (`htpasswd -c`) et déposé
-manuellement sur le serveur — il ne doit jamais être committé dans ce repo.
+> ⚠️ Le multisite `mfpsport.fr` doit être mappé sur le dossier `preprod/` dans le manager
+> OVH pour que la préproduction soit servie. L'upload dans `preprod/` est sans risque pour
+> le WordPress de `www/` même avant ce mapping.
+
+Le fichier `.htpasswd` de la préproduction (auth Apache de `ovh/preprod.htaccess`) doit être
+généré séparément (`htpasswd -c`) et déposé manuellement sur le serveur — jamais committé.

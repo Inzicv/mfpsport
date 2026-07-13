@@ -1,6 +1,7 @@
 ---
 nom: Tony Rousselot
 role: Préparateur mental
+photo: ../../assets/images/portrait-tony-rousselot.jpg
 diplomes:
   - Coach mental (préparation mentale neuro-psychologique)
   - Tronc commun du Brevet d'État d'Éducateur Sportif

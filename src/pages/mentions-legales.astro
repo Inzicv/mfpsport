@@ -18,18 +18,18 @@ const infos = await getEntry('infos', 'infos-pratiques');
 
     <h2>Éditeur du site</h2>
     <p>
-      <strong>MFP Sport</strong><br />
+      <strong>MFP Sport</strong> — EURL (entreprise unipersonnelle à responsabilité limitée)<br />
       15 Chemin des Moines, 13200 Arles, France<br />
-      SIRET : 981 625 783 00015 — SIREN : 981 625 783<br />
+      Capital social : 30 000,00 €<br />
+      SIREN : 981 625 783 — SIRET (siège) : 981 625 783 00015<br />
+      RCS : 981 625 783 R.C.S. Tarascon (immatriculée le 21/11/2023)<br />
+      N° TVA intracommunautaire : FR41981625783<br />
       {infos && (
-        <>Téléphone : {infos.data.telephone}<br />E-mail : {infos.data.email}</>
+        <>
+          Téléphone : {infos.data.telephone}<br />
+          E-mail : {infos.data.email}
+        </>
       )}
-    </p>
-    <p>
-      <em>
-        À compléter avant mise en production : forme juridique, capital social (le cas
-        échéant), numéro RCS et ville d'immatriculation, et numéro de TVA intracommunautaire.
-      </em>
     </p>
 
     <h2>Directeur de la publication</h2>
