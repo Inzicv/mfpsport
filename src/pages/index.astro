@@ -1,8 +1,5 @@
 ---
 // Accueil — structure définie en docs/etude-refonte.md §G.5.
-// Les textes ci-dessous sont des placeholders de structure (phase 3, socle
-// technique) : la rédaction définitive intervient en phase 4, après
-// validation du contenu par Maxime.
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
@@ -12,11 +9,24 @@ const actualites = (await getCollection('actualites'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 2);
 
+const profils = [
+  { titre: 'Je reprends le sport', texte: 'Après une longue pause ou un souci de santé, à votre rythme.', href: '/bilan-gratuit/' },
+  { titre: 'Je veux me remettre en forme', texte: 'Perdre du poids, gagner en tonus et en énergie durablement.', href: '/preparation-physique/' },
+  { titre: 'Je suis sportif', texte: 'Progresser dans ma discipline et passer un cap.', href: '/preparation-physique/' },
+  { titre: 'Je représente une équipe', texte: 'Stages et préparation physique collective pour un club.', href: '/equipes-clubs/' },
+];
+
 const poles = [
   { numero: '01', nom: 'Entraînement', href: '/preparation-physique/' },
   { numero: '02', nom: 'Nutrition', href: '/nutrition/' },
   { numero: '03', nom: 'Récupération', href: '/recuperation/' },
   { numero: '04', nom: 'Mental', href: '/preparation-mentale/' },
+];
+
+const etapes = [
+  { titre: 'Votre bilan offert', texte: 'On évalue votre condition et on définit vos objectifs ensemble.' },
+  { titre: 'Un programme personnalisé', texte: 'Adapté à votre niveau, vos objectifs et votre emploi du temps.' },
+  { titre: 'Un suivi et des résultats', texte: 'Un accompagnement régulier et des progrès mesurés dans le temps.' },
 ];
 ---
 
@@ -33,6 +43,22 @@ const poles = [
     <Cta />
   </section>
 
+  <section class="profils">
+    <h2>Quel que soit votre point de départ</h2>
+    <ul class="profils__grid">
+      {
+        profils.map((p) => (
+          <li>
+            <a href={p.href}>
+              <span class="profils__titre">{p.titre}</span>
+              <span class="profils__texte">{p.texte}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
   <section class="poles">
     <h2>4 piliers de la réussite sportive</h2>
     <ul class="poles__grid">
@@ -47,6 +73,21 @@ const poles = [
         ))
       }
     </ul>
+  </section>
+
+  <section class="methode">
+    <h2>Notre méthode, en trois temps</h2>
+    <ol class="methode__grid">
+      {
+        etapes.map((e, i) => (
+          <li>
+            <span class="methode__num">{i + 1}</span>
+            <h3>{e.titre}</h3>
+            <p>{e.texte}</p>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <section class="actualites">
@@ -124,6 +165,61 @@ const poles = [
   .poles__numero {
     font-size: 2rem;
     color: var(--color-blue-light);
+  }
+
+  .profils__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .profils__grid a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    height: 100%;
+    padding: 1.25rem;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    color: var(--color-ink);
+  }
+
+  .profils__titre {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-blue-deep);
+  }
+
+  .profils__texte {
+    font-size: 0.9rem;
+    color: var(--color-slate);
+  }
+
+  .methode__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    counter-reset: none;
+  }
+
+  .methode__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: var(--color-blue-deep);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
   }
 
   .cta-final {

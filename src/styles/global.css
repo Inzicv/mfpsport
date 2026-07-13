@@ -88,3 +88,55 @@ img {
 .cta:focus-visible {
   background: var(--color-cta-hover);
 }
+
+/* --- Utilitaires de mise en page réutilisés par les pages de contenu --- */
+
+.page {
+  max-width: 60rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+}
+
+.page-hero {
+  background: var(--color-blue-night);
+  color: #fff;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.page-hero h1 {
+  color: #fff;
+  max-width: 24ch;
+  margin-inline: auto;
+}
+
+.page-hero p {
+  max-width: 55ch;
+  margin: 1rem auto 0;
+  color: #dbe6f0;
+}
+
+.prose {
+  max-width: 44rem;
+}
+
+.prose h2 {
+  margin-top: 2.5rem;
+}
+
+.prose p {
+  margin: 0 0 1rem;
+}
+
+.prose ul {
+  padding-left: 1.2rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+}
+
+.section-cta {
+  text-align: center;
+  margin-top: 3rem;
+}

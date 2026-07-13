@@ -1,21 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import PolePros from '../components/PolePros.astro';
 ---
 
 <Layout
-  title="Préparation mentale à Arles"
-  description="Coaching mental pour sportifs à Arles : gestion du stress, concentration, préparation à la compétition."
+  title="Préparation mentale du sportif à Arles"
+  description="Coaching mental pour sportifs à Arles : gestion du stress, concentration, confiance et préparation à la compétition, avec un préparateur mental diplômé."
 >
-  <section class="page">
-    <h1>Préparation mentale</h1>
-    <p><em>Contenu en préparation (phase 4).</em></p>
-  </section>
-</Layout>
+  <header class="page-hero">
+    <h1>Développez votre force intérieure pour performer</h1>
+    <p>
+      Le corps et l'esprit ne font qu'un. La préparation mentale vous aide à exprimer tout
+      votre potentiel, en compétition comme au quotidien.
+    </p>
+  </header>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+  <div class="page prose">
+    <p>
+      Le coaching mental est un accompagnement personnalisé qui vise à renforcer votre
+      résilience, à améliorer votre gestion du stress et à maximiser votre concentration en
+      situation de compétition. En travaillant avec un préparateur mental, vous apprenez à
+      surmonter les blocages psychologiques, à maintenir une motivation constante et à
+      développer une attitude gagnante.
+    </p>
+
+    <h2>Pour qui ?</h2>
+    <p>
+      Que vous soyez un athlète en préparation de compétition ou simplement désireux de mieux
+      gérer vos défis personnels, la préparation mentale vous donne des outils concrets pour
+      avancer avec confiance et détermination.
+    </p>
+
+    <p>
+      La salle dispose de box dédiés aux professionnels médicaux et paramédicaux qui
+      interviennent dans la structure, pour un accompagnement dans de bonnes conditions.
+    </p>
+
+    <PolePros specialite="mental" titre="Votre préparateur mental" />
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
+</Layout>

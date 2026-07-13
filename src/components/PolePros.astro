@@ -1,0 +1,64 @@
+---
+// Affiche les professionnels actifs rattachés à un pôle (par spécialité).
+// Utilisé sur les pages de pôles pour renvoyer un visage sur « qui va
+// m'accompagner ? » — voir docs/etude-refonte.md §A.5 et §F.
+import { getCollection } from 'astro:content';
+
+interface Props {
+  specialite: string;
+  titre?: string;
+}
+
+const { specialite, titre = 'Qui vous accompagne' } = Astro.props;
+
+const pros = (await getCollection('professionnels'))
+  .filter((p) => p.data.actif && p.data.specialites.includes(specialite))
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+---
+
+{
+  pros.length > 0 && (
+    <div class="polepros">
+      <h2>{titre}</h2>
+      <ul>
+        {pros.map((p) => (
+          <li>
+            <p class="polepros__nom">{p.data.nom}</p>
+            <p class="polepros__role">{p.data.role}</p>
+            <a href="/equipe/">Voir sa fiche</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+<style>
+  .polepros ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .polepros li {
+    background: #fff;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 1.25rem;
+  }
+
+  .polepros__nom {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--color-blue-night);
+    margin: 0;
+  }
+
+  .polepros__role {
+    color: var(--color-blue-deep);
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0.75rem;
+  }
+</style>

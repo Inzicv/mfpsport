@@ -1,21 +1,61 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import PolePros from '../components/PolePros.astro';
 ---
 
 <Layout
   title="Récupération sportive à Arles — pressothérapie, bain froid, ostéopathie"
-  description="La récupération sportive chez MFP Sport à Arles : pressothérapie Normatec, bain chaud et bain froid, ostéopathie, kinésithérapie, massages."
+  description="La récupération sportive chez MFP Sport à Arles : pressothérapie Normatec, bain chaud et bain froid, Cryo-Tank, ostéopathie, kinésithérapie et massages."
 >
-  <section class="page">
-    <h1>La récupération sportive, pilier de votre progression</h1>
-    <p><em>Contenu en préparation (phase 4) — méthodes, praticiens, bénéfices.</em></p>
-  </section>
-</Layout>
+  <header class="page-hero">
+    <h1>La récupération, pilier de votre progression</h1>
+    <p>
+      Trop souvent négligée dans les salles classiques, la récupération est la clé pour
+      prévenir les blessures et progresser durablement.
+    </p>
+  </header>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+  <div class="page prose">
+    <p>
+      Plus l'entraînement est intense, meilleure doit être la récupération. Chez MFP Sport,
+      vous avez accès à des protocoles de récupération complets et à une équipe de
+      professionnels de santé — ostéopathe et praticienne en massage — pour un suivi
+      personnalisé.
+    </p>
+
+    <h2>Bains froids et Cryo-Tank</h2>
+    <p>
+      Grâce à nos bains froids et à notre Cryo-Tank, l'exposition au froid aide à réduire
+      l'inflammation, à diminuer les douleurs musculaires et à accélérer la récupération après
+      un effort intense, en stimulant la circulation sanguine et la guérison des tissus.
+    </p>
+
+    <h2>Pressothérapie Normatec</h2>
+    <p>
+      La pressothérapie Normatec améliore la circulation sanguine et lymphatique. À l'aide de
+      bottes compressives, elle réduit la rétention d'eau, soulage les jambes lourdes et
+      détend les muscles fatigués — particulièrement bénéfique après des séances intensives.
+    </p>
+
+    <h2>Ostéopathie</h2>
+    <p>
+      L'ostéopathie travaille sur l'équilibre global du corps. Par des techniques manuelles,
+      elle rétablit la mobilité des articulations, relâche les tensions musculaires et réduit
+      le risque de blessures tout en améliorant la posture.
+    </p>
+
+    <h2>Kinésithérapie et massages</h2>
+    <p>
+      La kinésithérapie est indispensable à la rééducation après une blessure, mais aussi à la
+      prévention et à l'optimisation des performances. Les massages bien-être, eux, s'intègrent
+      dans vos programmes de préparation et de récupération musculaire.
+    </p>
+
+    <PolePros specialite="recuperation" titre="Vos praticiens récupération" />
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
+</Layout>

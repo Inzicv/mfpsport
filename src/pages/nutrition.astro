@@ -1,21 +1,52 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import PolePros from '../components/PolePros.astro';
 ---
 
 <Layout
   title="Nutrition du sportif à Arles"
-  description="Suivi nutritionnel personnalisé pour sportifs à Arles : bilans diététiques, composition corporelle, conseils adaptés à vos objectifs."
+  description="Suivi nutritionnel personnalisé pour sportifs à Arles : bilan diététique, composition corporelle, conseils adaptés à vos objectifs de performance, perte de poids ou santé."
 >
-  <section class="page">
-    <h1>Nutrition</h1>
-    <p><em>Contenu en préparation (phase 4) — spécialistes, suivis, bilans.</em></p>
-  </section>
-</Layout>
+  <header class="page-hero">
+    <h1>Une alimentation adaptée à vos objectifs</h1>
+    <p>
+      La nutrition est le complément indispensable de l'entraînement. Un suivi personnalisé
+      pour tirer le meilleur de chaque séance.
+    </p>
+  </header>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+  <div class="page prose">
+    <h2>Pourquoi consulter un diététicien du sport</h2>
+    <p>
+      Consulter un professionnel de la nutrition en complément de l'entraînement est essentiel
+      pour maximiser vos résultats. Une alimentation adaptée fournit l'énergie nécessaire pour
+      performer, accélère la récupération et soutient la construction musculaire. Votre suivi
+      est personnalisé selon vos objectifs — perte de poids, gain de masse musculaire ou
+      amélioration des performances — pour tirer le meilleur de chaque séance et préserver
+      votre santé sur le long terme.
+    </p>
+
+    <h2>Un suivi personnalisé, du débutant au confirmé</h2>
+    <p>
+      Après une première consultation bilan, plusieurs formules de suivi (de 1 à 6 mois) vous
+      permettent d'atteindre vos objectifs et de garantir des résultats durables. Les suivis
+      sont entièrement personnalisés, que vous pratiquiez pour le loisir ou la compétition, et
+      peuvent inclure une analyse de la composition corporelle avec le Z-Métrix.
+    </p>
+
+    <h2>L'hydratation, un pilier trop souvent négligé</h2>
+    <p>
+      L'eau joue un rôle vital dans la régulation de la température corporelle, le transport
+      des nutriments et l'élimination des toxines. Une bonne hydratation améliore la
+      concentration, prévient la fatigue et réduit le risque de blessures. En restant bien
+      hydraté, vous optimisez votre endurance, votre récupération et votre bien-être général.
+    </p>
+
+    <PolePros specialite="nutrition" titre="Votre diététicien" />
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
+</Layout>

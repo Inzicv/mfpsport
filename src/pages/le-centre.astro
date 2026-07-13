@@ -1,21 +1,68 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
 ---
 
 <Layout
-  title="Le centre"
-  description="Découvrez le centre MFP Sport à Arles : 300 m² dédiés à la performance, la récupération et l'accompagnement sportif."
+  title="Le centre — 300 m² dédiés à la performance à Arles"
+  description="Découvrez MFP Sport à Arles : 300 m² d'espace d'entraînement, piste d'athlétisme, zone fonctionnelle et équipements haute performance pour tous les niveaux."
 >
-  <section class="page">
-    <h1>Le centre</h1>
-    <p><em>Contenu en préparation (phase 4) — équipements, locaux, galerie photos, fil Instagram.</em></p>
-  </section>
-</Layout>
+  <header class="page-hero">
+    <h1>Un centre pensé pour la performance et l'accompagnement</h1>
+    <p>
+      300 m² dédiés à l'entraînement, à la récupération et au suivi, à Arles — bien plus
+      qu'une simple salle de sport.
+    </p>
+  </header>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+  <div class="page prose">
+    <p>
+      MFP Sport n'est pas une salle en libre-service de plus. C'est un environnement complet
+      où chaque personne peut être évaluée, conseillée, entraînée et accompagnée dans sa
+      récupération, quel que soit son niveau de départ.
+    </p>
+
+    <h2>300 m² dédiés à la pratique sportive</h2>
+    <p>
+      La salle dispose d'une vaste zone de travail de près de 300 m² en sol souple, idéale
+      pour des entraînements variés en toute sécurité. Vous y trouverez aussi une piste
+      d'athlétisme de 24 m pour les sprints et les exercices de vitesse, ainsi qu'une zone
+      fonctionnelle de 57 m² en pelouse synthétique haute performance, parfaite pour le
+      travail fonctionnel et la mobilité.
+    </p>
+
+    <h2>Les outils de musculation</h2>
+    <p>
+      La salle est équipée d'un Half Rack WIIT Pro et d'une cage de cross-training à trois
+      stations entièrement équipées. Parmi les outils disponibles : Kieser fonctionnel,
+      barres Bamboo BANDBELL (résistance instable pour la force fonctionnelle et la
+      stabilité), sac de frappe, plyo box, corde ondulatoire, et bien d'autres.
+    </p>
+
+    <h2>Les outils cardio</h2>
+    <p>
+      Côté cardio-training : SkiErg et RowErg Concept 2, Wattbike Pro (le vélo utilisé par
+      les cyclistes professionnels), vélos de spinning M3i et vélos elliptiques Sparck pour
+      un entraînement à faible impact qui préserve les articulations.
+    </p>
+
+    <h2>Les outils haute performance</h2>
+    <p>
+      Pour aller plus loin : le VertiMax (force et explosivité en verticalité), les poulies
+      magnétiques Voltra, le Battle4Run The Crab (course et résistance), les BlazePods
+      (réactivité, vitesse, coordination) et la K Box4 pour l'entraînement excentrique.
+    </p>
+
+    <h2>Les outils de mesure et de tests</h2>
+    <p>
+      Nous utilisons des dispositifs de mesure de haute précision — les capteurs Kinvent et
+      les encodeurs Vitruve — pour suivre vos progrès et ajuster vos entraînements avec une
+      précision optimale. Ces technologies nous permettent de personnaliser votre programme
+      en fonction de vos performances réelles.
+    </p>
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
+</Layout>

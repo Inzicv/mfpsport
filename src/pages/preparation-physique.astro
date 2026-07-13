@@ -1,35 +1,57 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-const pros = (await getCollection('professionnels')).filter(
-  (p) => p.data.actif && p.data.specialites.includes('preparation-physique')
-);
+import Cta from '../components/Cta.astro';
+import PolePros from '../components/PolePros.astro';
 ---
 
 <Layout
   title="Préparation physique & coaching sportif à Arles"
-  description="Préparation physique personnalisée à Arles : bilans, tests physiques, coaching individuel et équipements haute performance."
+  description="Préparation physique personnalisée à Arles : bilan, programme sur mesure, coaching individuel, tests physiques et équipements haute performance. Bilan gratuit offert."
 >
-  <section class="page">
-    <h1>Préparation physique</h1>
-    <p><em>Contenu en préparation (phase 4) — équipements, méthode, bilans, tests physiques.</em></p>
-    {
-      pros.length > 0 && (
-        <ul>
-          {pros.map((p) => (
-            <li>{p.data.nom}</li>
-          ))}
-        </ul>
-      )
-    }
-  </section>
-</Layout>
+  <header class="page-hero">
+    <h1>La préparation physique, accessible à tous</h1>
+    <p>
+      Une méthode éprouvée dans le sport professionnel, aujourd'hui accessible aux amateurs
+      comme aux sportifs confirmés — encadrée par un préparateur physique diplômé.
+    </p>
+  </header>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+  <div class="page prose">
+    <p>
+      La préparation physique est une méthode d'entraînement qui se décompose en plusieurs
+      périodes, chacune axée sur le développement d'une qualité : endurance, force, vitesse,
+      ou des qualités techniques comme la qualité d'appuis ou la vitesse de réaction.
+      Longtemps réservée au sport professionnel, elle est aujourd'hui à la portée de tous
+      grâce aux connaissances et aux outils dont nous disposons.
+    </p>
+
+    <h2>Une méthode en quatre temps</h2>
+    <ul>
+      <li><strong>Le bilan</strong> — on évalue votre condition physique et on définit vos objectifs.</li>
+      <li><strong>Le programme</strong> — une planification personnalisée, adaptée à votre niveau et à votre emploi du temps.</li>
+      <li><strong>Le suivi</strong> — un accompagnement régulier pour ajuster l'entraînement.</li>
+      <li><strong>La mesure</strong> — des tests physiques pour objectiver vos progrès.</li>
+    </ul>
+
+    <h2>Des tests physiques précis</h2>
+    <p>
+      Grâce aux capteurs Kinvent et aux encodeurs Vitruve, nous mesurons vos capacités réelles
+      (force, puissance, vitesse) et suivons votre progression dans le temps. Vos programmes
+      sont ajustés à partir de données concrètes, pas d'impressions.
+    </p>
+
+    <h2>Un plateau technique complet</h2>
+    <p>
+      Half Rack WIIT Pro, VertiMax, poulies magnétiques Voltra, Wattbike Pro, SkiErg et RowErg
+      Concept 2, K Box4… La salle met à votre disposition des équipements utilisés par les
+      sportifs de haut niveau, dans un espace de 300 m² avec piste d'athlétisme et zone
+      fonctionnelle.
+    </p>
+
+    <PolePros specialite="preparation-physique" titre="Votre préparateur physique" />
+
+    <div class="section-cta">
+      <Cta />
+    </div>
+  </div>
+</Layout>
