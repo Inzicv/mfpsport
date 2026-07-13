@@ -2,13 +2,10 @@
 # Déployé par .github/workflows/deploy-preprod.yml, renommé en .htaccess
 # à la racine de la préprod. Voir docs/etude-refonte.md §D.5.
 #
-# ⚠️ Le mot de passe doit être généré séparément (htpasswd) et déposé à côté
-# de ce fichier sous le nom .htpasswd — ne JAMAIS committer .htpasswd dans le repo.
-
-AuthType Basic
-AuthName "MFP Sport — préproduction"
-AuthUserFile /home/XXXXX/preprod/.htpasswd
-Require valid-user
+# La préprod est protégée du référencement (noindex). L'auth HTTP Basic n'est
+# PAS activée ici : elle exige le chemin absolu du home OVH et un fichier
+# .htpasswd (à générer sur le serveur). Pour l'ajouter plus tard, décommenter
+# le bloc ci-dessous en renseignant le vrai chemin AuthUserFile.
 
 <IfModule mod_headers.c>
   Header always set X-Robots-Tag "noindex, nofollow"
@@ -19,3 +16,9 @@ RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 ErrorDocument 404 /404.html
+
+# --- Auth HTTP Basic (optionnelle, à activer une fois le .htpasswd créé) ---
+# AuthType Basic
+# AuthName "MFP Sport - preproduction"
+# AuthUserFile /home/<compte>/preprod/.htpasswd
+# Require valid-user
