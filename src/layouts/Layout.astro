@@ -57,7 +57,7 @@ const jsonLd = {
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="fr_FR" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
   </head>
   <body>
     <Header />
