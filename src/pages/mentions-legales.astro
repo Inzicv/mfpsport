@@ -1,24 +1,66 @@
 ---
-// Page absente de l'ancien site (obligation légale — voir §A.5 point 5).
-// Contenu à rédiger en phase 4 avec les informations légales de Maxime
-// (SIRET, forme juridique, responsable de publication, hébergeur).
+// Mentions légales (obligation LCEN). Données confirmées : SIRET, adresse,
+// hébergeur. Les éléments marqués « à confirmer » attendent une validation de
+// Maxime (§B.2) — forme juridique, RCS, capital, directeur de la publication.
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const infos = await getEntry('infos', 'infos-pratiques');
 ---
 
 <Layout
   title="Mentions légales"
-  description="Mentions légales du site MFP Sport."
+  description="Mentions légales du site MFP Sport, 15 Chemin des Moines, 13200 Arles."
+  noindex
 >
-  <section class="page">
+  <div class="page prose">
     <h1>Mentions légales</h1>
-    <p><em>Contenu en attente des informations légales de MFP Sport (SIRET, forme juridique, responsable de publication — voir docs/etude-refonte.md §B.2).</em></p>
-  </section>
-</Layout>
 
-<style>
-  .page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-  }
-</style>
+    <h2>Éditeur du site</h2>
+    <p>
+      <strong>MFP Sport</strong><br />
+      15 Chemin des Moines, 13200 Arles, France<br />
+      SIRET : 981 625 783 00015 — SIREN : 981 625 783<br />
+      {infos && (
+        <>Téléphone : {infos.data.telephone}<br />E-mail : {infos.data.email}</>
+      )}
+    </p>
+    <p>
+      <em>
+        À compléter avant publication : forme juridique, capital social, numéro RCS et ville
+        d'immatriculation, numéro de TVA intracommunautaire, et directeur de la publication.
+      </em>
+    </p>
+
+    <h2>Directeur de la publication</h2>
+    <p><em>À confirmer (par défaut : le représentant légal de MFP Sport).</em></p>
+
+    <h2>Hébergement</h2>
+    <p>
+      Le site est hébergé par <strong>OVH SAS</strong><br />
+      2 rue Kellermann, 59100 Roubaix, France<br />
+      Téléphone : 1007<br />
+      <a href="https://www.ovhcloud.com" rel="noopener">www.ovhcloud.com</a>
+    </p>
+
+    <h2>Propriété intellectuelle</h2>
+    <p>
+      L'ensemble des contenus présents sur ce site (textes, images, logo, éléments graphiques)
+      est la propriété de MFP Sport, sauf mention contraire, et ne peut être reproduit sans
+      autorisation préalable.
+    </p>
+
+    <h2>Réservations et paiements</h2>
+    <p>
+      Les inscriptions, réservations et paiements sont gérés par la plateforme externe
+      Sportigo. Les conditions applicables sont celles de Sportigo, accessibles depuis les
+      espaces de réservation et l'espace client.
+    </p>
+
+    <h2>Données personnelles</h2>
+    <p>
+      Le traitement de vos données est décrit dans notre
+      <a href="/politique-de-confidentialite/">politique de confidentialité</a>.
+    </p>
+  </div>
+</Layout>

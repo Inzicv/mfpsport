@@ -1,6 +1,7 @@
 ---
 nom: Maxime Favier
 role: Directeur du centre & préparateur physique
+photo: ../../assets/images/portrait-maxime-favier.jpg
 diplomes:
   - BPJEPS (Brevet Professionnel de la Jeunesse, de l'Éducation Populaire et du Sport)
   - Préparateur physique pour sportifs de haut niveau (CREPS de Montpellier)

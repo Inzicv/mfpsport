@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
 import PolePros from '../components/PolePros.astro';
+import { Image } from 'astro:assets';
+import cryotank from '../assets/images/recuperation-cryotank-mfp-sport.jpg';
 ---
 
 <Layout
@@ -30,6 +32,14 @@ import PolePros from '../components/PolePros.astro';
       l'inflammation, à diminuer les douleurs musculaires et à accélérer la récupération après
       un effort intense, en stimulant la circulation sanguine et la guérison des tissus.
     </p>
+
+    <Image
+      class="media"
+      src={cryotank}
+      alt="Le Cryo-Tank de MFP Sport pour la récupération par le froid, à Arles"
+      widths={[480, 768]}
+      sizes="(max-width: 44rem) 100vw, 44rem"
+    />
 
     <h2>Pressothérapie Normatec</h2>
     <p>

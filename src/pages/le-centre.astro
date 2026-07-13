@@ -1,9 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
+import Galerie from '../components/Galerie.astro';
 import { Image } from 'astro:assets';
 import vertimax from '../assets/images/entrainement-vertimax-mfp-sport.jpg';
 import plan from '../assets/images/plan-salle-mfp-sport-arles.jpg';
+import keiser from '../assets/images/entrainement-keiser-mfp-sport.jpg';
+import cryotank from '../assets/images/recuperation-cryotank-mfp-sport.jpg';
+import testForce from '../assets/images/preparateur-physique-test-force.jpg';
+import sprint from '../assets/images/preparation-physique-sprint-arles.jpg';
+
+const galerie = [
+  { src: keiser, alt: "Entraînement sur machine Keiser à MFP Sport, Arles" },
+  { src: cryotank, alt: "Le Cryo-Tank pour la récupération par le froid" },
+  { src: testForce, alt: "Test de force avec un préparateur physique" },
+  { src: sprint, alt: "Sprint résisté sur la piste d'athlétisme intérieure" },
+];
 ---
 
 <Layout
@@ -79,6 +91,8 @@ import plan from '../assets/images/plan-salle-mfp-sport-arles.jpg';
       précision optimale. Ces technologies nous permettent de personnaliser votre programme
       en fonction de vos performances réelles.
     </p>
+
+    <Galerie titre="Le centre en images" images={galerie} />
 
     <div class="section-cta">
       <Cta />

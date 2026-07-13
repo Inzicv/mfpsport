@@ -1,6 +1,7 @@
 ---
 nom: Charles Louvet
 role: Diététicien — nutrition du sportif
+photo: ../../assets/images/portrait-charles-louvet.jpg
 specialites:
   - nutrition
 joursPresence: Sur rendez-vous

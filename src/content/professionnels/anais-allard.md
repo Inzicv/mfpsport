@@ -1,6 +1,7 @@
 ---
 nom: Anaïs Allard
 role: Praticienne en massage bien-être et récupération musculaire
+photo: ../../assets/images/portrait-anais-allard.jpg
 diplomes:
   - Praticienne bien-être certifiée
 specialites:

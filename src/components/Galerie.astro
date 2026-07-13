@@ -1,0 +1,53 @@
+---
+// Galerie de photos réelles de la salle — grille responsive, images optimisées
+// au build. Voir docs/etude-refonte.md §G.5 (« Le centre en images »).
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  titre?: string;
+  images: { src: ImageMetadata; alt: string }[];
+}
+
+const { titre, images } = Astro.props;
+---
+
+<section class="galerie">
+  {titre && <h2>{titre}</h2>}
+  <ul class="galerie__grid">
+    {
+      images.map((img) => (
+        <li>
+          <Image
+            src={img.src}
+            alt={img.alt}
+            widths={[320, 640]}
+            sizes="(max-width: 40rem) 50vw, 320px"
+          />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .galerie__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .galerie__grid li {
+    margin: 0;
+  }
+
+  .galerie :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    display: block;
+  }
+</style>
