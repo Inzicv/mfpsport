@@ -1,11 +1,22 @@
 ---
 // Les tarifs affichés proviennent exclusivement de la collection `offres` —
 // jamais de valeurs codées en dur ici. Voir docs/etude-refonte.md §B.1 :
-// plusieurs points tarifaires restent à valider par Maxime avant publication.
+// certains points tarifaires restent à valider par Maxime avant publication.
 import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
 import { getCollection } from 'astro:content';
 
 const offres = (await getCollection('offres')).sort((a, b) => a.data.ordre - b.data.ordre);
+
+const groupes = [
+  { categorie: 'abonnement', titre: 'Abonnements — accès autonome' },
+  { categorie: 'cours-collectifs', titre: 'Cours collectifs' },
+  { categorie: 'preparation-individuelle', titre: 'Préparation physique individuelle' },
+  { categorie: 'prestation', titre: 'Prestations' },
+] as const;
+
+const prix = (o: (typeof offres)[number]) =>
+  o.data.prix === 0 ? 'Offert' : `${o.data.prix} €`;
 ---
 
 <Layout
@@ -14,27 +25,45 @@ const offres = (await getCollection('offres')).sort((a, b) => a.data.ordre - b.d
 >
   <section class="page">
     <h1>Les tarifs</h1>
+
+    <div class="essai">
+      <p>Pas encore décidé ? Commencez par votre <strong>bilan gratuit</strong>, sans engagement.</p>
+      <Cta />
+    </div>
+
     {
-      offres.length === 0 ? (
-        <p><em>Grille tarifaire en préparation (phase 4, en attente de validation des tarifs par Maxime — §B.1).</em></p>
-      ) : (
-        <ul class="offres__grid">
-          {offres.map((o) => (
-            <li>
-              <h3>{o.data.nom}</h3>
-              <p class="offres__prix">
-                {o.data.prix} € <span>/ {o.data.unite}</span>
-              </p>
-              {o.data.idealPour && <p><strong>Idéal pour :</strong> {o.data.idealPour}</p>}
-              <ul>
-                {o.data.inclusions.map((i) => (
-                  <li>{i}</li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      )
+      groupes.map((groupe) => {
+        const items = offres.filter((o) => o.data.categorie === groupe.categorie);
+        if (items.length === 0) return null;
+        return (
+          <section class="groupe">
+            <h2>{groupe.titre}</h2>
+            <ul class="offres__grid">
+              {items.map((o) => (
+                <li class:list={['offre', { 'offre--avant': o.data.miseEnAvant }]}>
+                  {o.data.miseEnAvant && <span class="offre__badge">À la une</span>}
+                  <h3>{o.data.nom}</h3>
+                  <p class="offre__prix">
+                    {prix(o)}
+                    {o.data.prix !== 0 && <span> / {o.data.unite}</span>}
+                  </p>
+                  {o.data.dureeEngagement && <p class="offre__duree">{o.data.dureeEngagement}</p>}
+                  {o.data.idealPour && (
+                    <p class="offre__ideal">
+                      <strong>Idéal pour :</strong> {o.data.idealPour}
+                    </p>
+                  )}
+                  <ul class="offre__inclusions">
+                    {o.data.inclusions.map((i) => (
+                      <li>{i}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })
     }
   </section>
 </Layout>
@@ -46,6 +75,27 @@ const offres = (await getCollection('offres')).sort((a, b) => a.data.ordre - b.d
     padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
   }
 
+  .essai {
+    background: var(--color-blue-night);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .essai p {
+    margin: 0;
+  }
+
+  .groupe {
+    margin-bottom: 3rem;
+  }
+
   .offres__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -54,23 +104,58 @@ const offres = (await getCollection('offres')).sort((a, b) => a.data.ordre - b.d
     padding: 0;
   }
 
-  .offres__grid > li {
+  .offre {
+    position: relative;
     background: #fff;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     padding: 1.5rem;
+    border: 2px solid transparent;
   }
 
-  .offres__prix {
+  .offre--avant {
+    border-color: var(--color-blue-deep);
+  }
+
+  .offre__badge {
+    position: absolute;
+    top: -0.75rem;
+    right: 1rem;
+    background: var(--color-blue-deep);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .offre__prix {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: var(--color-blue-deep);
+    margin: 0.25rem 0;
   }
 
-  .offres__prix span {
+  .offre__prix span {
     font-size: 0.9rem;
     font-weight: 400;
     color: var(--color-slate);
+  }
+
+  .offre__duree {
+    color: var(--color-slate);
+    font-size: 0.85rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .offre__ideal {
+    font-size: 0.9rem;
+  }
+
+  .offre__inclusions {
+    padding-left: 1.1rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
   }
 </style>

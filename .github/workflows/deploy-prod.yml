@@ -1,8 +1,11 @@
 name: Déploiement production (mfpsport.com)
 
+# ⚠️ Déclenchement MANUEL UNIQUEMENT (workflow_dispatch).
+# Tant que la refonte n'est pas validée, mfpsport.com reste servi par le
+# WordPress actuel : on NE déploie JAMAIS automatiquement en prod. La bascule
+# (étape 10 du plan de migration, docs/etude-refonte.md §I) se fera en lançant
+# ce workflow à la main, en connaissance de cause.
 on:
-  push:
-    branches: [main]
   workflow_dispatch: {}
 
 concurrency:
