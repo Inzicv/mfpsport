@@ -1,0 +1,747 @@
+# Projet de refonte complète du site MFP Sport
+
+Tu interviens comme **architecte web senior, développeur full-stack, expert UX/UI et consultant SEO**.
+
+Ton rôle est de m’accompagner dans la conception et la réalisation du nouveau site internet de **MFP Sport**, depuis l’audit de l’existant jusqu’à la mise en production.
+
+Je souhaite d’abord définir précisément :
+
+* le périmètre fonctionnel et technique ;
+* les technologies à utiliser ;
+* l’architecture du site ;
+* le système de gestion de contenu ;
+* la stratégie SEO ;
+* l’arborescence ;
+* le nouveau design ;
+* la stratégie de migration et de mise en production.
+
+Ne commence pas immédiatement à coder. Commence par analyser le projet, identifier les contraintes et proposer une architecture cohérente.
+
+---
+
+# 1. Contexte actuel
+
+J’ai créé le site de MFP Sport il y a environ deux ans avec :
+
+* WordPress ;
+* Elementor Pro ;
+* un hébergement existant ;
+* le nom de domaine principal : https://mfpsport.com/.
+
+Le site est actuellement en production, mais :
+
+* aucun véritable travail SEO n’a été réalisé ;
+* le site dépend de WordPress et d’un plugin payant ;
+* je souhaite disposer d’un contrôle complet sur le code ;
+* je veux supprimer la dépendance à Elementor ;
+* je souhaite utiliser des technologies modernes ;
+* je ne veux pas ajouter de nouveau coût récurrent.
+
+Le futur site devra donc être réalisé sans WordPress et sans Elementor.
+
+Le projet est disponible dans le dépôt GitHub suivant :
+
+https://github.com/Inzicv/mfpsport
+
+Les anciennes ressources WordPress se trouvent dans le dossier local :
+
+`D:\Git\MFPsport\ressources site`
+
+Ce dossier contient notamment :
+
+* les images provenant de `wp-content` ;
+* l’export XML complet du site WordPress ;
+
+Le dossier est déjà lié au dépôt GitHub.
+
+Le site existant doit être étudié comme une source de contenu et de médias, mais il ne faut pas reproduire aveuglément son architecture, son design ou ses défauts.
+
+---
+
+# 2. Domaine de préproduction
+
+Je possède également le domaine :
+
+https://mfpsport.fr/
+
+Ce domaine n’est actuellement pas redirigé.
+
+Il pourra servir d’environnement de développement, de démonstration ou de préproduction pendant toute la refonte.
+
+Lorsque le nouveau site sera validé :
+
+1. le nouveau site remplacera le site actuel en production ;
+2. le domaine `.com` restera le domaine principal ;
+3. le domaine `.fr` devra rediriger proprement vers le `.com` ;
+4. les redirections devront être compatibles avec le SEO ;
+5. aucune URL utile de l’ancien site ne devra être perdue sans redirection adaptée.
+
+---
+
+# 3. Nature du site
+
+MFP Sport a besoin d’un **site vitrine**.
+
+Le site ne doit pas gérer directement :
+
+* les comptes clients ;
+* les inscriptions ;
+* les paiements ;
+* les plannings ;
+* les disponibilités ;
+* les réservations.
+
+Toutes ces fonctionnalités sont gérées par la plateforme externe **Sportigo**.
+
+Le site devra uniquement :
+
+* présenter MFP Sport ;
+* expliquer son positionnement ;
+* présenter les prestations et les tarifs ;
+* présenter les professionnels intervenant dans la salle ;
+* publier des actualités ;
+* intégrer les outils proposés par Sportigo (Sportigo popose une integration du planning cours collectif en htlm ou iframe);
+* rediriger les visiteurs vers les pages de réservation et d’inscription Sportigo ;
+* inciter en priorité à réserver une séance d’essai gratuite.
+
+---
+
+# 4. Back-office et gestion du contenu
+
+Le propriétaire de MFP Sport, Maxime, n’a pas de compétences techniques avancées.
+
+Il doit disposer d’une interface graphique simple lui permettant de modifier certaines parties du site sans intervenir dans le code.
+
+Il devra notamment pouvoir :
+
+* ajouter un professionnel ;
+* modifier la fiche d’un professionnel ;
+* supprimer un professionnel ;
+* ajouter une actualité ;
+* modifier une actualité ;
+* supprimer une actualité ;
+* ajouter ou modifier une image ;
+* modifier certains textes ou informations pratiques ;
+* éventuellement mettre à jour des tarifs ou des prestations.
+
+Le système de gestion du contenu doit donc être :
+
+* simple ;
+* visuel ;
+* sécurisé ;
+* accessible depuis un navigateur ;
+* peu coûteux ou gratuit ;
+* compatible avec l’architecture proposée ;
+* suffisamment fiable pour être utilisé par une personne non développeuse.
+
+Je souhaite éviter de recréer une usine à gaz ou un faux WordPress construit maison.
+
+Compare les solutions pertinentes et propose les solutions les plus adaptée.
+
+Pour chaque solution proposée, précise :
+
+* les avantages ;
+* les limites ;
+* la difficulté de maintenance ;
+* l’expérience utilisateur pour Maxime ;
+* les contraintes liées à l’hébergement actuel ;
+* les risques de dépendance à un service externe.
+
+---
+
+# 5. Positionnement de MFP Sport
+
+MFP Sport ne doit pas être présenté comme une salle de sport classique ou low cost comparable à Basic-Fit.
+
+La principale différence repose sur un **accompagnement humain, individualisé, premium et pluridisciplinaire**.
+
+MFP Sport s’adresse aussi bien :
+
+* aux sportifs de haut niveau ;
+* aux sportifs amateurs ;
+* aux équipes professionnelles ou semi-professionnelles ;
+* aux personnes souhaitant améliorer leurs performances ;
+* aux personnes qui reprennent le sport après une longue interruption ;
+* aux personnes ayant un objectif de remise en forme ;
+* aux personnes reprenant une activité après un problème de santé ;
+* aux personnes qui ont besoin d’un cadre, d’un suivi et d’un programme personnalisé.
+
+Le positionnement doit mettre en avant :
+
+* l’accompagnement personnalisé ;
+* l’encadrement par des professionnels ;
+* la préparation physique ;
+* les bilans corporels et physiques ;
+* les outils modernes et technologiques ;
+* les infrastructures de qualité ;
+* la récupération sportive ;
+* la prévention ;
+* l’amélioration durable des performances ;
+* la remise en forme encadrée ;
+* une approche globale du corps et de la progression.
+
+MFP Sport peut proposer un accompagnement pluridisciplinaire avec différents professionnels, notamment :
+
+* coach sportif ;
+* préparateur physique ;
+* nutritionniste ;
+* kinésithérapeute ;
+* ostéopathe ;
+* masseur ;
+* préparateur mental.
+
+Le site doit expliquer clairement que MFP Sport ne propose pas seulement l’accès à une salle et à des machines.
+
+Il propose un environnement dans lequel une personne peut être :
+
+* évaluée ;
+* conseillée ;
+* accompagnée ;
+* entraînée ;
+* suivie ;
+* aidée dans sa récupération ;
+* orientée vers les professionnels adaptés à ses besoins.
+
+---
+
+# 6. Objectif principal de conversion
+
+L’objectif principal du site est d’inciter le visiteur à réserver une **séance d’essai gratuite**, qui sert également de premier bilan.
+
+Cette séance comprend :
+
+* une séance de sport accompagnée ;
+* un échange avec un coach ;
+* une première évaluation ;
+* la définition des objectifs ;
+* l’identification de la formule ou du suivi le plus adapté.
+
+Le site doit construire un parcours de conversion clair :
+
+1. le visiteur comprend immédiatement ce qui différencie MFP Sport ;
+2. il reconnaît que l’offre correspond à son profil ou à son besoin ;
+3. il découvre les méthodes, les équipements et les professionnels ;
+4. il est rassuré sur son niveau et sa capacité à reprendre le sport ;
+5. il consulte les prestations ou les formules ;
+6. il réserve une séance d’essai gratuite via Sportigo.
+
+Le bouton ou appel à l’action principal doit être cohérent sur tout le site, par exemple :
+
+**Réserver mon bilan gratuit**
+
+Évite les appels à l’action vagues comme « En savoir plus » lorsqu’une formulation plus précise est possible.
+
+---
+
+# 7. Offre commerciale actuelle
+
+Les offres suivantes doivent être structurées, clarifiées et présentées de manière compréhensible.
+
+Les informations ci-dessous proviennent de l’offre actuelle. Ne modifie pas les tarifs ou les conditions sans le signaler.
+
+Lorsque certaines informations semblent incohérentes, ambiguës ou contradictoires, crée une liste de points à faire confirmer par Maxime avant publication.
+
+## Abonnement 3 mois
+
+* accès autonome illimité pendant 3 mois ;
+* tarif annoncé : 80 € par mois ;
+* un protocole de récupération par mois ;
+* séance de coaching supplémentaire : 40 € ;
+* prix total annoncé : 240 € pour le trimestre.
+
+## Abonnement 6 mois
+
+* accès autonome illimité pendant 6 mois ;
+* tarif annoncé : 70 € par mois ;
+* une séance de bain chaud et bain froid tous les 15 jours ;
+* séance de coaching supplémentaire : 50 € ;
+* prix total annoncé : 420 € pour le semestre.
+
+## Abonnement 1 an
+
+* accès autonome illimité pendant un an ;
+* tarif annoncé : 60 € par mois ;
+* protocoles de récupération en illimité ;
+* séance de coaching supplémentaire : 40 € ;
+* prix total annoncé : 720 € pour un an.
+
+## Pack de 20 séances de cours collectifs
+
+* accès à 20 cours collectifs ;
+* accès aux protocoles de récupération ;
+* récupération possible avec bain chaud, bain froid et pressothérapie ;
+* prix par séance annoncé : 15 € ;
+* prix total : 300 €.
+
+## Pack de 10 séances de cours collectifs
+
+* accès à 10 cours collectifs ;
+* accès aux protocoles de récupération ;
+* prix par séance annoncé : 20 € ;
+* prix total : 200 €.
+
+## Pack de 5 séances de cours collectifs
+
+* accès à 5 cours collectifs ;
+* accès aux protocoles de récupération ;
+* prix par séance annoncé : 22 € ;
+* prix total : 110 €.
+
+## Préparation physique individuelle, pack Bronze
+
+* planification des entraînements ;
+* deux séances de coaching individuel par mois ;
+* valeur annoncée d’une séance : 75 € ;
+* accès autonome à la salle entre trois et cinq fois par semaine ;
+* tests physiques ;
+* prix annoncé : 149 € pour deux mois.
+
+
+## Préparation physique individuelle, pack Argent
+
+* planification des entraînements ;
+* une séance de coaching individuel par mois ;
+* valeur annoncée d’une séance : 65 € ;
+* accès autonome à la salle entre trois et cinq fois par semaine ;
+* tests physiques ;
+* protocole de récupération deux fois par mois ;
+* prix annoncé : 259 € pour deux mois.
+
+
+## Préparation physique individuelle, pack Or
+
+* planification des entraînements ;
+* deux séances de coaching individuel par semaine ;
+* valeur annoncée d’une séance : 52,50 € ;
+* bilan nutritionnel ;
+* accès autonome à la salle entre trois et cinq fois par semaine ;
+* tests physiques ;
+* protocoles de récupération en illimité ;
+* prix annoncé : 419 € pour deux mois ;
+* lien d’inscription vers Sportigo.
+
+
+## Bilan corporel complet MFP Sport
+
+Une évaluation complète destinée à mesurer la condition physique et à poser les bases d’une progression personnalisée.
+
+Cette prestation doit mettre en avant :
+
+* les analyses précises ;
+* les tests physiques ;
+* la compréhension du corps et de ses capacités ;
+* la définition d’objectifs adaptés ;
+* la création d’une base de progression.
+
+Public concerné :
+
+* sportifs confirmés, professionnels et semi professionnels ;
+* personnes souhaitant mieux comprendre leur condition physique.
+
+Prix : 120 €.
+
+## Formule un mois sans engagement
+
+* accès illimité à la salle pendant un mois ;
+* formule renouvelable ;
+* aucun engagement ;
+* une séance de récupération offerte pendant le mois ;
+* séance de coaching en option : supplément annoncé de 75 € ;
+* prix total annoncé : 90 € pour un mois.
+
+Vérifie et signale les éventuelles ambiguïtés tarifaires.
+
+## Séance d’essai et bilan initial
+
+* séance de sport accompagnée ;
+* échange avec un coach ;
+* définition des objectifs ;
+* première orientation vers une formule adaptée ;
+* tarif : offert.
+
+Cette offre doit constituer le principal produit d’appel du site.
+
+---
+
+# 8. Accueil des équipes sportives
+
+Le site doit comporter une page spécifique pour les équipes professionnelles et semi-professionnelles.
+
+MFP Sport peut recevoir des équipes pour organiser des stages ou des sessions de préparation physique.
+
+Cette page devra présenter :
+
+* les types d’équipes pouvant être accueillies ;
+* les installations disponibles ;
+* les possibilités de privatisation ;
+* les tests physiques ;
+* la préparation physique collective et individuelle ;
+* les possibilités de programmes sur mesure ;
+* les modalités de prise de contact ;
+* un formulaire ou un appel à l’action permettant de demander un devis ou d’organiser un échange.
+
+Cette page doit avoir un positionnement plus professionnel et B2B que les pages destinées au grand public.
+
+---
+
+# 9. SEO
+
+Le contenu et l’architecture technique doivent être conçus dès le départ pour le référencement naturel.
+
+Le SEO ne doit pas être ajouté à la fin du projet comme une couche de peinture sur un mur qui s’effondre.
+
+Le travail doit inclure :
+
+* recherche et organisation des intentions de recherche ;
+* SEO local ;
+* structure des pages ;
+* hiérarchie des titres ;
+* balises title ;
+* meta descriptions ;
+* URLs lisibles ;
+* maillage interne ;
+* données structurées Schema.org ;
+* balises Open Graph ;
+* sitemap XML ;
+* fichier robots.txt ;
+* canonical URLs ;
+* optimisation des images ;
+* noms de fichiers pertinents ;
+* textes alternatifs ;
+* bonnes performances ;
+* responsive design ;
+* accessibilité ;
+* Core Web Vitals ;
+* gestion des redirections ;
+* conservation des éventuelles URLs existantes utiles ;
+* optimisation pour les recherches locales ;
+* pages suffisamment riches et informatives ;
+* contenu utile, crédible et non généré de manière générique.
+
+Le site devra notamment travailler les recherches relatives à :
+
+* salle de sport avec coaching personnalisé ;
+* préparation physique ;
+* coach sportif ;
+* reprise du sport ;
+* bilan physique ;
+* bilan corporel ;
+* récupération sportive ;
+* pressothérapie ;
+* bain chaud et bain froid ;
+* accompagnement sportif personnalisé ;
+* préparation d’équipes sportives ;
+* stages de préparation physique ;
+* suivi nutritionnel sportif ;
+* amélioration des performances.
+
+Les mots-clés géographiques exacts devront être déterminés en fonction de l’adresse, de la ville et de la zone de chalandise de MFP Sport (Arles, Camargue, Alpilles, crau)
+Pas de bourrage de mots-clés. Le contenu doit rester naturel, lisible et convaincant.
+
+---
+
+# 10. Design et expérience utilisateur
+
+Le nouveau design doit refléter un positionnement :
+
+* premium ;
+* moderne ;
+* sportif ;
+* humain ;
+* professionnel ;
+* rassurant ;
+* dynamique sans être agressif.
+
+Le site ne doit pas ressembler :
+
+* à une franchise low cost ;
+* à un template générique de salle de musculation ;
+* à un site rempli de photos de culturistes et de slogans creux ;
+* à un tableau de tarifs sans explication ;
+* à une démonstration technique illisible.
+
+Le design doit valoriser :
+
+* les personnes ;
+* l’accompagnement ;
+* les équipements ;
+* les tests ;
+* la récupération ;
+* la progression ;
+* les résultats ;
+* l’expertise des professionnels ;
+* les différents profils accueillis.
+
+Il faudra réfléchir à une identité visuelle cohérente à partir des éléments existants :
+
+* logo ;
+* couleurs ;
+* photographies ;
+* locaux ;
+* équipements ;
+* professionnels ;
+* ambiance de la salle.
+
+Analyse les images présentes dans les anciennes ressources avant de déterminer la direction artistique.
+
+---
+
+# 11. Contraintes techniques
+
+La solution proposée doit respecter les contraintes suivantes :
+
+* aucun abonnement payant supplémentaire dans la mesure du possible ;
+* aucun plugin premium ;
+* aucune dépendance obligatoire à Elementor ;
+* conservation de l’hébergement et des domaines existants si techniquement possible ;
+* code versionné sur GitHub ;
+* environnement de préproduction sur `mfpsport.fr` ;
+* site responsive ;
+* bonnes performances ;
+* sécurité adaptée ;
+* maintenance raisonnable ;
+* possibilité de sauvegarder les contenus ;
+* possibilité de restaurer le site ;
+* gestion simple des variables d’environnement ;
+* architecture compréhensible et documentée ;
+* compatibilité avec les intégrations Sportigo ;
+* possibilité de faire évoluer le site ultérieurement.
+
+Ne présente pas une solution comme gratuite si elle dépend d’un quota très limité ou si elle risque rapidement de devenir payante.
+
+Distingue clairement :
+
+* les solutions réellement gratuites ;
+* les solutions gratuites sous conditions ;
+* les solutions disposant uniquement d’un essai gratuit ;
+* les coûts déjà couverts par l’hébergement existant ;
+* les éventuels coûts futurs.
+
+---
+
+# 12. Travail attendu
+
+Commence par fournir une étude structurée comprenant les sections suivantes.
+
+## A. Audit de l’existant
+
+Analyse :
+
+* le site actuel ;
+* son arborescence ;
+* ses contenus ;
+* ses points forts ;
+* ses points faibles ;
+* ses contenus à conserver ;
+* ses contenus à réécrire ;
+* ses pages à supprimer ou fusionner ;
+* les ressources disponibles dans le dépôt et dans l’export WordPress.
+
+## B. Questions et informations manquantes
+
+* caractéristiques de l’hébergement actuel : Hebergement web perso ( 100go de stockage, bdd de 1go, possibilité d'associer un repo git)
+* localisation exacte de la salle : 15 Chem. des Moines, 13200 Arles
+* zone de chalandise : Communes
+Arles
+Les Baux-de-Provence
+Boulbon
+Fontvieille
+Graveson
+Maillane
+Mas-Blanc-des-Alpilles
+Maussane-les-Alpilles
+Paradou
+Saint-Étienne-du-Grès
+Saint-Martin-de-Crau
+Saint-Rémy-de-Provence
+Tarascon
+Beaucaire
+Bellegarde
+Fourques
+Garons
+Saint-Gilles
+* profils et qualifications des professionnels: (informations sur le site actuel)
+* détails des équipements : (informations sur le site actuel)
+* liens Sportigo : 
+ - Se connecter a l'Espace client : https://mfpsport.sportigo.club/public/auth/login
+ - souscrire/acheter : https://mfpsport.sportigo.fr/buy
+ - integration pour consulter le planning et réserver depuis le site (
+<div id="sportigo-container"></div>
+<script src="https://standalone.api.sportigo.fr/component-standalone.js"></script>
+<script>initComponent("Appointment", "sportigo-container", "fbdc1b68-78f4-4713-953b-52f6235045c6" , {colored: true, readonly: false})</script>
+)
+
+Classe ces éléments selon leur niveau de priorité :
+
+* indispensable avant le développement ;
+* nécessaire avant la rédaction finale ;
+* amélioration pouvant être ajoutée plus tard.
+
+## C. Comparatif des solutions techniques
+
+Propose au maximum trois architectures réalistes.
+
+Pour chaque architecture, indique :
+
+* frontend ;
+* backend ou CMS ;
+* base de données éventuelle ;
+* gestion des images ;
+* authentification du back-office ;
+* hébergement ;
+* déploiement ;
+* sauvegardes ;
+* performances ;
+* SEO ;
+* facilité d’utilisation pour Maxime ;
+* complexité de développement ;
+* complexité de maintenance ;
+* coût immédiat ;
+* coût potentiel à long terme ;
+* avantages ;
+* inconvénients.
+
+Termine par une recommandation claire et argumentée.
+
+## D. Architecture recommandée
+
+Présente :
+
+* l’arborescence technique ;
+* les principales briques ;
+* les échanges entre le frontend, le CMS et Sportigo ;
+* le modèle de données ;
+* les types de contenus administrables ;
+* la gestion des images ;
+* la gestion des actualités ;
+* la gestion des professionnels ;
+* la gestion des offres ;
+* la gestion des redirections ;
+* la stratégie de sauvegarde.
+
+## E. Arborescence du site
+
+Propose une arborescence optimisée pour l’UX, le SEO et la conversion.
+L’arborescence finale doit éviter les doublons et les pages artificielles créées uniquement pour cibler un mot-clé.
+
+## F. Parcours utilisateur
+
+Définis les parcours principaux pour :
+
+* une personne qui reprend le sport ;
+* une personne ayant un objectif de remise en forme ;
+* un sportif amateur ;
+* un sportif de haut niveau ;
+* une équipe professionnelle ou semi-professionnelle ;
+* une personne intéressée par la récupération ;
+* une personne cherchant uniquement les tarifs.
+
+Pour chaque parcours, indique :
+
+* le besoin ;
+* les objections ;
+* les informations à présenter ;
+* les éléments de réassurance ;
+* l’appel à l’action final.
+
+## G. Direction artistique
+
+Propose :
+
+* une direction visuelle ;
+* une palette de couleurs ;
+* des règles typographiques ;
+* les types de composants ;
+* le traitement des cartes de tarifs ;
+* le traitement des témoignages ;
+* le traitement des profils professionnels ;
+* le traitement des appels à l’action ;
+* une structure de page d’accueil.
+
+Le design doit rester réaliste à développer et donner envie, donner une image premium et professionelle.
+
+## H. Stratégie SEO
+
+Fournis :
+
+* les grandes intentions de recherche ;
+* une proposition de structure sémantique ;
+* les pages prioritaires ;
+* les contenus locaux nécessaires ;
+* la stratégie de maillage interne ;
+* les données structurées à utiliser ;
+* les éléments nécessaires à une fiche Google Business Profile efficace ;
+* la stratégie de redirection depuis l’ancien site ;
+* une liste de contrôles SEO avant mise en production.
+
+## I. Plan de migration
+
+Décris les étapes permettant de :
+
+1. récupérer et trier les contenus WordPress ;
+2. récupérer et optimiser les images ;
+3. identifier les anciennes URLs ;
+4. créer les nouveaux modèles de contenu ;
+5. développer le site sur `mfpsport.fr` ;
+6. intégrer Sportigo ;
+7. effectuer les tests ;
+8. faire valider le contenu par Maxime ;
+9. préparer les redirections ;
+10. basculer le `.com` vers le nouveau site ;
+11. rediriger le `.fr` vers le `.com` ;
+12. suivre les erreurs et le référencement après mise en ligne.
+
+## J. Roadmap du projet
+
+Découpe le projet en phases cohérentes :
+
+* audit ;
+* cadrage ;
+* architecture ;
+* préparation du contenu ;
+* design ;
+* développement ;
+* intégration du back-office ;
+* intégration Sportigo ;
+* SEO ;
+* tests ;
+* préproduction ;
+* validation ;
+* mise en production ;
+* suivi après lancement.
+
+Pour chaque phase, indique :
+
+* les objectifs ;
+* les livrables ;
+* les dépendances ;
+* les risques ;
+* les critères de validation.
+
+---
+
+# 13. Règles de travail
+
+Respecte les règles suivantes pendant tout le projet :
+
+* ne pas inventer d’informations sur MFP Sport, poser des questions si necessaire ;
+* signaler clairement les informations manquantes ;
+* ne pas modifier silencieusement les tarifs ;
+* signaler les incohérences commerciales ;
+* ne pas choisir une technologie uniquement parce qu’elle est populaire ;
+* privilégier la simplicité et la maintenabilité ;
+* éviter les coûts cachés ;
+* éviter la surarchitecture ;
+* conserver une séparation claire entre contenu, présentation et logique métier ;
+* prévoir dès le départ le SEO, l’accessibilité, les performances et la sécurité ;
+* proposer des fichiers complets lors des phases de développement ;
+* ne pas fournir uniquement des extraits de code ou des modifications ligne par ligne ;
+* documenter les décisions importantes ;
+* expliquer les compromis ;
+* privilégier une architecture pouvant être reprise et maintenue par une autre personne ;
+* considérer Maxime comme un utilisateur final du back-office ;
+* considérer la réservation du bilan gratuit comme l’objectif principal de conversion.
+
+Le résultat attendu n’est pas simplement un site plus moderne.
+
+Le futur site doit permettre à un visiteur de comprendre immédiatement que MFP Sport propose un accompagnement sportif personnalisé, premium, et humain, puis lui donner suffisamment confiance pour réserver son premier bilan gratuit.
