@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Cta from '../../components/Cta.astro';
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   const actualites = await getCollection('actualites');
@@ -16,21 +18,44 @@ const { Content } = await render(entry);
 
 <Layout title={entry.data.titre} description={entry.data.chapo}>
   <article class="page">
+    <p class="date">
+      {entry.data.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+    </p>
     <h1>{entry.data.titre}</h1>
-    <p class="date">{entry.data.date.toLocaleDateString('fr-FR')}</p>
-    <Content />
+    {
+      entry.data.image && (
+        <Image
+          class="media cover"
+          src={entry.data.image}
+          alt={entry.data.imageAlt ?? ''}
+          widths={[480, 768, 1100]}
+          sizes="(max-width: 48rem) 100vw, 44rem"
+        />
+      )
+    }
+    <div class="prose">
+      <Content />
+    </div>
+    <div class="section-cta">
+      <Cta />
+    </div>
   </article>
 </Layout>
 
 <style>
   .page {
     max-width: 48rem;
-    margin: 0 auto;
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
   }
 
   .date {
     color: var(--color-slate);
     font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .cover {
+    max-height: 420px;
+    object-fit: cover;
+    margin-bottom: 2rem;
   }
 </style>

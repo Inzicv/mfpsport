@@ -1,6 +1,8 @@
 ---
 titre: "Ouverture de notre centre le 9 septembre !"
 date: 2024-09-01
+image: ../../assets/images/halteres-logo-mfp-sport.jpg
+imageAlt: "Le rack d'haltères de la salle, avec le logo MFP Sport au sol"
 chapo: >-
   Notre centre sportif ouvre officiellement ses portes le 9 septembre : un espace
   entièrement dédié à la performance, au bien-être et à la récupération des sportifs
