@@ -18,8 +18,7 @@ const actualites = (await getCollection('actualites'))
 
 const pros = (await getCollection('professionnels'))
   .filter((p) => p.data.actif && p.data.photo)
-  .sort((a, b) => a.data.ordre - b.data.ordre)
-  .slice(0, 4);
+  .sort((a, b) => a.data.ordre - b.data.ordre);
 
 const poles = [
   {
@@ -200,7 +199,9 @@ const etapes = [
           {pros.map((pro) => (
             <li>
               <a href="/equipe/">
-                <Image src={pro.data.photo!} alt={`${pro.data.nom}, ${pro.data.role}`} widths={[320, 520]} sizes="(max-width: 700px) 80vw, 25vw" />
+                <span class="equipe-home__photo">
+                  <Image src={pro.data.photo!} alt={`${pro.data.nom}, ${pro.data.role}`} widths={[320, 520]} sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 20vw" />
+                </span>
                 <span><strong>{pro.data.nom}</strong><small>{pro.data.role}</small></span>
               </a>
             </li>
@@ -294,12 +295,13 @@ const etapes = [
 
   .equipe-home { color: #fff; background: #0c2638; }
   .section-head--dark > a { color: #fff; text-decoration: none; }
-  .equipe-home__grid { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; gap: 1px; padding: 0; margin: 0; background: rgba(255,255,255,.16); }
+  .equipe-home__grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; gap: 1px; padding: 0; margin: 0; background: rgba(255,255,255,.16); }
   .equipe-home__grid li { background: #0c2638; }
-  .equipe-home__grid a { display: block; color: #fff; text-decoration: none; }
-  .equipe-home__grid img { width: 100%; aspect-ratio: 4/5; object-fit: cover; filter: saturate(.72); transition: filter .25s; }
-  .equipe-home__grid a:hover img { filter: saturate(1); }
-  .equipe-home__grid span { display: flex; flex-direction: column; min-height: 7rem; padding: 1rem; }
+  .equipe-home__grid a { display: flex; flex-direction: column; height: 100%; color: #fff; text-decoration: none; }
+  .equipe-home__photo { display: block; width: 100%; aspect-ratio: 4/5; min-height: 0; padding: 0; overflow: hidden; background: #132f42; }
+  .equipe-home__photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: saturate(.72); transition: filter .25s; }
+  .equipe-home__grid a:hover .equipe-home__photo :global(img) { filter: saturate(1); }
+  .equipe-home__grid a > span:last-child { display: flex; flex: 1; flex-direction: column; min-height: 7rem; padding: 1rem; }
   .equipe-home__grid strong { font-family: var(--font-display); font-size: 1.05rem; }
   .equipe-home__grid small { margin-top: .3rem; color: #a9bfcd; line-height: 1.4; }
 
@@ -335,6 +337,7 @@ const etapes = [
     .expertises__text { grid-column: 2 / 3; }
     .expertises__arrow { grid-column: 3; grid-row: 1; }
     .equipe-home__grid { grid-template-columns: repeat(2, 1fr); }
+    .equipe-home__grid li:last-child { grid-column: 1 / -1; max-width: 50%; width: 100%; justify-self: center; }
   }
 
   @media (max-width: 560px) {
@@ -343,6 +346,7 @@ const etapes = [
     .trust p { padding: .75rem; }
     .section-head, .final-cta__inner { align-items: flex-start; flex-direction: column; }
     .equipe-home__grid { grid-template-columns: 1fr; }
+    .equipe-home__grid li:last-child { grid-column: auto; max-width: none; }
     .centre-home__mosaic { grid-template-columns: 1fr; grid-template-rows: repeat(3, 15rem); height: auto; }
     .centre-home__mosaic img:first-child { grid-row: auto; }
     .news-ticker { min-height: 3.8rem; }
