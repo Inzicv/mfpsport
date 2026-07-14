@@ -6,6 +6,9 @@ diplomes:
   - Praticienne bien-être certifiée
 specialites:
   - recuperation
+telephone: "06 32 45 60 57"
+facebook: https://www.facebook.com/profile.php?id=61569605145370
+lienRdv: https://mfpsport.sportigo.club/public/auth/login
 ordre: 5
 actif: true
 ---

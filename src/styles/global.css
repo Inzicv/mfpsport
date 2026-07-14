@@ -4,17 +4,17 @@
 :root {
   /* Palette dérivée du logo */
   --color-blue-deep: #005ca9;
-  --color-blue-night: #0b2740;
+  --color-blue-night: #081d2c;
   --color-blue-light: #4fb8e7;
   --color-ink: #10202f;
-  --color-paper: #f5f8fb;
+  --color-paper: #f3f5f4;
   --color-surface: #ffffff;
   --color-slate: #5b6b7a;
   --color-line: rgba(11, 39, 64, 0.1);
 
-  /* Accent réservé au CTA de conversion et aux badges « Offert » */
-  --color-cta: #ff7a2f;
-  --color-cta-hover: #e8641c;
+  /* L'identité reste volontairement monochrome : le CTA reprend le bleu MFP. */
+  --color-cta: #006fba;
+  --color-cta-hover: #004f86;
 
   /* Dégradé de marque (motif « barres » du logo) */
   --gradient-brand: linear-gradient(120deg, #0b2740 0%, #063a63 55%, #005ca9 100%);
@@ -24,9 +24,9 @@
   /* Alias rétrocompatible (anciennes références --font-heading) */
   --font-heading: var(--font-display);
 
-  --radius-sm: 0.5rem;
-  --radius-md: 0.9rem;
-  --radius-lg: 1.4rem;
+  --radius-sm: 0.35rem;
+  --radius-md: 0.6rem;
+  --radius-lg: 0.85rem;
 
   --shadow-sm: 0 1px 3px rgba(11, 39, 64, 0.08);
   --shadow-card: 0 10px 40px -12px rgba(11, 39, 64, 0.18);
@@ -71,11 +71,11 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(2.4rem, 5.2vw, 4rem);
+  font-size: clamp(2.7rem, 6vw, 5.25rem);
 }
 
 h2 {
-  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
 }
 
 h3 {
@@ -135,7 +135,7 @@ img {
   line-height: 1;
   text-decoration: none;
   padding: 0.95em 1.8em;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
   transition:
@@ -148,7 +148,7 @@ img {
 .cta {
   background: var(--color-cta);
   color: #fff;
-  box-shadow: 0 8px 24px -8px rgba(255, 122, 47, 0.6);
+  box-shadow: none;
 }
 
 .cta:hover,
@@ -165,7 +165,7 @@ img {
   font-weight: 600;
   text-decoration: none;
   padding: 0.95em 1.6em;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
   transition:

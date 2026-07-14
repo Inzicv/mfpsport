@@ -7,6 +7,9 @@ diplomes:
 specialites:
   - recuperation
 joursPresence: Le lundi après-midi à la salle (cabinet à Tarascon le reste du temps)
+lienRdv: https://www.doctolib.fr/osteopathe/tarascon/elliot-mas
+telephone: "06 38 73 92 90"
+email: elliotmasosteo@gmail.com
 ordre: 4
 actif: true
 ---

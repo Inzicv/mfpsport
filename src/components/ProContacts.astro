@@ -1,0 +1,80 @@
+---
+interface Props {
+  telephone?: string;
+  email?: string;
+  lienRdv?: string;
+  instagram?: string;
+  facebook?: string;
+  linkedin?: string;
+  compact?: boolean;
+}
+
+const {
+  telephone,
+  email,
+  lienRdv,
+  instagram,
+  facebook,
+  linkedin,
+  compact = false,
+} = Astro.props;
+
+const telHref = telephone ? `tel:${telephone.replace(/\s/g, '')}` : undefined;
+const hasContacts = telephone || email || lienRdv || instagram || facebook || linkedin;
+---
+
+{
+  hasContacts && (
+    <div class:list={['pro-contacts', { 'pro-contacts--compact': compact }]} aria-label="Coordonnées du praticien">
+      {lienRdv && <a class="pro-contacts__primary" href={lienRdv} rel="noopener">Prendre rendez-vous</a>}
+      {telephone && <a href={telHref}>Tél. {telephone}</a>}
+      {email && <a href={`mailto:${email}`}>{email}</a>}
+      {instagram && <a href={instagram} rel="noopener">Instagram</a>}
+      {facebook && <a href={facebook} rel="noopener">Facebook</a>}
+      {linkedin && <a href={linkedin} rel="noopener">LinkedIn</a>}
+    </div>
+  )
+}
+
+<style>
+  .pro-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1rem;
+    align-items: center;
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .pro-contacts a {
+    color: var(--color-blue-deep);
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .pro-contacts a:hover {
+    text-decoration: underline;
+  }
+
+  .pro-contacts .pro-contacts__primary {
+    display: inline-flex;
+    padding: 0.68rem 0.9rem;
+    color: #fff;
+    background: var(--color-blue-deep);
+    border-radius: var(--radius-sm);
+  }
+
+  .pro-contacts .pro-contacts__primary:hover {
+    color: #fff;
+    text-decoration: none;
+    background: var(--color-blue-night);
+  }
+
+  .pro-contacts--compact {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    gap: 0.4rem 0.75rem;
+  }
+</style>

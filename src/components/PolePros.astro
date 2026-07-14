@@ -3,6 +3,7 @@
 // Utilisé sur les pages de pôles pour renvoyer un visage sur « qui va
 // m'accompagner ? » — voir docs/etude-refonte.md §A.5 et §F.
 import { getCollection } from 'astro:content';
+import ProContacts from './ProContacts.astro';
 
 interface Props {
   specialite: string;
@@ -26,6 +27,15 @@ const pros = (await getCollection('professionnels'))
             <p class="polepros__nom">{p.data.nom}</p>
             <p class="polepros__role">{p.data.role}</p>
             <a href="/equipe/">Voir sa fiche</a>
+            <ProContacts
+              compact
+              telephone={p.data.telephone}
+              email={p.data.email}
+              lienRdv={p.data.lienRdv}
+              instagram={p.data.instagram}
+              facebook={p.data.facebook}
+              linkedin={p.data.linkedin}
+            />
           </li>
         ))}
       </ul>
@@ -44,8 +54,8 @@ const pros = (await getCollection('professionnels'))
 
   .polepros li {
     background: #fff;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
     padding: 1.25rem;
   }
 

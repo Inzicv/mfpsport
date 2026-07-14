@@ -5,6 +5,7 @@ photo: ../../assets/images/portrait-charles-louvet.jpg
 specialites:
   - nutrition
 joursPresence: Sur rendez-vous
+instagram: https://www.instagram.com/backtobasics.diet
 ordre: 2
 actif: true
 ---

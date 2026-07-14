@@ -7,6 +7,8 @@ diplomes:
   - Tronc commun du Brevet d'État d'Éducateur Sportif
 specialites:
   - mental
+instagram: https://www.instagram.com/tonyrousselot/
+linkedin: https://www.linkedin.com/in/tony-rousselot-coach-sportif-bouche-du-rh%C3%B4ne/
 ordre: 3
 actif: true
 ---

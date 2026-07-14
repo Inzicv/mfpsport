@@ -1,5 +1,7 @@
 ---
 import { getEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-mfp-sport.png';
 
 const infos = await getEntry('infos', 'infos-pratiques');
 const year = new Date().getFullYear();
@@ -8,7 +10,9 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="site-footer__grid">
     <div>
-      <p class="site-footer__brand">MFP Sport</p>
+      <a class="site-footer__brand" href="/" aria-label="MFP Sport — accueil">
+        <Image src={logo} alt="MFP Sport" width={110} />
+      </a>
       {infos && (
         <address>
           {infos.data.adresse}<br />
@@ -59,10 +63,14 @@ const year = new Date().getFullYear();
   }
 
   .site-footer__brand {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    color: #fff;
-    font-size: 1.1rem;
+    display: inline-block;
+    background: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .site-footer__brand :global(img) {
+    width: 110px;
+    height: auto;
   }
 
   .site-footer a {

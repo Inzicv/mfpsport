@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
+import ProContacts from '../components/ProContacts.astro';
 
 const pros = (await getCollection('professionnels'))
   .filter((p) => p.data.actif)
@@ -24,12 +25,16 @@ const initiales = (nom: string) =>
   title="L'équipe"
   description="Rencontrez l'équipe pluridisciplinaire de MFP Sport à Arles : coach, préparateur physique, diététicienne, préparateur mental, ostéopathe, praticienne massage."
 >
-  <section class="page">
-    <h1>L'équipe</h1>
-    <p class="intro">
+  <header class="page-hero equipe-hero">
+    <p class="eyebrow eyebrow--light">Une équipe, un même parcours</p>
+    <h1>Les professionnels qui vous accompagnent</h1>
+    <p>
       Chez MFP Sport, vous n'êtes jamais seul·e face aux machines. Une équipe de
       professionnels vous évalue, vous conseille et vous accompagne à chaque étape.
     </p>
+  </header>
+
+  <section class="page equipe-page">
 
     {
       rendus.length === 0 ? (
@@ -43,8 +48,8 @@ const initiales = (nom: string) =>
                   class="pro__photo"
                   src={data.photo}
                   alt={`${data.nom}, ${data.role} chez MFP Sport`}
-                  width={120}
-                  height={120}
+                  width={720}
+                  height={540}
                 />
               ) : (
                 <span class="pro__photo pro__photo--placeholder" aria-hidden="true">
@@ -63,7 +68,15 @@ const initiales = (nom: string) =>
               <div class="pro__bio">
                 <Content />
               </div>
-              {data.joursPresence && <p class="pro__presence">📅 {data.joursPresence}</p>}
+              {data.joursPresence && <p class="pro__presence">Présence : {data.joursPresence}</p>}
+              <ProContacts
+                telephone={data.telephone}
+                email={data.email}
+                lienRdv={data.lienRdv}
+                instagram={data.instagram}
+                facebook={data.facebook}
+                linkedin={data.linkedin}
+              />
             </li>
           ))}
         </ul>
@@ -79,14 +92,24 @@ const initiales = (nom: string) =>
     padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
   }
 
-  .intro {
-    max-width: 50ch;
-    color: var(--color-slate);
+  .equipe-hero {
+    text-align: left;
+  }
+
+  .equipe-hero h1,
+  .equipe-hero p {
+    margin-inline: 0;
+  }
+
+  .equipe-hero > * {
+    max-width: min(72rem, calc(100% - 2.2rem));
+    margin-left: max(1.1rem, calc((100% - 72rem) / 2));
   }
 
   .equipe__grid {
     display: grid;
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
     list-style: none;
     padding: 0;
     margin-top: 2rem;
@@ -94,15 +117,15 @@ const initiales = (nom: string) =>
 
   .pro {
     background: #fff;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: 1.75rem;
+    border: 1px solid var(--color-line);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .pro__photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-sm);
     object-fit: cover;
     margin-bottom: 1rem;
   }
@@ -149,5 +172,11 @@ const initiales = (nom: string) =>
     color: var(--color-slate);
     font-size: 0.9rem;
     margin-bottom: 0;
+  }
+
+  @media (max-width: 720px) {
+    .equipe__grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

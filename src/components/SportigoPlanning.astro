@@ -1,0 +1,131 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const containerId = compact ? 'sportigo-home' : 'sportigo-container';
+---
+
+<div class:list={['sportigo-shell', { 'sportigo-shell--compact': compact }]} data-sportigo-shell>
+  <div class="sportigo-shell__head">
+    <div>
+      <p class="eyebrow">Planning en direct</p>
+      <h2>Trouvez votre prochaine séance</h2>
+      <p>Consultez les créneaux disponibles et réservez directement en ligne.</p>
+    </div>
+    {compact && <a href="/planning/">Ouvrir le planning complet →</a>}
+  </div>
+
+  <div id={containerId} class="sportigo-shell__widget" data-sportigo-target={containerId}>
+    <p class="sportigo-shell__loading" data-sportigo-loading>Chargement du planning…</p>
+  </div>
+  <noscript>
+    <p>JavaScript est nécessaire pour afficher le planning. <a href="https://mfpsport.sportigo.club/public/auth/login">Accéder à Sportigo</a>.</p>
+  </noscript>
+</div>
+
+<script>
+  declare global {
+    interface Window {
+      initComponent?: (type: string, container: string, id: string, options: object) => void;
+      __mfpSportigoPromise?: Promise<void>;
+      __mfpSportigoTargets?: Set<string>;
+    }
+  }
+
+  const initialise = (targetId: string) => {
+    if (!window.initComponent || window.__mfpSportigoTargets?.has(targetId)) return;
+    window.__mfpSportigoTargets ??= new Set();
+    window.__mfpSportigoTargets.add(targetId);
+    document.querySelector(`#${targetId} [data-sportigo-loading]`)?.remove();
+    window.initComponent('Appointment', targetId, 'fbdc1b68-78f4-4713-953b-52f6235045c6', {
+      colored: true,
+      readonly: false,
+    });
+  };
+
+  const loadSportigo = () => {
+    window.__mfpSportigoPromise ??= new Promise((resolve, reject) => {
+      if (window.initComponent) return resolve();
+      const script = document.createElement('script');
+      script.src = 'https://standalone.api.sportigo.fr/component-standalone.js';
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('Sportigo indisponible'));
+      document.head.appendChild(script);
+    });
+    return window.__mfpSportigoPromise;
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-sportigo-target]').forEach((target) => {
+    const targetId = target.dataset.sportigoTarget;
+    if (!targetId) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        loadSportigo()
+          .then(() => initialise(targetId))
+          .catch(() => {
+            target.innerHTML = '<p class="sportigo-shell__error">Le planning ne peut pas être chargé pour le moment. <a href="https://mfpsport.sportigo.club/public/auth/login">Ouvrir Sportigo</a></p>';
+          });
+        observer.disconnect();
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(target);
+  });
+</script>
+
+<style>
+  .sportigo-shell {
+    background: #fff;
+    border: 1px solid var(--color-line);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  .sportigo-shell__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: 1.5rem;
+  }
+
+  .sportigo-shell__head h2 {
+    margin-bottom: 0.45rem;
+  }
+
+  .sportigo-shell__head p:last-child {
+    color: var(--color-slate);
+    margin: 0;
+  }
+
+  .sportigo-shell__head > a {
+    flex: none;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .sportigo-shell__widget {
+    min-height: 560px;
+    background: var(--color-paper);
+  }
+
+  .sportigo-shell__loading,
+  :global(.sportigo-shell__error) {
+    padding: 2rem;
+    color: var(--color-slate);
+  }
+
+  @media (max-width: 700px) {
+    .sportigo-shell__head {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .sportigo-shell__widget {
+      min-height: 620px;
+    }
+  }
+</style>
