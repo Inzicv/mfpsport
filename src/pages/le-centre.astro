@@ -50,72 +50,159 @@ const galerie = [
     </p>
   </header>
 
-  <div class="page prose">
-    <p>
+  <main class="centre-page">
+    <p class="centre-intro">
       MFP Sport n'est pas une salle en libre-service de plus. C'est un environnement complet
       où chaque personne peut être évaluée, conseillée, entraînée et accompagnée dans sa
       récupération, quel que soit son niveau de départ.
     </p>
 
-    <h2>300 m² dédiés à la pratique sportive</h2>
-    <p>
-      La salle dispose d'une vaste zone de travail de près de 300 m² en sol souple, idéale
-      pour des entraînements variés en toute sécurité. Vous y trouverez aussi une piste
-      d'athlétisme de 24 m pour les sprints et les exercices de vitesse, ainsi qu'une zone
-      fonctionnelle de 57 m² en pelouse synthétique haute performance, parfaite pour le
-      travail fonctionnel et la mobilité.
-    </p>
+    <section class="centre-feature">
+      <div>
+        <p class="eyebrow">L'espace</p>
+        <h2>300 m² dédiés à la pratique sportive</h2>
+        <p>
+          La salle dispose d'une vaste zone de travail de près de 300 m² en sol souple, idéale
+          pour des entraînements variés en toute sécurité. Vous y trouverez aussi une piste
+          d'athlétisme de 24 m pour les sprints et les exercices de vitesse, ainsi qu'une zone
+          fonctionnelle de 57 m² en pelouse synthétique haute performance.
+        </p>
+      </div>
+      <Image
+        class="centre-feature__image"
+        src={plan}
+        alt="Plan de la salle MFP Sport à Arles : zone d'entraînement, piste, zone fonctionnelle et box praticiens"
+        widths={[640, 960]}
+        sizes="(max-width: 800px) 100vw, 52vw"
+      />
+    </section>
 
-    <Image
-      class="media"
-      src={plan}
-      alt="Plan de la salle MFP Sport à Arles : zone d'entraînement, piste, zone fonctionnelle et box praticiens"
-      widths={[480, 768]}
-      sizes="(max-width: 44rem) 100vw, 44rem"
-    />
+    <section class="centre-tools" aria-label="Les équipements du centre">
+      <article>
+        <span>01</span>
+        <h2>Les outils de musculation</h2>
+        <p>
+          Half Rack WIIT Pro, cage de cross-training à trois stations, Kieser fonctionnel,
+          barres Bamboo BANDBELL, sac de frappe, plyo box et corde ondulatoire.
+        </p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Les outils cardio</h2>
+        <p>
+          SkiErg et RowErg Concept 2, Wattbike Pro, vélos de spinning M3i et elliptiques
+          Sparc pour un travail intense qui préserve les articulations.
+        </p>
+      </article>
+    </section>
 
-    <h2>Les outils de musculation</h2>
-    <p>
-      La salle est équipée d'un Half Rack WIIT Pro et d'une cage de cross-training à trois
-      stations entièrement équipées. Parmi les outils disponibles : Kieser fonctionnel,
-      barres Bamboo BANDBELL (résistance instable pour la force fonctionnelle et la
-      stabilité), sac de frappe, plyo box, corde ondulatoire, et bien d'autres.
-    </p>
+    <section class="centre-feature centre-feature--reverse">
+      <div>
+        <p class="eyebrow">Performance</p>
+        <h2>Des outils qui vont plus loin</h2>
+        <p>
+          VertiMax pour la force et l'explosivité, poulies magnétiques Voltra, Battle4Run The
+          Crab, BlazePods pour la réactivité et K Box4 pour l'entraînement excentrique : le
+          matériel sert une programmation précise, jamais l'inverse.
+        </p>
+      </div>
+      <Image
+        class="centre-feature__image"
+        src={vertimax}
+        alt="Entraînement sur VertiMax à MFP Sport, développement de l'explosivité"
+        widths={[640, 960]}
+        sizes="(max-width: 800px) 100vw, 52vw"
+      />
+    </section>
 
-    <h2>Les outils cardio</h2>
-    <p>
-      Côté cardio-training : SkiErg et RowErg Concept 2, Wattbike Pro (le vélo utilisé par
-      les cyclistes professionnels), vélos de spinning M3i et vélos elliptiques Sparck pour
-      un entraînement à faible impact qui préserve les articulations.
-    </p>
-
-    <h2>Les outils haute performance</h2>
-    <p>
-      Pour aller plus loin : le VertiMax (force et explosivité en verticalité), les poulies
-      magnétiques Voltra, le Battle4Run The Crab (course et résistance), les BlazePods
-      (réactivité, vitesse, coordination) et la K Box4 pour l'entraînement excentrique.
-    </p>
-
-    <Image
-      class="media"
-      src={vertimax}
-      alt="Entraînement sur VertiMax à MFP Sport, développement de l'explosivité"
-      widths={[480, 768]}
-      sizes="(max-width: 44rem) 100vw, 44rem"
-    />
-
-    <h2>Les outils de mesure et de tests</h2>
-    <p>
-      Nous utilisons des dispositifs de mesure de haute précision — les capteurs Kinvent et
-      les encodeurs Vitruve — pour suivre vos progrès et ajuster vos entraînements avec une
-      précision optimale. Ces technologies nous permettent de personnaliser votre programme
-      en fonction de vos performances réelles.
-    </p>
+    <section class="centre-measure">
+      <p class="eyebrow eyebrow--light">Mesurer pour progresser</p>
+      <h2>Les outils de mesure et de tests</h2>
+      <p>
+        Les capteurs Kinvent et les encodeurs Vitruve permettent de suivre vos progrès,
+        d'ajuster les entraînements et de personnaliser votre programme à partir de données
+        concrètes.
+      </p>
+    </section>
 
     <Galerie titre="Le centre en images" images={galerie} />
 
-    <div class="section-cta">
-      <Cta />
-    </div>
-  </div>
+    <div class="section-cta"><Cta /></div>
+  </main>
 </Layout>
+
+<style>
+  .centre-page {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: clamp(3rem, 7vw, 6rem) clamp(1.1rem, 4vw, 3rem);
+  }
+
+  .centre-intro {
+    max-width: 48rem;
+    margin: 0 0 clamp(3rem, 7vw, 6rem);
+    color: var(--color-blue-night);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.3vw, 1.75rem);
+    line-height: 1.45;
+  }
+
+  .centre-feature {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: center;
+    margin-bottom: clamp(4rem, 9vw, 8rem);
+  }
+
+  .centre-feature--reverse {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+  }
+
+  .centre-feature--reverse > div { grid-column: 2; grid-row: 1; }
+  .centre-feature--reverse .centre-feature__image { grid-column: 1; grid-row: 1; }
+
+  .centre-feature__image {
+    width: 100%;
+    max-height: 38rem;
+    object-fit: cover;
+    box-shadow: var(--shadow-card);
+  }
+
+  .centre-feature h2 { font-size: clamp(2.2rem, 4.3vw, 4rem); }
+  .centre-feature p:last-child { color: var(--color-slate); }
+
+  .centre-tools {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: clamp(4rem, 9vw, 8rem);
+    border-block: 1px solid var(--color-line);
+  }
+
+  .centre-tools article { padding: clamp(2rem, 5vw, 4rem); }
+  .centre-tools article + article { border-left: 1px solid var(--color-line); }
+  .centre-tools span { color: var(--color-blue-deep); font-family: var(--font-display); font-weight: 700; }
+  .centre-tools h2 { margin-top: 1rem; font-size: clamp(1.8rem, 3vw, 2.8rem); }
+  .centre-tools p { color: var(--color-slate); }
+
+  .centre-measure {
+    max-width: 56rem;
+    margin: 0 auto clamp(4rem, 8vw, 7rem);
+    padding: clamp(2.5rem, 6vw, 5rem);
+    color: #d3e2eb;
+    background: var(--color-blue-night);
+  }
+
+  .centre-measure h2 { color: #fff; }
+  .centre-page :global(.galerie) { margin-top: 2rem; }
+  .centre-page :global(.galerie > h2) { margin-bottom: 1.5rem; }
+
+  @media (max-width: 800px) {
+    .centre-feature,
+    .centre-feature--reverse,
+    .centre-tools { grid-template-columns: 1fr; }
+    .centre-feature--reverse > div,
+    .centre-feature--reverse .centre-feature__image { grid-column: 1; grid-row: auto; }
+    .centre-tools article + article { border-left: 0; border-top: 1px solid var(--color-line); }
+  }
+</style>

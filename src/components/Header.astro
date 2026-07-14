@@ -36,7 +36,7 @@ const nav = [
         {
           nav.map((item) => (
             <li class:list={['nav-item', { 'has-children': item.children }]}>
-              <a href={item.href}>
+              <a href={item.href} aria-haspopup={item.children ? 'true' : undefined}>
                 {item.label}
                 {item.children && <span class="chevron" aria-hidden="true">▾</span>}
               </a>
@@ -195,9 +195,9 @@ const nav = [
 
   /* Sous-menu : masqué par défaut, affiché au survol/focus (bug de spécificité corrigé) */
   .submenu {
-    display: none;
+    display: flex;
     position: absolute;
-    top: calc(100% + 6px);
+    top: calc(100% - 1px);
     left: 0;
     flex-direction: column;
     gap: 2px;
@@ -209,11 +209,20 @@ const nav = [
     border: 1px solid var(--color-line);
     box-shadow: var(--shadow-card);
     border-radius: var(--radius-sm);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(5px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
   }
 
   .nav-item.has-children:hover .submenu,
   .nav-item.has-children:focus-within .submenu {
-    display: flex;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .submenu a {

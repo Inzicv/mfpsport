@@ -41,13 +41,23 @@ const { titre, images } = Astro.props;
 
   .galerie__grid li {
     margin: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #dfe5e7;
+    border-radius: var(--radius-md);
   }
 
   .galerie :global(img) {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-md);
     display: block;
+  }
+
+  @media (max-width: 520px) {
+    .galerie__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
   }
 </style>

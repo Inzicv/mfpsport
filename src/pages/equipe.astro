@@ -87,7 +87,7 @@ const initiales = (nom: string) =>
 
 <style>
   .page {
-    max-width: 60rem;
+    max-width: var(--maxw);
     margin: 0 auto;
     padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
   }
@@ -108,26 +108,49 @@ const initiales = (nom: string) =>
 
   .equipe__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
     list-style: none;
     padding: 0;
     margin-top: 2rem;
   }
 
   .pro {
+    display: grid;
+    grid-template-columns: minmax(15rem, 22rem) minmax(0, 1fr);
+    grid-template-rows: auto;
+    column-gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
     background: #fff;
     border: 1px solid var(--color-line);
     padding: clamp(1.5rem, 4vw, 2.5rem);
   }
 
+  .pro > :not(.pro__photo) {
+    grid-column: 2;
+  }
+
   .pro__photo {
+    grid-column: 1;
+    grid-row: 1 / span 8;
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
     border-radius: var(--radius-sm);
     object-fit: cover;
     margin-bottom: 1rem;
+  }
+
+  .pro:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 22rem);
+  }
+
+  .pro:nth-child(even) > :not(.pro__photo) {
+    grid-column: 1;
+  }
+
+  .pro:nth-child(even) .pro__photo {
+    grid-column: 2;
   }
 
   .pro__photo--placeholder {
@@ -175,8 +198,21 @@ const initiales = (nom: string) =>
   }
 
   @media (max-width: 720px) {
-    .equipe__grid {
+    .pro,
+    .pro:nth-child(even) {
       grid-template-columns: 1fr;
+    }
+
+    .pro > :not(.pro__photo),
+    .pro:nth-child(even) > :not(.pro__photo),
+    .pro__photo,
+    .pro:nth-child(even) .pro__photo {
+      grid-column: 1;
+    }
+
+    .pro__photo,
+    .pro:nth-child(even) .pro__photo {
+      grid-row: auto;
     }
   }
 </style>

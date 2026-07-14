@@ -84,6 +84,25 @@ const etapes = [
     <a class="hero__scroll" href="#approche">Découvrir notre approche <span aria-hidden="true">↓</span></a>
   </section>
 
+  {actualites.length > 0 && (
+    <aside class="news-ticker" aria-label="Dernières actualités">
+      <a class="news-ticker__label" href="/actualites/">En ce moment</a>
+      <div class="news-ticker__viewport">
+        {[0, 1].map((copy) => (
+          <div class="news-ticker__track" aria-hidden={copy === 1 ? 'true' : undefined}>
+            {actualites.map((actu) => (
+              <a href={`/actualites/${actu.id}/`} tabindex={copy === 1 ? '-1' : undefined}>
+                <time>{actu.data.date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })}</time>
+                <strong>{actu.data.titre}</strong>
+                <span aria-hidden="true">→</span>
+              </a>
+            ))}
+          </div>
+        ))}
+      </div>
+    </aside>
+  )}
+
   <section class="trust" aria-label="MFP Sport en quelques repères">
     <div class="container trust__grid">
       <p><strong>300 m²</strong><span>dédiés à votre progression</span></p>
@@ -205,19 +224,6 @@ const etapes = [
     </div>
   </section>
 
-  {actualites.length > 0 && (
-    <section class="section actus">
-      <div class="container actus__grid">
-        <div><p class="eyebrow">Actualités</p><h2>La vie du centre</h2><a href="/actualites/">Toutes les actualités →</a></div>
-        <ul>
-          {actualites.map((actu) => (
-            <li><a href={`/actualites/${actu.id}/`}><time>{actu.data.date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' })}</time><strong>{actu.data.titre}</strong><span>Lire →</span></a></li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )}
-
   <section class="final-cta">
     <div class="container final-cta__inner">
       <div><p class="eyebrow eyebrow--light">Votre point de départ</p><h2>Parlons de ce que vous voulez accomplir.</h2></div>
@@ -236,6 +242,17 @@ const etapes = [
   .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; }
   .hero__scroll { position: absolute; z-index: 2; right: clamp(1.1rem, 4vw, 3rem); bottom: 2rem; color: #fff; text-decoration: none; font-size: .85rem; letter-spacing: .04em; }
   .hero__scroll span { margin-left: .5rem; color: var(--color-blue-light); }
+
+  .news-ticker { display: flex; min-height: 4.25rem; color: #fff; background: var(--color-blue-deep); border-bottom: 1px solid rgba(255,255,255,.18); overflow: hidden; }
+  .news-ticker__label { position: relative; z-index: 2; display: flex; flex: 0 0 auto; align-items: center; padding-inline: max(1.1rem, calc((100vw - var(--maxw)) / 2 + 3rem)); padding-right: 2rem; color: #fff; background: var(--color-blue-night); font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: .13em; text-decoration: none; text-transform: uppercase; }
+  .news-ticker__viewport { display: flex; min-width: 0; overflow: hidden; }
+  .news-ticker__track { display: flex; flex: none; align-items: stretch; min-width: 100%; animation: news-scroll 28s linear infinite; }
+  .news-ticker:hover .news-ticker__track, .news-ticker:focus-within .news-ticker__track { animation-play-state: paused; }
+  .news-ticker__track a { display: flex; flex: 0 0 auto; align-items: center; gap: 1rem; min-width: 31rem; padding: .85rem 2.25rem; border-right: 1px solid rgba(255,255,255,.2); color: #fff; text-decoration: none; }
+  .news-ticker__track time { color: #a9d9f2; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+  .news-ticker__track strong { font-size: .9rem; white-space: nowrap; }
+  .news-ticker__track span { color: var(--color-blue-light); font-size: 1.2rem; }
+  @keyframes news-scroll { to { transform: translateX(-100%); } }
 
   .trust { background: #fff; border-bottom: 1px solid var(--color-line); }
   .trust__grid { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 1.6rem; }
@@ -313,7 +330,7 @@ const etapes = [
     .hero__scroll { display: none; }
     .trust__grid { grid-template-columns: repeat(2, 1fr); }
     .trust p:nth-child(3) { border-left: 0; padding-left: 0; }
-    .manifesto__grid, .methode__grid, .actus__grid { grid-template-columns: 1fr; }
+    .manifesto__grid, .methode__grid { grid-template-columns: 1fr; }
     .expertises__list a { grid-template-columns: 3rem 1fr 2rem; }
     .expertises__text { grid-column: 2 / 3; }
     .expertises__arrow { grid-column: 3; grid-row: 1; }
@@ -328,8 +345,16 @@ const etapes = [
     .equipe-home__grid { grid-template-columns: 1fr; }
     .centre-home__mosaic { grid-template-columns: 1fr; grid-template-rows: repeat(3, 15rem); height: auto; }
     .centre-home__mosaic img:first-child { grid-row: auto; }
-    .actus li a { grid-template-columns: 1fr auto; }
-    .actus time { grid-column: 1 / 3; }
+    .news-ticker { min-height: 3.8rem; }
+    .news-ticker__label { padding-inline: 1rem; font-size: .65rem; }
+    .news-ticker__track a { min-width: 22rem; padding-inline: 1.25rem; }
+    .news-ticker__track strong { max-width: 16rem; overflow: hidden; text-overflow: ellipsis; }
     .final-cta__inner > div:last-child { text-align: left; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .news-ticker__viewport { overflow-x: auto; }
+    .news-ticker__track { animation: none; }
+    .news-ticker__track[aria-hidden='true'] { display: none; }
   }
 </style>

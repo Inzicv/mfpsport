@@ -108,8 +108,16 @@ const containerId = compact ? 'sportigo-home' : 'sportigo-container';
   }
 
   .sportigo-shell__widget {
-    min-height: 560px;
+    height: clamp(620px, 78vh, 880px);
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
     background: var(--color-paper);
+    scrollbar-gutter: stable;
+  }
+
+  .sportigo-shell--compact .sportigo-shell__widget {
+    height: clamp(560px, 68vh, 720px);
   }
 
   .sportigo-shell__loading,
@@ -125,7 +133,7 @@ const containerId = compact ? 'sportigo-home' : 'sportigo-container';
     }
 
     .sportigo-shell__widget {
-      min-height: 620px;
+      height: min(72vh, 720px);
     }
   }
 </style>
