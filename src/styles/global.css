@@ -1,24 +1,38 @@
-/* Design tokens — voir docs/etude-refonte.md §G.2 (palette) et §G.3 (typographie). */
+/* Design system MFP Sport — voir docs/etude-refonte.md §G.
+   Polices auto-hébergées (importées dans Layout.astro via @fontsource). */
 
 :root {
-  /* Palette dérivée du logo MFP Sport */
-  --color-blue-deep: #005ca9;    /* primaire : titres forts, liens, marque */
-  --color-blue-night: #0b2740;   /* titrage, footer, fonds sombres */
-  --color-blue-light: #4fb8e7;   /* icônes, hover, accents */
-  --color-ink: #111417;          /* texte courant */
-  --color-paper: #f6f9fc;        /* fond de page */
-  --color-slate: #5b6b7a;        /* texte secondaire, légendes */
+  /* Palette dérivée du logo */
+  --color-blue-deep: #005ca9;
+  --color-blue-night: #0b2740;
+  --color-blue-light: #4fb8e7;
+  --color-ink: #10202f;
+  --color-paper: #f5f8fb;
+  --color-surface: #ffffff;
+  --color-slate: #5b6b7a;
+  --color-line: rgba(11, 39, 64, 0.1);
 
-  /* Accent réservé exclusivement au CTA de conversion et aux badges "Offert" */
-  --color-cta: #ff8a3d;
-  --color-cta-hover: #e97527;
+  /* Accent réservé au CTA de conversion et aux badges « Offert » */
+  --color-cta: #ff7a2f;
+  --color-cta-hover: #e8641c;
 
-  --font-heading: 'Archivo', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  /* Dégradé de marque (motif « barres » du logo) */
+  --gradient-brand: linear-gradient(120deg, #0b2740 0%, #063a63 55%, #005ca9 100%);
 
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --shadow-card: 0 4px 20px rgba(11, 39, 64, 0.08);
+  --font-display: 'Sora Variable', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  /* Alias rétrocompatible (anciennes références --font-heading) */
+  --font-heading: var(--font-display);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.9rem;
+  --radius-lg: 1.4rem;
+
+  --shadow-sm: 0 1px 3px rgba(11, 39, 64, 0.08);
+  --shadow-card: 0 10px 40px -12px rgba(11, 39, 64, 0.18);
+  --shadow-lg: 0 30px 60px -20px rgba(11, 39, 64, 0.28);
+
+  --maxw: 74rem;
 }
 
 *,
@@ -29,41 +43,52 @@
 
 html {
   color-scheme: light;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   font-family: var(--font-body);
   font-size: 1.0625rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--color-ink);
   background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
-  line-height: 1.15;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   margin: 0 0 0.5em;
   color: var(--color-blue-night);
+  text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  font-size: clamp(2.4rem, 5.2vw, 4rem);
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 a {
   color: var(--color-blue-deep);
+  text-underline-offset: 2px;
 }
 
 img {
@@ -71,64 +96,157 @@ img {
   display: block;
 }
 
-/* Le bouton CTA de conversion — la seule utilisation autorisée de l'orange. */
-.cta {
+::selection {
+  background: var(--color-blue-light);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-blue-light);
+  outline-offset: 2px;
+}
+
+/* --- Eyebrow (surtitre de section) --- */
+.eyebrow {
   display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-blue-deep);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow--light {
+  color: var(--color-blue-light);
+}
+
+/* --- Boutons --- */
+.cta,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  padding: 0.95em 1.8em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* Le CTA de conversion — seule utilisation autorisée de l'orange. */
+.cta {
   background: var(--color-cta);
   color: #fff;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0.85em 1.75em;
-  border-radius: var(--radius-md);
-  transition: background-color 0.15s ease;
+  box-shadow: 0 8px 24px -8px rgba(255, 122, 47, 0.6);
 }
 
 .cta:hover,
 .cta:focus-visible {
   background: var(--color-cta-hover);
+  transform: translateY(-2px);
 }
 
-/* --- Utilitaires de mise en page réutilisés par les pages de contenu --- */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.95em 1.6em;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
 
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Conteneurs & sections --- */
 .page {
   max-width: 60rem;
   margin-inline: auto;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.1rem, 4vw, 3rem);
 }
 
+.section {
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+}
+
+.container {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 3rem);
+}
+
+/* Bandeau d'en-tête de page intérieure */
 .page-hero {
-  background: var(--color-blue-night);
+  position: relative;
+  background: var(--gradient-brand);
   color: #fff;
-  padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 3rem);
+  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.1rem, 4vw, 3rem);
   text-align: center;
+  overflow: hidden;
+}
+
+.page-hero::after {
+  /* Halo lumineux discret */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 120% at 50% -10%, rgba(79, 184, 231, 0.35), transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .page-hero h1 {
   color: #fff;
-  max-width: 24ch;
+  max-width: 20ch;
   margin-inline: auto;
 }
 
 .page-hero p {
-  max-width: 55ch;
+  max-width: 58ch;
   margin: 1rem auto 0;
-  color: #dbe6f0;
+  color: #cfe0ee;
+  font-size: 1.1rem;
 }
 
+/* Corps de texte lisible */
 .prose {
-  max-width: 44rem;
+  max-width: 46rem;
 }
 
 .prose h2 {
-  margin-top: 2.5rem;
+  margin-top: 2.75rem;
 }
 
 .prose p {
   margin: 0 0 1rem;
 }
 
-.prose ul {
+.prose ul,
+.prose ol {
   padding-left: 1.2rem;
 }
 
@@ -141,11 +259,38 @@ img {
   margin-top: 3rem;
 }
 
-/* Image de contenu dans le flux d'une page (photos de section, plan…) */
+/* Image de contenu dans le flux */
 .media {
   width: 100%;
   height: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
-  margin: 1.5rem 0 0.5rem;
+  margin: 1.75rem 0 0.5rem;
 }
+
+/* Carte générique premium */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* Motif « barres » du logo, en séparateur décoratif */
+.brand-bars {
+  display: inline-flex;
+  gap: 4px;
+  align-items: flex-end;
+  height: 22px;
+}
+
+.brand-bars span {
+  width: 5px;
+  border-radius: 3px;
+  background: var(--color-blue-light);
+}
+
+.brand-bars span:nth-child(1) { height: 40%; }
+.brand-bars span:nth-child(2) { height: 70%; }
+.brand-bars span:nth-child(3) { height: 100%; background: var(--color-blue-deep); }
+.brand-bars span:nth-child(4) { height: 60%; }

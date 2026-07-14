@@ -11,6 +11,13 @@ const actualites = (await getCollection('actualites'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 2);
 
+const stats = [
+  { chiffre: '300 m²', label: "d'espace d'entraînement" },
+  { chiffre: '4 pôles', label: 'entraînement, nutrition, récup, mental' },
+  { chiffre: '5', label: 'professionnels à vos côtés' },
+  { chiffre: '1 bilan', label: 'offert pour commencer' },
+];
+
 const profils = [
   { titre: 'Je reprends le sport', texte: 'Après une longue pause ou un souci de santé, à votre rythme.', href: '/bilan-gratuit/' },
   { titre: 'Je veux me remettre en forme', texte: 'Perdre du poids, gagner en tonus et en énergie durablement.', href: '/preparation-physique/' },
@@ -19,10 +26,10 @@ const profils = [
 ];
 
 const poles = [
-  { numero: '01', nom: 'Entraînement', href: '/preparation-physique/' },
-  { numero: '02', nom: 'Nutrition', href: '/nutrition/' },
-  { numero: '03', nom: 'Récupération', href: '/recuperation/' },
-  { numero: '04', nom: 'Mental', href: '/preparation-mentale/' },
+  { numero: '01', nom: 'Entraînement', texte: 'Préparation physique et coaching, équipements haute performance.', href: '/preparation-physique/' },
+  { numero: '02', nom: 'Nutrition', texte: 'Suivi diététique du sportif, bilans et composition corporelle.', href: '/nutrition/' },
+  { numero: '03', nom: 'Récupération', texte: 'Bains chaud/froid, pressothérapie, ostéopathie, massages.', href: '/recuperation/' },
+  { numero: '04', nom: 'Mental', texte: 'Gestion du stress, concentration, préparation à la compétition.', href: '/preparation-mentale/' },
 ];
 
 const etapes = [
@@ -42,97 +49,134 @@ const etapes = [
       src={heroImg}
       alt="Séance de préparation physique en sprint résisté à MFP Sport, Arles"
       loading="eager"
-      widths={[640, 1024, 1600]}
+      widths={[768, 1280, 1920]}
       sizes="100vw"
     />
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <h1>Votre préparation physique, encadrée par des professionnels — à Arles</h1>
-      <p>
-        Un accompagnement sportif personnalisé, premium et pluridisciplinaire : entraînement,
-        nutrition, récupération et préparation mentale.
+    <div class="hero__inner container">
+      <p class="eyebrow eyebrow--light">Arles · Alpilles · Camargue · Crau</p>
+      <h1>Votre préparation physique, encadrée par des professionnels</h1>
+      <p class="hero__lead">
+        Un accompagnement sportif personnalisé, premium et humain — entraînement, nutrition,
+        récupération et préparation mentale, réunis en un seul lieu.
       </p>
-      <Cta />
+      <div class="hero__actions">
+        <Cta />
+        <a class="btn-ghost" href="/le-centre/">Découvrir le centre</a>
+      </div>
     </div>
   </section>
 
-  <section class="profils">
-    <h2>Quel que soit votre point de départ</h2>
-    <ul class="profils__grid">
+  <section class="stats">
+    <div class="container stats__grid">
       {
-        profils.map((p) => (
-          <li>
-            <a href={p.href}>
-              <span class="profils__titre">{p.titre}</span>
-              <span class="profils__texte">{p.texte}</span>
-            </a>
-          </li>
+        stats.map((s) => (
+          <div class="stats__item">
+            <span class="stats__chiffre">{s.chiffre}</span>
+            <span class="stats__label">{s.label}</span>
+          </div>
         ))
       }
-    </ul>
+    </div>
   </section>
 
-  <section class="poles">
-    <h2>4 piliers de la réussite sportive</h2>
-    <ul class="poles__grid">
-      {
-        poles.map((pole) => (
-          <li>
-            <a href={pole.href}>
-              <span class="poles__numero">{pole.numero}</span>
-              <span>{pole.nom}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="methode">
-    <h2>Notre méthode, en trois temps</h2>
-    <ol class="methode__grid">
-      {
-        etapes.map((e, i) => (
-          <li>
-            <span class="methode__num">{i + 1}</span>
-            <h3>{e.titre}</h3>
-            <p>{e.texte}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="actualites">
-    <h2>Actualités</h2>
-    {
-      actualites.length === 0 ? (
-        <p><em>Aucune actualité publiée pour le moment.</em></p>
-      ) : (
-        <ul>
-          {actualites.map((a) => (
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Pour qui ?</p>
+      <h2>Quel que soit votre point de départ</h2>
+      <ul class="profils__grid">
+        {
+          profils.map((p) => (
             <li>
-              <a href={`/actualites/${a.id}/`}>{a.data.titre}</a>
+              <a href={p.href} class="card profils__card">
+                <span class="profils__titre">{p.titre}</span>
+                <span class="profils__texte">{p.texte}</span>
+                <span class="profils__arrow" aria-hidden="true">→</span>
+              </a>
             </li>
-          ))}
-        </ul>
-      )
-    }
+          ))
+        }
+      </ul>
+    </div>
   </section>
+
+  <section class="section poles">
+    <div class="container">
+      <p class="eyebrow eyebrow--light">Notre approche</p>
+      <h2>4 piliers de la réussite sportive</h2>
+      <ul class="poles__grid">
+        {
+          poles.map((pole) => (
+            <li>
+              <a href={pole.href} class="poles__card">
+                <span class="poles__numero">{pole.numero}</span>
+                <span class="poles__nom">{pole.nom}</span>
+                <span class="poles__texte">{pole.texte}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">La méthode</p>
+      <h2>De votre premier pas à vos résultats</h2>
+      <ol class="methode__grid">
+        {
+          etapes.map((e, i) => (
+            <li class="card methode__card">
+              <span class="methode__num">{i + 1}</span>
+              <h3>{e.titre}</h3>
+              <p>{e.texte}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  {
+    actualites.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="eyebrow">Actualités</p>
+          <h2>La vie du centre</h2>
+          <ul class="actus__grid">
+            {actualites.map((a) => (
+              <li class="card actus__card">
+                <a href={`/actualites/${a.id}/`}>
+                  <h3>{a.data.titre}</h3>
+                  <p>{a.data.chapo}</p>
+                  <span class="actus__link">Lire l'article →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
 
   <section class="cta-final">
-    <h2>Prêt·e à faire le point ?</h2>
-    <p>Votre bilan est offert, sans engagement.</p>
-    <Cta />
+    <div class="container">
+      <span class="brand-bars"><span></span><span></span><span></span><span></span></span>
+      <h2>Prêt·e à faire le point ?</h2>
+      <p>Votre premier bilan est offert, sans engagement — 45 minutes pour partir du bon pied.</p>
+      <Cta />
+    </div>
   </section>
 </Layout>
 
 <style>
+  /* HERO */
   .hero {
     position: relative;
+    min-height: min(88vh, 780px);
+    display: flex;
+    align-items: center;
     color: #fff;
-    padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 3rem);
-    text-align: center;
     isolation: isolate;
     overflow: hidden;
   }
@@ -146,126 +190,256 @@ const etapes = [
     z-index: -2;
   }
 
-  .hero__overlay {
+  .hero::after {
+    content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(
-      to bottom,
-      rgba(11, 39, 64, 0.72),
-      rgba(11, 39, 64, 0.82)
-    );
+    background:
+      linear-gradient(105deg, rgba(8, 26, 43, 0.92) 0%, rgba(8, 26, 43, 0.7) 45%, rgba(8, 26, 43, 0.25) 100%),
+      linear-gradient(to top, rgba(8, 26, 43, 0.85), transparent 40%);
   }
 
-  .hero__content {
-    max-width: 55rem;
-    margin-inline: auto;
+  .hero__inner {
+    padding-block: clamp(3rem, 8vw, 5rem);
+    max-width: 60rem;
   }
 
   .hero h1 {
     color: #fff;
-    max-width: 40ch;
-    margin-inline: auto;
+    max-width: 18ch;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
   }
 
-  .hero p {
-    max-width: 55ch;
-    margin: 1rem auto 2rem;
-    color: #dbe6f0;
+  .hero__lead {
+    max-width: 48ch;
+    margin: 1.25rem 0 2rem;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: #d6e3ef;
   }
 
-  section {
-    padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
-    max-width: 72rem;
-    margin-inline: auto;
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--color-blue-night);
+    color: #fff;
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem 2rem;
+    padding-block: 2.25rem;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .stats__chiffre {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    color: var(--color-blue-light);
+    letter-spacing: -0.02em;
+  }
+
+  .stats__label {
+    font-size: 0.9rem;
+    color: #b9cadb;
+  }
+
+  /* PROFILS */
+  .profils__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .profils__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .profils__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .profils__titre {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--color-blue-night);
+  }
+
+  .profils__texte {
+    font-size: 0.92rem;
+    color: var(--color-slate);
+  }
+
+  .profils__arrow {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    color: var(--color-blue-deep);
+    font-weight: 700;
+  }
+
+  /* POLES (section sombre) */
+  .poles {
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+
+  .poles h2 {
+    color: #fff;
   }
 
   .poles__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
     list-style: none;
     padding: 0;
+    margin-top: 2rem;
   }
 
-  .poles__grid a {
+  .poles__card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1.5rem;
-    background: #fff;
+    height: 100%;
+    padding: 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+    background: rgba(255, 255, 255, 0.04);
     text-decoration: none;
-    color: var(--color-blue-night);
-    font-family: var(--font-heading);
-    font-weight: 600;
+    color: #fff;
+    transition: background-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .poles__card:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-4px);
   }
 
   .poles__numero {
-    font-size: 2rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
     color: var(--color-blue-light);
   }
 
-  .profils__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    list-style: none;
-    padding: 0;
-  }
-
-  .profils__grid a {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    height: 100%;
-    padding: 1.25rem;
-    background: #fff;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    text-decoration: none;
-    color: var(--color-ink);
-  }
-
-  .profils__titre {
-    font-family: var(--font-heading);
+  .poles__nom {
+    font-family: var(--font-display);
     font-weight: 600;
-    color: var(--color-blue-deep);
+    font-size: 1.3rem;
   }
 
-  .profils__texte {
-    font-size: 0.9rem;
-    color: var(--color-slate);
+  .poles__texte {
+    font-size: 0.92rem;
+    color: #c3d4e4;
   }
 
+  /* METHODE */
   .methode__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
     list-style: none;
     padding: 0;
+    margin-top: 2rem;
     counter-reset: none;
+  }
+
+  .methode__card {
+    padding: 1.75rem;
   }
 
   .methode__num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 999px;
-    background: var(--color-blue-deep);
+    background: var(--gradient-brand);
     color: #fff;
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ACTUALITES */
+  .actus__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .actus__card a {
+    display: block;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    height: 100%;
+  }
+
+  .actus__card h3 {
+    color: var(--color-blue-night);
+  }
+
+  .actus__card p {
+    color: var(--color-slate);
+    font-size: 0.95rem;
+  }
+
+  .actus__link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-weight: 600;
+    color: var(--color-blue-deep);
+  }
+
+  /* CTA FINAL */
+  .cta-final {
+    text-align: center;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+
+  .cta-final .brand-bars {
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-final h2 {
     margin-bottom: 0.5rem;
   }
 
-  .cta-final {
-    text-align: center;
-    background: #fff;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
+  .cta-final p {
+    max-width: 46ch;
+    margin: 0 auto 2rem;
+    color: var(--color-slate);
+    font-size: 1.1rem;
   }
 </style>
