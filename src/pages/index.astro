@@ -364,10 +364,9 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
   .methode__steps h3, .methode__steps p { margin: 0; }
   .methode__steps p { color: var(--color-slate); font-size: .95rem; }
 
-  .zinzino { background: #edf3f6; }
-  .zinzino__card { position: relative; display: grid; grid-template-columns: minmax(20rem, .88fr) minmax(32rem, 1.12fr); gap: clamp(2rem, 5vw, 5rem); padding: clamp(2.5rem, 6vw, 6rem); overflow: hidden; color: #fff; background: var(--color-blue-night); box-shadow: 0 1.5rem 4rem rgba(7, 37, 55, .14); }
-  .zinzino__card::before { position: absolute; inset: 0; content: ''; background: radial-gradient(circle at 88% 18%, rgba(79,184,231,.2), transparent 24rem), linear-gradient(115deg, transparent 45%, rgba(0,92,169,.16)); pointer-events: none; }
-  .zinzino__content, .zinzino__steps { position: relative; z-index: 1; }
+  .zinzino { position: relative; overflow: hidden; background: var(--color-blue-night); }
+  .zinzino::after { position: absolute; top: -18rem; right: -12rem; width: 38rem; height: 38rem; border: 1px solid rgba(79,184,231,.16); border-radius: 50%; content: ''; box-shadow: 0 0 0 8rem rgba(0,92,169,.04), 0 0 0 16rem rgba(0,92,169,.025); pointer-events: none; }
+  .zinzino__card { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(20rem, .82fr) minmax(32rem, 1.18fr); gap: clamp(3rem, 8vw, 8rem); color: #fff; }
   .zinzino__content { display: flex; flex-direction: column; justify-content: center; }
   .zinzino h2 { max-width: 11ch; margin-bottom: 1.5rem; color: #fff; font-size: clamp(2.7rem, 4.5vw, 4.8rem); }
   .zinzino h2 span, .zinzino__promise strong { color: var(--color-blue-light); }
@@ -379,13 +378,13 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
   .zinzino__cta--secondary { color: #fff; background: transparent; }
   .zinzino__cta--secondary:hover { color: var(--color-blue-night); }
   .zinzino__disclosure { max-width: 35rem; margin: 1.25rem 0 0; color: #8fa7b7; font-size: .72rem; line-height: 1.5; }
-  .zinzino__steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; align-self: center; margin: 0; padding: 1px; list-style: none; background: rgba(255,255,255,.16); }
-  .zinzino__steps li { display: flex; flex-direction: column; justify-content: space-between; min-height: 12rem; padding: clamp(1.25rem, 3vw, 2rem); background: rgba(8,29,44,.94); transition: background-color .2s; }
-  .zinzino__steps li:hover { background: rgba(0,92,169,.24); }
-  .zinzino__steps span { color: var(--color-blue-light); font-family: var(--font-display); font-size: .78rem; font-weight: 700; letter-spacing: .12em; }
-  .zinzino__steps div { display: flex; flex-direction: column; }
+  .zinzino__steps { align-self: center; margin: 0; padding: 0; border-top: 1px solid rgba(255,255,255,.2); list-style: none; }
+  .zinzino__steps li { display: grid; grid-template-columns: 4rem minmax(10rem, .65fr) 1fr; gap: 1.25rem; align-items: center; padding: clamp(1.2rem, 2vw, 1.75rem) 0; border-bottom: 1px solid rgba(255,255,255,.2); transition: padding .2s, border-color .2s; }
+  .zinzino__steps li:hover { padding-inline: .75rem; border-color: rgba(79,184,231,.6); }
+  .zinzino__steps span { color: var(--color-blue-light); font-family: var(--font-display); font-size: .72rem; font-weight: 700; letter-spacing: .12em; }
+  .zinzino__steps div { display: contents; }
   .zinzino__steps strong { color: #fff; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.7rem); }
-  .zinzino__steps small { margin-top: .35rem; color: #9eb4c2; font-size: .82rem; }
+  .zinzino__steps small { color: #9eb4c2; font-size: .82rem; }
 
   .planning-home { background: #e8edef; }
 
@@ -450,9 +449,9 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
     .trust__grid { grid-template-columns: 1fr 1fr; }
     .trust p { padding: .75rem; }
     .section-head, .final-cta__inner { align-items: flex-start; flex-direction: column; }
-    .zinzino__card { padding: 1.5rem; }
-    .zinzino__steps { grid-template-columns: 1fr; }
-    .zinzino__steps li { min-height: 8.5rem; }
+    .zinzino__steps li { grid-template-columns: 2.5rem 1fr; }
+    .zinzino__steps div { display: flex; flex-direction: column; }
+    .zinzino__steps small { margin-top: .25rem; }
     .equipe-home__grid { grid-template-columns: 1fr; }
     .equipe-home__grid li:last-child { grid-column: auto; max-width: none; }
     .news-ticker { min-height: 3.8rem; }
