@@ -4,6 +4,7 @@ import Cta from '../components/Cta.astro';
 import PolePros from '../components/PolePros.astro';
 import { Image } from 'astro:assets';
 import testForce from '../assets/images/preparateur-physique-test-force.jpg';
+import coachingElastique from '../assets/images/coaching-etirement-elastique.jpg';
 ---
 
 <Layout
@@ -54,6 +55,14 @@ import testForce from '../assets/images/preparateur-physique-test-force.jpg';
       class="media"
       src={testForce}
       alt="Test de force encadré par un préparateur physique à MFP Sport, Arles"
+      widths={[480, 768]}
+      sizes="(max-width: 44rem) 100vw, 44rem"
+    />
+
+    <Image
+      class="media"
+      src={coachingElastique}
+      alt="Étirement guidé par le préparateur physique à MFP Sport"
       widths={[480, 768]}
       sizes="(max-width: 44rem) 100vw, 44rem"
     />

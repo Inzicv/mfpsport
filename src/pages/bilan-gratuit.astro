@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cta from '../components/Cta.astro';
+import { Image } from 'astro:assets';
+import bilan from '../assets/images/bilan-corporel-consultation.jpg';
 ---
 
 <Layout
@@ -24,6 +26,14 @@ import Cta from '../components/Cta.astro';
       <li>La définition de vos objectifs.</li>
       <li>Une orientation vers la formule ou le suivi le plus adapté à votre profil.</li>
     </ul>
+
+    <Image
+      class="media"
+      src={bilan}
+      alt="Restitution d'un bilan chez MFP Sport, avec le suivi des données du membre"
+      widths={[480, 768]}
+      sizes="(max-width: 44rem) 100vw, 44rem"
+    />
 
     <h2>Pour qui ?</h2>
     <p>

@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Cta from '../components/Cta.astro';
+import { localAreaGroups } from '../data/local-seo';
+import salle from '../assets/images/zone-cardio-mfp-sport.jpg';
+import coaching from '../assets/images/coach-sportif-personnel-arles.jpg';
+---
+
+<Layout
+  title="Centre sportif à Arles — Camargue et Alpilles"
+  description="Découvrez MFP Sport, salle de sport et centre de coaching sportif à Arles, accessible depuis la Camargue, les Alpilles, Tarascon, Beaucaire et Saint-Martin-de-Crau."
+>
+  <header class="page-hero local-hero">
+    <p class="eyebrow eyebrow--light">MFP Sport · 15 Chemin des Moines</p>
+    <h1>Salle de sport et coach sportif à Arles</h1>
+    <p>
+      Un centre de 300 m² où entraînement, accompagnement individuel et expertises sport-santé
+      sont réunis autour de vos objectifs.
+    </p>
+  </header>
+
+  <section class="section local-intro">
+    <div class="container local-intro__grid">
+      <div>
+        <p class="eyebrow">Un centre différent à Arles</p>
+        <h2>Une salle où vous êtes réellement accompagné</h2>
+        <p>
+          MFP Sport s’adresse aussi bien aux personnes qui reprennent une activité physique
+          qu’aux sportifs confirmés. Votre parcours commence par l’évaluation de vos besoins :
+          remise en forme, perte de poids, renforcement, retour au sport ou préparation d’une
+          compétition.
+        </p>
+        <p>
+          Vous pouvez venir pour vous entraîner dans un espace équipé, suivre des cours ou être
+          accompagné par un coach sportif. Lorsque votre objectif le demande, nutrition,
+          récupération et préparation mentale peuvent compléter le suivi au même endroit.
+        </p>
+        <p><Cta /></p>
+      </div>
+      <Image
+        src={coaching}
+        alt="Séance avec un coach sportif chez MFP Sport à Arles"
+        widths={[480, 768, 1000]}
+        sizes="(max-width: 800px) 100vw, 48vw"
+      />
+    </div>
+  </section>
+
+  <section class="section services-local">
+    <div class="container">
+      <p class="eyebrow eyebrow--light">Selon votre objectif</p>
+      <h2>Votre entraînement, à votre mesure</h2>
+      <div class="services-local__grid">
+        <article>
+          <h3>Salle de sport</h3>
+          <p>Cardio, force, zone fonctionnelle et piste d’athlétisme dans un espace à taille humaine.</p>
+          <a href="/le-centre/">Découvrir les équipements →</a>
+        </article>
+        <article>
+          <h3>Coach sportif personnel</h3>
+          <p>Bilan, séances individuelles et programme progressif construit selon votre niveau.</p>
+          <a href="/preparation-physique/">Voir le coaching sportif →</a>
+        </article>
+        <article>
+          <h3>Accompagnement complet</h3>
+          <p>Préparation physique, nutrition, récupération et mental coordonnés si nécessaire.</p>
+          <a href="/equipe/">Rencontrer l’équipe →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section zone-local" aria-labelledby="zone-title">
+    <div class="container zone-local__layout">
+      <div>
+        <p class="eyebrow">Zone d’accueil</p>
+        <h2 id="zone-title">Une salle de sport au cœur du territoire arlésien</h2>
+        <p>
+          Le centre se trouve à Arles et accueille notamment des adhérents venant de la
+          Camargue, des Alpilles, de la Crau et des communes voisines du Gard. Toutes les séances
+          et prestations ont lieu au centre d’Arles.
+        </p>
+        <Image
+          src={salle}
+          alt="Salle de sport MFP Sport à Arles"
+          widths={[480, 768]}
+          sizes="(max-width: 800px) 100vw, 44vw"
+        />
+      </div>
+      <div class="zone-local__groups">
+        {localAreaGroups.map((group) => (
+          <section>
+            <h3>{group.name}</h3>
+            <ul>
+              {group.places.map((place) => <li>{place}</li>)}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section practical-local">
+    <div class="container practical-local__grid">
+      <div>
+        <p class="eyebrow eyebrow--light">Venir au centre</p>
+        <h2>15 Chemin des Moines, 13200 Arles</h2>
+        <p>
+          Le centre est ouvert du lundi au vendredi de 8h à 20h et le samedi de 8h à 13h.
+          Retrouvez l’itinéraire et toutes les coordonnées sur la page contact.
+        </p>
+        <a href="/contact/">Voir l’accès et les horaires →</a>
+      </div>
+      <div>
+        <h2>Commencez par un bilan gratuit</h2>
+        <p>
+          Une première séance permet de visiter la salle, échanger avec un coach et définir un
+          point de départ adapté, sans engagement.
+        </p>
+        <Cta />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .local-hero .eyebrow { margin-bottom: 1rem; }
+  .local-intro { background: #fff; }
+  .local-intro__grid, .zone-local__layout, .practical-local__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
+  .local-intro__grid > img, .zone-local img { width: 100%; height: min(620px, 60vw); object-fit: cover; }
+  .services-local { color: #fff; background: var(--color-blue-night); }
+  .services-local h2 { color: #fff; }
+  .services-local__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 2.5rem; background: rgba(255,255,255,.18); }
+  .services-local article { padding: clamp(1.5rem, 3vw, 2.5rem); background: var(--color-blue-night); }
+  .services-local h3, .services-local a { color: #fff; }
+  .services-local p { color: #b9cad5; }
+  .services-local a, .practical-local a { font-weight: 700; text-decoration: none; }
+  .zone-local { background: #e8edef; }
+  .zone-local__layout { align-items: start; }
+  .zone-local img { height: 22rem; margin-top: 2rem; }
+  .zone-local__groups { border-top: 1px solid var(--color-line); }
+  .zone-local__groups section { padding: 1.4rem 0; border-bottom: 1px solid var(--color-line); }
+  .zone-local__groups h3 { font-size: 1.15rem; }
+  .zone-local__groups ul { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; margin: 0; padding: 0; }
+  .zone-local__groups li { padding: .35rem .65rem; color: var(--color-slate); background: #fff; border-radius: var(--radius-sm); font-size: .86rem; }
+  .practical-local { color: #fff; background: var(--color-blue-deep); }
+  .practical-local h2, .practical-local a { color: #fff; }
+  .practical-local p { color: #d5e4ee; }
+  .practical-local__grid { align-items: start; }
+  .practical-local__grid > div:last-child { padding-left: clamp(0rem, 4vw, 4rem); border-left: 1px solid rgba(255,255,255,.25); }
+  .practical-local :global(.cta) { background: #fff; color: var(--color-blue-night); }
+
+  @media (max-width: 800px) {
+    .local-intro__grid, .zone-local__layout, .practical-local__grid { grid-template-columns: 1fr; }
+    .local-intro__grid > img { height: 28rem; }
+    .services-local__grid { grid-template-columns: 1fr; }
+    .practical-local__grid > div:last-child { padding: 2rem 0 0; border-top: 1px solid rgba(255,255,255,.25); border-left: 0; }
+  }
+</style>

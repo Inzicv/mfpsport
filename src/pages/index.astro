@@ -5,11 +5,33 @@ import SportigoPlanning from '../components/SportigoPlanning.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
-import hero from '../assets/images/coach-sportif-personnel-arles.jpg';
-import methode from '../assets/images/preparateur-physique-test-force.jpg';
-import centreCardio from '../assets/images/zone-cardio-mfp-sport.jpg';
-import centreForce from '../assets/images/entrainement-keiser-mfp-sport.jpg';
-import centreRecup from '../assets/images/recuperation-cryotank-mfp-sport.jpg';
+import PhotoMarquee from '../components/PhotoMarquee.astro';
+import hero from '../assets/images/communaute-adherents-mfp-sport.jpg';
+import methode from '../assets/images/coaching-analyse-donnees-vitruve.jpg';
+import centreCardio from '../assets/images/vue-ensemble-piste-materiel.jpg';
+import centreForce from '../assets/images/coaching-vertimax-explosivite.jpg';
+import centreRecup from '../assets/images/cryotank-bain-froid-duo.jpg';
+import { localAreaGroups } from '../data/local-seo';
+
+import vieEtirements from '../assets/images/cours-collectif-etirements-sol.jpg';
+import vieSouleve from '../assets/images/coaching-souleve-de-terre.jpg';
+import viePresso from '../assets/images/pressotherapie-normatec-sourire.jpg';
+import vieSteps from '../assets/images/cours-collectif-steps-lumiere.jpg';
+import vieBallet from '../assets/images/arles-youth-ballet-company-mfp-sport.jpg';
+import vieKettlebell from '../assets/images/kettlebell-swing-fonctionnel.jpg';
+import vieComplicite from '../assets/images/complicite-adherents-mfp-sport.jpg';
+import vieCircuit from '../assets/images/circuit-training-groupe.jpg';
+
+const vieDuCentre = [
+  { src: vieEtirements, alt: 'Cours collectif au sol chez MFP Sport' },
+  { src: vieSouleve, alt: 'Séance de coaching individuel, soulevé de terre' },
+  { src: viePresso, alt: 'Séance de pressothérapie Normatec' },
+  { src: vieSteps, alt: 'Cours collectif sur steps' },
+  { src: vieBallet, alt: "L'équipe de l'Arles Youth Ballet Company chez MFP Sport" },
+  { src: vieKettlebell, alt: 'Kettlebell swing en zone fonctionnelle' },
+  { src: vieComplicite, alt: 'Deux adhérents de MFP Sport' },
+  { src: vieCircuit, alt: 'Circuit training en groupe' },
+];
 
 const actualites = (await getCollection('actualites'))
   .filter((a) => a.data.publie)
@@ -55,21 +77,21 @@ const etapes = [
 ---
 
 <Layout
-  title="Centre sportif & accompagnement sur mesure à Arles"
-  description="MFP Sport à Arles réunit entraînement, nutrition, récupération et préparation mentale dans un parcours sportif personnalisé et coordonné."
+  title="Salle de sport et coach sportif à Arles"
+  description="MFP Sport, salle de sport à Arles : coaching sportif personnalisé, préparation physique, cours, nutrition et récupération pour Arles, la Camargue et les Alpilles."
 >
   <section class="hero">
     <Image
       class="hero__image"
       src={hero}
-      alt="Préparateur physique MFP Sport dans le centre d'entraînement à Arles"
+      alt="Les adhérents de MFP Sport réunis devant la fresque du centre, à Arles"
       loading="eager"
       widths={[768, 1280, 1920]}
       sizes="100vw"
     />
     <div class="hero__veil"></div>
     <div class="container hero__content">
-      <p class="eyebrow eyebrow--light">Centre sportif · Arles</p>
+      <p class="eyebrow eyebrow--light">Salle de sport · Coach sportif · Arles</p>
       <h1>Votre espace sportif pour un accompagnement sur mesure</h1>
       <p class="hero__lead">
         Entraînement, nutrition, récupération et préparation mentale : une équipe de
@@ -218,9 +240,41 @@ const etapes = [
         <a href="/le-centre/">Visiter le centre →</a>
       </div>
       <div class="centre-home__mosaic">
-        <Image src={centreCardio} alt="Zone cardio MFP Sport" widths={[480, 900]} sizes="60vw" />
-        <Image src={centreForce} alt="Espace de préparation physique MFP Sport" widths={[360, 640]} sizes="40vw" />
-        <Image src={centreRecup} alt="Espace de récupération par le froid MFP Sport" widths={[360, 640]} sizes="40vw" />
+        <Image src={centreCardio} alt="Vue d'ensemble de la piste et du plateau technique MFP Sport" widths={[480, 900]} sizes="60vw" />
+        <Image src={centreForce} alt="Coaching sur VertiMax pour l'explosivité" widths={[360, 640]} sizes="40vw" />
+        <Image src={centreRecup} alt="Deux membres en séance de récupération au Cryo-Tank" widths={[360, 640]} sizes="40vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section vie-du-centre">
+    <div class="container">
+      <div class="section-head section-head--light">
+        <div><p class="eyebrow">La vie du centre</p><h2>Des séances, des progrès, une équipe</h2></div>
+      </div>
+    </div>
+    <PhotoMarquee images={vieDuCentre} />
+  </section>
+
+  <section class="section local-home" aria-labelledby="local-title">
+    <div class="container local-home__grid">
+      <div>
+        <p class="eyebrow">Votre centre sportif local</p>
+        <h2 id="local-title">À Arles, au service de la Camargue et des Alpilles</h2>
+        <p>
+          Installé au 15 Chemin des Moines à Arles, MFP Sport accueille les sportifs de tous
+          niveaux pour des séances encadrées, un programme personnalisé ou une préparation
+          physique complète.
+        </p>
+        <a href="/salle-de-sport-arles/">Découvrir le centre et notre zone d’accueil →</a>
+      </div>
+      <div class="local-home__areas">
+        {localAreaGroups.map((group) => (
+          <div>
+            <h3>{group.name}</h3>
+            <p>{group.places.join(' · ')}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -312,6 +366,19 @@ const etapes = [
   .centre-home__mosaic img { width: 100%; height: 100%; object-fit: cover; }
   .centre-home__mosaic img:first-child { grid-row: 1 / 3; }
 
+  .vie-du-centre { background: #fff; padding-bottom: clamp(3rem, 7vw, 5rem); }
+  .vie-du-centre .section-head { margin-bottom: 1.75rem; }
+
+  .local-home { background: #e8edef; }
+  .local-home__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(3rem, 7vw, 7rem); align-items: start; }
+  .local-home__grid > div:first-child > p:not(.eyebrow) { max-width: 54ch; }
+  .local-home__grid > div:first-child > a { display: inline-block; margin-top: 1rem; font-weight: 700; text-decoration: none; }
+  .local-home__areas { border-top: 1px solid var(--color-line); }
+  .local-home__areas > div { padding: 1.25rem 0; border-bottom: 1px solid var(--color-line); }
+  .local-home__areas h3, .local-home__areas p { margin: 0; }
+  .local-home__areas h3 { margin-bottom: .35rem; font-size: 1.05rem; }
+  .local-home__areas p { color: var(--color-slate); font-size: .9rem; }
+
   .actus__grid { display: grid; grid-template-columns: .55fr 1.45fr; gap: clamp(2rem, 7vw, 7rem); }
   .actus__grid > div a { font-weight: 700; text-decoration: none; }
   .actus ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--color-line); }
@@ -332,7 +399,7 @@ const etapes = [
     .hero__scroll { display: none; }
     .trust__grid { grid-template-columns: repeat(2, 1fr); }
     .trust p:nth-child(3) { border-left: 0; padding-left: 0; }
-    .manifesto__grid, .methode__grid { grid-template-columns: 1fr; }
+    .manifesto__grid, .methode__grid, .local-home__grid { grid-template-columns: 1fr; }
     .expertises__list a { grid-template-columns: 3rem 1fr 2rem; }
     .expertises__text { grid-column: 2 / 3; }
     .expertises__arrow { grid-column: 3; grid-row: 1; }

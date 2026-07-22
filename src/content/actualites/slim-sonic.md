@@ -4,8 +4,8 @@
 # que ses conditions écrites ne sont pas validées (voir docs/etude-refonte.md §B.1).
 titre: "Nouveauté : la ceinture Slim Sonic, pour une combustion ciblée des graisses"
 date: 2026-07-14
-image: ../../assets/images/ceinture-slim-sonic.jpg
-imageAlt: "La ceinture Slim Sonic portée à la taille, avec son boîtier de commande"
+image: ../../assets/images/ceinture-slim-sonic-en-action.jpg
+imageAlt: "La ceinture Slim Sonic portée pendant une séance de squat guidé"
 chapo: >-
   Chez MFP Sport, nous mettons à votre disposition des technologies utilisées par
   les sportifs de haut niveau. Dernière innovation disponible dans la salle : la

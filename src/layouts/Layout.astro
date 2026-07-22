@@ -7,6 +7,8 @@ import '../styles/global.css';
 import { getEntry } from 'astro:content';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import logo from '../assets/logo-mfp-sport.png';
+import { localServiceAreas } from '../data/local-seo';
 
 interface Props {
   title: string;
@@ -22,20 +24,42 @@ const { title, description, noindex = process.env.PREPROD === 'true' } = Astro.p
 const infos = await getEntry('infos', 'infos-pratiques');
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const businessUrl = new URL('/', Astro.site).toString();
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'HealthClub',
+  '@id': `${businessUrl}#mfp-sport`,
   name: 'MFP Sport',
-  url: Astro.site?.toString(),
+  description:
+    'Salle de sport et centre de coaching sportif à Arles : entraînement, préparation physique, nutrition, récupération et préparation mentale.',
+  url: businessUrl,
+  logo: new URL(logo.src, Astro.site).toString(),
   ...(infos?.data.telephone ? { telephone: infos.data.telephone } : {}),
   email: infos?.data.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: infos?.data.adresse,
+    streetAddress: '15 Chemin des Moines',
     addressLocality: 'Arles',
+    addressRegion: 'Provence-Alpes-Côte d’Azur',
+    postalCode: '13200',
     addressCountry: 'FR',
   },
+  areaServed: localServiceAreas.map((name) => ({ '@type': 'City', name })),
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '20:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '08:00',
+      closes: '13:00',
+    },
+  ],
   sameAs: [infos?.data.reseaux.instagram, infos?.data.reseaux.facebook].filter(Boolean),
 };
 ---
