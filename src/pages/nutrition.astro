@@ -45,6 +45,8 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
       hydraté, vous optimisez votre endurance, votre récupération et votre bien-être général.
     </p>
 
+    <PolePros specialite="nutrition" titre="Votre diététicien" />
+
     <section class="zinzino-detail" id="zinzino" aria-labelledby="zinzino-detail-title">
       <div class="zinzino-detail__intro">
         <div>
@@ -60,6 +62,10 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
           <p>
             Cette démarche peut compléter un accompagnement nutritionnel, mais ne remplace ni
             un bilan diététique personnalisé ni un avis médical.
+          </p>
+          <p class="zinzino-detail__independence">
+            Le partenariat Zinzino de Maxime est indépendant de l'accompagnement diététique
+            proposé par Charles Louvet.
           </p>
         </div>
       </div>
@@ -112,8 +118,6 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
       </p>
     </section>
 
-    <PolePros specialite="nutrition" titre="Votre diététicien" />
-
     <div class="section-cta">
       <Cta />
     </div>
@@ -141,6 +145,7 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 
   .zinzino-detail h2 { margin-top: 0; font-size: clamp(2.5rem, 5vw, 4.5rem); }
   .zinzino-detail__lead { color: var(--color-blue-night); font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.5; }
+  .zinzino-detail__independence { padding: .9rem 1rem; border-left: 3px solid var(--color-blue-deep); color: var(--color-slate); background: #f4f8fa; font-size: .85rem; }
 
   .zinzino-detail__steps {
     display: grid;

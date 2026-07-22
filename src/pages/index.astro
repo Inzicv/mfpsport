@@ -8,7 +8,6 @@ import { Image } from 'astro:assets';
 import PhotoMarquee from '../components/PhotoMarquee.astro';
 import hero from '../assets/images/communaute-adherents-mfp-sport.jpg';
 import methode from '../assets/images/coaching-analyse-donnees-vitruve.jpg';
-import zinzinoVisual from '../assets/images/partenariat-zinzino-mfp-sport.png';
 import { localAreaGroups } from '../data/local-seo';
 
 import vieEtirements from '../assets/images/cours-collectif-etirements-sol.jpg';
@@ -228,14 +227,12 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
         </p>
       </div>
 
-      <div class="zinzino__visual" aria-hidden="true">
-        <Image
-          src={zinzinoVisual}
-          alt=""
-          widths={[720, 1080, 1440]}
-          sizes="(max-width: 860px) 100vw, 58vw"
-        />
-      </div>
+      <ol class="zinzino__steps" aria-label="La démarche Zinzino chez MFP Sport">
+        <li><span>01</span><div><strong>Tester</strong><small>Prélèvement à domicile</small></div></li>
+        <li><span>02</span><div><strong>Comprendre</strong><small>Lecture des résultats</small></div></li>
+        <li><span>03</span><div><strong>Ajuster</strong><small>Approche personnalisée</small></div></li>
+        <li><span>04</span><div><strong>Suivre</strong><small>Évolution dans le temps</small></div></li>
+      </ol>
 
     </div>
   </section>
@@ -367,22 +364,28 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
   .methode__steps h3, .methode__steps p { margin: 0; }
   .methode__steps p { color: var(--color-slate); font-size: .95rem; }
 
-  .zinzino { background: #f4f8fa; }
-  .zinzino__card { position: relative; display: grid; grid-template-columns: minmax(20rem, .82fr) minmax(0, 1.18fr); min-height: 42rem; padding: 0; overflow: hidden; border: 1px solid #d9e6ec; background: #fff; box-shadow: 0 1.5rem 4rem rgba(7, 37, 55, .1); }
-  .zinzino__content { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem, 6vw, 6.5rem); padding-right: clamp(2rem, 3vw, 4rem); background: linear-gradient(90deg, #fff 82%, rgba(255,255,255,.9) 94%, transparent); }
-  .zinzino h2 { max-width: 11ch; margin-bottom: 1.5rem; color: var(--color-blue-night); font-size: clamp(2.7rem, 5vw, 5.1rem); }
-  .zinzino h2 span, .zinzino__promise strong { color: var(--color-blue-deep); }
-  .zinzino__promise { margin: 0 0 1rem; color: var(--color-blue-night); font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.5rem); }
-  .zinzino__intro { max-width: 33rem; margin: 0 0 1.75rem; color: var(--color-slate); }
+  .zinzino { background: #edf3f6; }
+  .zinzino__card { position: relative; display: grid; grid-template-columns: minmax(20rem, .88fr) minmax(32rem, 1.12fr); gap: clamp(2rem, 5vw, 5rem); padding: clamp(2.5rem, 6vw, 6rem); overflow: hidden; color: #fff; background: var(--color-blue-night); box-shadow: 0 1.5rem 4rem rgba(7, 37, 55, .14); }
+  .zinzino__card::before { position: absolute; inset: 0; content: ''; background: radial-gradient(circle at 88% 18%, rgba(79,184,231,.2), transparent 24rem), linear-gradient(115deg, transparent 45%, rgba(0,92,169,.16)); pointer-events: none; }
+  .zinzino__content, .zinzino__steps { position: relative; z-index: 1; }
+  .zinzino__content { display: flex; flex-direction: column; justify-content: center; }
+  .zinzino h2 { max-width: 11ch; margin-bottom: 1.5rem; color: #fff; font-size: clamp(2.7rem, 4.5vw, 4.8rem); }
+  .zinzino h2 span, .zinzino__promise strong { color: var(--color-blue-light); }
+  .zinzino__promise { margin: 0 0 1rem; color: #fff; font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.5rem); }
+  .zinzino__intro { max-width: 35rem; margin: 0 0 1.75rem; color: #b9cad5; }
   .zinzino__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
-  .zinzino__cta { display: inline-flex; align-items: center; align-self: flex-start; gap: 1.5rem; padding: 1rem 1.35rem; border: 1px solid var(--color-blue-deep); border-radius: .2rem; color: #fff; background: var(--color-blue-deep); font-weight: 700; text-decoration: none; transition: transform .2s, background-color .2s, color .2s; }
-  .zinzino__cta:hover { transform: translateY(-2px); background: var(--color-blue-night); }
-  .zinzino__cta--secondary { color: var(--color-blue-deep); background: #fff; }
-  .zinzino__cta--secondary:hover { color: #fff; }
-  .zinzino__disclosure { max-width: 35rem; margin: 1.25rem 0 0; color: #6d7f8a; font-size: .72rem; line-height: 1.5; }
-  .zinzino__visual { position: absolute; inset: 0 0 0 37%; overflow: hidden; }
-  .zinzino__visual :global(picture), .zinzino__visual :global(img) { width: 100%; height: 100%; }
-  .zinzino__visual :global(img) { object-fit: cover; object-position: 72% center; }
+  .zinzino__cta { display: inline-flex; align-items: center; align-self: flex-start; gap: 1.5rem; padding: 1rem 1.35rem; border: 1px solid var(--color-blue-light); border-radius: .2rem; color: var(--color-blue-night); background: var(--color-blue-light); font-weight: 700; text-decoration: none; transition: transform .2s, background-color .2s, color .2s; }
+  .zinzino__cta:hover { transform: translateY(-2px); color: var(--color-blue-night); background: #fff; }
+  .zinzino__cta--secondary { color: #fff; background: transparent; }
+  .zinzino__cta--secondary:hover { color: var(--color-blue-night); }
+  .zinzino__disclosure { max-width: 35rem; margin: 1.25rem 0 0; color: #8fa7b7; font-size: .72rem; line-height: 1.5; }
+  .zinzino__steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; align-self: center; margin: 0; padding: 1px; list-style: none; background: rgba(255,255,255,.16); }
+  .zinzino__steps li { display: flex; flex-direction: column; justify-content: space-between; min-height: 12rem; padding: clamp(1.25rem, 3vw, 2rem); background: rgba(8,29,44,.94); transition: background-color .2s; }
+  .zinzino__steps li:hover { background: rgba(0,92,169,.24); }
+  .zinzino__steps span { color: var(--color-blue-light); font-family: var(--font-display); font-size: .78rem; font-weight: 700; letter-spacing: .12em; }
+  .zinzino__steps div { display: flex; flex-direction: column; }
+  .zinzino__steps strong { color: #fff; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.7rem); }
+  .zinzino__steps small { margin-top: .35rem; color: #9eb4c2; font-size: .82rem; }
 
   .planning-home { background: #e8edef; }
 
@@ -434,10 +437,7 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
     .trust__grid { grid-template-columns: repeat(2, 1fr); }
     .trust p:nth-child(3) { border-left: 0; padding-left: 0; }
     .manifesto__grid, .methode__grid, .local-home__grid { grid-template-columns: 1fr; }
-    .zinzino__card { grid-template-columns: 1fr; min-height: 0; }
-    .zinzino__content { padding: clamp(2.25rem, 8vw, 4rem); background: #fff; }
-    .zinzino__visual { position: relative; inset: auto; height: min(75vw, 32rem); order: 2; }
-    .zinzino__visual :global(img) { object-position: 72% 58%; }
+    .zinzino__card { grid-template-columns: 1fr; }
     .expertises__list a { grid-template-columns: 3rem 1fr 2rem; }
     .expertises__text { grid-column: 2 / 3; }
     .expertises__arrow { grid-column: 3; grid-row: 1; }
@@ -450,6 +450,9 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
     .trust__grid { grid-template-columns: 1fr 1fr; }
     .trust p { padding: .75rem; }
     .section-head, .final-cta__inner { align-items: flex-start; flex-direction: column; }
+    .zinzino__card { padding: 1.5rem; }
+    .zinzino__steps { grid-template-columns: 1fr; }
+    .zinzino__steps li { min-height: 8.5rem; }
     .equipe-home__grid { grid-template-columns: 1fr; }
     .equipe-home__grid li:last-child { grid-column: auto; max-width: none; }
     .news-ticker { min-height: 3.8rem; }

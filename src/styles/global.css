@@ -32,7 +32,7 @@
   --shadow-card: 0 10px 40px -12px rgba(11, 39, 64, 0.18);
   --shadow-lg: 0 30px 60px -20px rgba(11, 39, 64, 0.28);
 
-  --maxw: 74rem;
+  --maxw: 86rem;
 }
 
 *,
@@ -180,7 +180,7 @@ img {
 
 /* --- Conteneurs & sections --- */
 .page {
-  max-width: 60rem;
+  max-width: var(--maxw);
   margin-inline: auto;
   padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.1rem, 4vw, 3rem);
 }
@@ -200,8 +200,9 @@ img {
   position: relative;
   background: var(--gradient-brand);
   color: #fff;
-  padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.1rem, 4vw, 3rem);
-  text-align: center;
+  padding-block: clamp(3.5rem, 9vw, 6.5rem);
+  padding-inline: max(clamp(1.1rem, 4vw, 3rem), calc((100vw - var(--maxw)) / 2 + 3rem));
+  text-align: left;
   overflow: hidden;
 }
 
@@ -222,19 +223,29 @@ img {
 .page-hero h1 {
   color: #fff;
   max-width: 20ch;
-  margin-inline: auto;
+  margin-inline: 0;
 }
 
 .page-hero p {
   max-width: 58ch;
-  margin: 1rem auto 0;
+  margin: 1rem 0 0;
   color: #cfe0ee;
   font-size: 1.1rem;
 }
 
 /* Corps de texte lisible */
 .prose {
-  max-width: 46rem;
+  max-width: var(--maxw);
+}
+
+.prose > h1,
+.prose > h2,
+.prose > h3,
+.prose > p,
+.prose > ul,
+.prose > ol,
+.prose > blockquote {
+  max-width: 52rem;
 }
 
 .prose h2 {
@@ -255,13 +266,14 @@ img {
 }
 
 .section-cta {
-  text-align: center;
+  text-align: left;
   margin-top: 3rem;
 }
 
 /* Image de contenu dans le flux */
 .media {
   width: 100%;
+  max-width: 52rem;
   height: auto;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
