@@ -1,7 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Cta from '../components/Cta.astro';
 import PolePros from '../components/PolePros.astro';
+import { Image } from 'astro:assets';
+import balanceTestImage from '../assets/images/zinzino-balancetest.png';
+import balanceOilImage from '../assets/images/zinzino-balanceoil-plus.png';
 
 const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 ---
@@ -64,8 +66,8 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
             un bilan diététique personnalisé ni un avis médical.
           </p>
           <p class="zinzino-detail__independence">
-            Le partenariat Zinzino de Maxime est indépendant de l'accompagnement diététique
-            proposé par Charles Louvet.
+            Le partenariat commercial Zinzino × MFP Sport est indépendant de l'accompagnement
+            diététique proposé par Charles Louvet.
           </p>
         </div>
       </div>
@@ -79,22 +81,44 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 
       <div class="zinzino-detail__products">
         <article>
-          <p class="zinzino-detail__number">01 / Mesurer</p>
-          <h3>BalanceTest</h3>
-          <p>
-            Un test sur sang séché réalisé à domicile qui mesure 11 acides gras et fournit
-            plusieurs indicateurs, dont l'équilibre Oméga-6:3. Les résultats sont accessibles
-            de manière confidentielle à l'aide de l'identifiant du kit.
-          </p>
+          <div class="zinzino-detail__product-visual">
+            <Image
+              src={balanceTestImage}
+              alt="Kit de prélèvement Zinzino BalanceTest"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 760px) 80vw, 32vw"
+              loading="lazy"
+            />
+          </div>
+          <div class="zinzino-detail__product-copy">
+            <p class="zinzino-detail__number">01 / Mesurer</p>
+            <h3>BalanceTest</h3>
+            <p>
+              Un test sur sang séché réalisé à domicile qui mesure 11 acides gras et fournit
+              plusieurs indicateurs, dont l'équilibre Oméga-6:3. Les résultats sont accessibles
+              de manière confidentielle à l'aide de l'identifiant du kit.
+            </p>
+          </div>
         </article>
         <article>
-          <p class="zinzino-detail__number">02 / Compléter</p>
-          <h3>BalanceOil+</h3>
-          <p>
-            Un complément alimentaire contenant des oméga-3 EPA et DHA, des polyphénols issus
-            de l'huile d'olive et de la vitamine D3. Le choix d'une supplémentation doit rester
-            adapté à votre situation, votre alimentation et vos objectifs.
-          </p>
+          <div class="zinzino-detail__product-visual">
+            <Image
+              src={balanceOilImage}
+              alt="Flacon Zinzino BalanceOil+"
+              widths={[320, 480, 640]}
+              sizes="(max-width: 760px) 70vw, 28vw"
+              loading="lazy"
+            />
+          </div>
+          <div class="zinzino-detail__product-copy">
+            <p class="zinzino-detail__number">02 / Compléter</p>
+            <h3>BalanceOil+</h3>
+            <p>
+              Un complément alimentaire contenant des oméga-3 EPA et DHA, des polyphénols issus
+              de l'huile d'olive et de la vitamine D3. Le choix d'une supplémentation doit rester
+              adapté à votre situation, votre alimentation et vos objectifs.
+            </p>
+          </div>
         </article>
       </div>
 
@@ -112,15 +136,11 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
       </div>
 
       <p class="zinzino-detail__notice">
-        MFP Sport est partenaire indépendant Zinzino. Maxime peut percevoir une commission sur
-        les achats réalisés via ce lien, sans surcoût pour vous. Les compléments alimentaires
+        MFP Sport est partenaire indépendant Zinzino et peut percevoir une commission sur les
+        achats réalisés via ce lien, sans surcoût pour vous. Les compléments alimentaires
         ne se substituent pas à une alimentation variée et équilibrée ni à un mode de vie sain.
       </p>
     </section>
-
-    <div class="section-cta">
-      <Cta />
-    </div>
   </div>
 </Layout>
 
@@ -161,10 +181,13 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
   .zinzino-detail__steps p { margin: 0; color: #9eb4c2; font-size: .86rem; line-height: 1.5; }
 
   .zinzino-detail__products { margin-top: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid rgba(255,255,255,.2); }
-  .zinzino-detail__products article { display: grid; grid-template-columns: minmax(10rem, .42fr) 1fr; gap: clamp(2rem, 6vw, 6rem); padding: clamp(1.75rem, 3vw, 2.5rem) 0; border-bottom: 1px solid rgba(255,255,255,.2); color: #d4e0e8; }
-  .zinzino-detail__products h3 { grid-column: 2; margin: 0; color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); }
-  .zinzino-detail__products p { grid-column: 2; max-width: 58ch; margin: 0; }
-  .zinzino-detail__number { grid-row: 1 / 3; grid-column: 1; color: var(--color-blue-light); font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .zinzino-detail__products article { display: grid; grid-template-columns: minmax(15rem, .8fr) 1fr; gap: clamp(2.5rem, 7vw, 7rem); align-items: center; min-height: clamp(24rem, 42vw, 34rem); padding: clamp(2.5rem, 5vw, 4.5rem) 0; border-bottom: 1px solid rgba(255,255,255,.2); color: #d4e0e8; }
+  .zinzino-detail__product-visual { display: grid; place-items: center; min-width: 0; }
+  .zinzino-detail__product-visual :global(img) { display: block; width: min(100%, 30rem); max-height: 27rem; object-fit: contain; filter: drop-shadow(0 1.5rem 2rem rgba(0,0,0,.28)); }
+  .zinzino-detail__product-copy { max-width: 58ch; }
+  .zinzino-detail__products h3 { margin: .55rem 0 1.25rem; color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+  .zinzino-detail__products p { margin: 0; }
+  .zinzino-detail__number { color: var(--color-blue-light); font-family: var(--font-display); font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 
   .zinzino-detail__footer { display: flex; justify-content: space-between; gap: 2rem; align-items: center; padding: clamp(2rem, 5vw, 3.5rem) 0 1.5rem; }
   .zinzino-detail__footer h3 { color: #fff; }
@@ -176,8 +199,9 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
     .zinzino-detail__intro { grid-template-columns: 1fr; }
     .zinzino-detail__steps li { grid-template-columns: 2.5rem 1fr; }
     .zinzino-detail__steps p { grid-column: 2; }
-    .zinzino-detail__products article { grid-template-columns: 1fr; gap: .5rem; }
-    .zinzino-detail__products h3, .zinzino-detail__products p, .zinzino-detail__number { grid-row: auto; grid-column: 1; }
+    .zinzino-detail__products article { grid-template-columns: 1fr; gap: 1.5rem; min-height: 0; }
+    .zinzino-detail__product-visual { min-height: 15rem; }
+    .zinzino-detail__product-visual :global(img) { max-height: 20rem; }
     .zinzino-detail__footer { align-items: flex-start; flex-direction: column; }
   }
 
