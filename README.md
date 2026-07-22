@@ -18,12 +18,15 @@ npm run astro check
 - `src/pages/` — une page par URL du site (voir `docs/etude-refonte.md` §E).
 - `src/content/` — contenu administrable (professionnels, actualités, offres, infos
   pratiques, fil Instagram) ; schémas dans `src/content.config.ts`. C'est ce que le
-  futur micro back-office de Maxime modifiera (§D.7 de l'étude).
+  micro back-office de Maxime modifie (§D.7 de l'étude).
 - `src/components/`, `src/layouts/`, `src/styles/` — présentation, séparée du contenu.
 - `ovh/` — configuration Apache à déployer sur l'hébergement (`.htaccess` prod/préprod,
   redirection définitive `.fr` → `.com`).
 - `scripts/refresh-instagram.mjs` — récupère les derniers posts Instagram (§D.8).
 - `.github/workflows/` — build + déploiement automatique.
+- `admin/` — micro back-office PHP pour gérer l'équipe, les actualités et les
+  photos sans toucher au code ; installation et sécurité documentées dans
+  [`admin/README.md`](admin/README.md).
 
 ## Déploiement — secret GitHub requis
 

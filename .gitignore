@@ -18,6 +18,11 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Configuration et etat locaux du micro back-office (contiennent des secrets)
+private/
+admin/config.php
+admin/var/
+
 # macOS-specific files
 .DS_Store
 

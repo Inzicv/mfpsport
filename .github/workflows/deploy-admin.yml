@@ -1,0 +1,40 @@
+name: Déploiement du back-office (admin.mfpsport.com)
+
+on:
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-admin
+  cancel-in-progress: true
+
+env:
+  FTP_HOST: ftp.cluster127.hosting.ovh.net
+  FTP_USER: mfpspou
+  # Ce dossier doit être la racine du multisite admin.mfpsport.com dans OVH.
+  REMOTE_DIR: ./admin/
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Vérifier qu’aucun secret n’est embarqué
+        run: |
+          test ! -f admin/config.php
+          test ! -d admin/var
+
+      - name: Installer lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Déployer l’administration sur OVH (SFTP)
+        env:
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          lftp -e "set sftp:auto-confirm yes; \
+                   set net:max-retries 2; \
+                   set net:timeout 20; \
+                   open sftp://$FTP_HOST; \
+                   user $FTP_USER $FTP_PASSWORD; \
+                   mirror -R --verbose --exclude config.php --exclude-glob var/** ./admin/ $REMOTE_DIR; \
+                   bye"
