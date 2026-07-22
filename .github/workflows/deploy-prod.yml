@@ -1,22 +1,23 @@
 name: Déploiement production (mfpsport.com)
 
-# ⚠️ Déclenchement MANUEL UNIQUEMENT (workflow_dispatch).
-# Tant que la refonte n'est pas validée, mfpsport.com reste servi par le
-# WordPress actuel : on NE déploie JAMAIS automatiquement en prod. La bascule
-# (étape 10 du plan de migration, docs/etude-refonte.md §I) se fera en lançant
-# ce workflow à la main, en connaissance de cause — et écrasera le WordPress
-# dans ./www/. À ne lancer qu'après validation complète en préproduction.
+# Après la bascule initiale, chaque mise à jour de main est publiée. Le premier
+# passage déplace le WordPress intact dans ./wordpress-offline ; les suivants
+# archivent simplement la version statique précédente.
 on:
+  push:
+    branches: [main]
   workflow_dispatch: {}
 
 concurrency:
   group: deploy-prod
-  cancel-in-progress: true
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 
 env:
   FTP_HOST: ftp.cluster127.hosting.ovh.net
   FTP_USER: mfpspou
-  REMOTE_DIR: ./www/
 
 jobs:
   build-and-deploy:
@@ -36,13 +37,56 @@ jobs:
         env:
           SITE_URL: https://mfpsport.com
 
-      - name: Copier le .htaccess de production
-        run: cp ovh/.htaccess dist/.htaccess
+      - name: Préparer la version de production
+        run: |
+          cp ovh/.htaccess dist/.htaccess
+          touch dist/.mfp-astro-site
 
       - name: Installer lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Déployer sur OVH (SFTP)
+      - name: Envoyer la nouvelle version dans un dossier temporaire
+        env:
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          RELEASE_DIR="./release-${GITHUB_SHA}"
+          echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
+          lftp -e "set sftp:auto-confirm yes; \
+                   set net:max-retries 2; \
+                   set net:timeout 20; \
+                   open sftp://$FTP_HOST; \
+                   user $FTP_USER $FTP_PASSWORD; \
+                   mirror -R --verbose ./dist/ $RELEASE_DIR; \
+                   bye"
+
+      - name: Basculer le site en conservant WordPress hors ligne
+        env:
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          if lftp -e "set sftp:auto-confirm yes; open sftp://$FTP_HOST; user $FTP_USER $FTP_PASSWORD; cls -1 ./www/.mfp-astro-site; bye" >/dev/null 2>&1; then
+            BACKUP_DIR="./site-offline-${GITHUB_RUN_ID}"
+          else
+            BACKUP_DIR="./wordpress-offline"
+            if lftp -e "set sftp:auto-confirm yes; open sftp://$FTP_HOST; user $FTP_USER $FTP_PASSWORD; cls -1 $BACKUP_DIR; bye" >/dev/null 2>&1; then
+              echo "Le dossier de sauvegarde WordPress existe déjà ; bascule interrompue."
+              exit 1
+            fi
+          fi
+
+          echo "BACKUP_DIR=$BACKUP_DIR" >> "$GITHUB_ENV"
+          if ! lftp -e "set sftp:auto-confirm yes; \
+                        set net:max-retries 2; \
+                        set net:timeout 20; \
+                        open sftp://$FTP_HOST; \
+                        user $FTP_USER $FTP_PASSWORD; \
+                        mv ./www $BACKUP_DIR; \
+                        mv $RELEASE_DIR ./www; \
+                        bye"; then
+            lftp -e "set sftp:auto-confirm yes; open sftp://$FTP_HOST; user $FTP_USER $FTP_PASSWORD; mv $BACKUP_DIR ./www; bye" || true
+            exit 1
+          fi
+
+      - name: Rediriger mfpsport.fr vers mfpsport.com
         env:
           FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
         run: |
@@ -51,5 +95,21 @@ jobs:
                    set net:timeout 20; \
                    open sftp://$FTP_HOST; \
                    user $FTP_USER $FTP_PASSWORD; \
-                   mirror -R --verbose ./dist/ $REMOTE_DIR; \
+                   put ovh/fr-vers-com.htaccess -o ./preprod/.htaccess; \
                    bye"
+
+      - name: Vérifier la mise en ligne
+        run: |
+          curl --fail --silent --show-error --retry 6 --retry-delay 10 https://mfpsport.com/ -o /dev/null
+          LOCATION="$(curl --silent --show-error --head https://mfpsport.fr/ | tr -d '\r' | awk 'tolower($1) == "location:" { print $2; exit }')"
+          case "$LOCATION" in
+            https://mfpsport.com/*) ;;
+            *) echo "La redirection mfpsport.fr est incorrecte : $LOCATION"; exit 1 ;;
+          esac
+
+      - name: Résumé de la bascule
+        run: |
+          echo "### MFP Sport publié" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Site : https://mfpsport.com" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Ancienne version conservée dans : $BACKUP_DIR" >> "$GITHUB_STEP_SUMMARY"
+          echo "- mfpsport.fr redirige vers mfpsport.com" >> "$GITHUB_STEP_SUMMARY"

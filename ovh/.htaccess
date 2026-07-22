@@ -2,6 +2,11 @@
 # Déployé par .github/workflows/deploy-prod.yml à la racine du site.
 # Voir docs/etude-refonte.md §D.5 et §H.8.
 
+# Le site de production est entièrement statique. Le WordPress est conservé
+# dans un dossier frère hors ligne, jamais dans cette racine web.
+Options -Indexes
+DirectoryIndex index.html
+
 # --- HTTPS forcé ---
 RewriteEngine On
 RewriteCond %{HTTPS} off
