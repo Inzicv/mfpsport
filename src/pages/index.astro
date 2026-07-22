@@ -73,8 +73,7 @@ const etapes = [
   ['Mesurer', 'Un suivi régulier, des repères concrets et un programme qui évolue avec vous.'],
 ];
 
-// À remplacer par le lien partenaire personnel de Maxime dès qu'il est transmis.
-const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
+const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 ---
 
 <Layout
@@ -212,12 +211,17 @@ const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
         <h2 id="zinzino-title">La solution Zinzino<br />chez <span>MFP Sport</span></h2>
         <p class="zinzino__promise"><strong>Tester.</strong> Comprendre. Ajuster. Suivre.</p>
         <p class="zinzino__intro">
-          Une démarche basée sur le testing pour mieux comprendre votre profil et vous
-          conseiller une stratégie adaptée, avec un suivi assuré par Maxime.
+          Une démarche basée sur le testing pour mieux comprendre votre profil. Maxime vous
+          présente le concept ; l'interprétation nutritionnelle s'inscrit dans un accompagnement professionnel.
         </p>
-        <a class="zinzino__cta" href={zinzinoUrl} target="_blank" rel="sponsored noopener">
-          Découvrir la démarche <span aria-hidden="true">→</span>
-        </a>
+        <div class="zinzino__actions">
+          <a class="zinzino__cta zinzino__cta--secondary" href="/nutrition/#zinzino">
+            En savoir plus <span aria-hidden="true">→</span>
+          </a>
+          <a class="zinzino__cta" href={zinzinoUrl} target="_blank" rel="sponsored noopener">
+            Commander <span aria-hidden="true">↗</span>
+          </a>
+        </div>
         <p class="zinzino__disclosure">
           MFP Sport est partenaire indépendant Zinzino. Maxime peut percevoir une commission
           sur les achats réalisés via ce lien, sans surcoût pour vous.
@@ -233,12 +237,6 @@ const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
         />
       </div>
 
-      <ol class="zinzino__steps" aria-label="La démarche Zinzino chez MFP Sport">
-        <li><span>01</span><strong>Test à domicile</strong></li>
-        <li><span>02</span><strong>Lecture des résultats</strong></li>
-        <li><span>03</span><strong>Stratégie personnalisée</strong></li>
-        <li><span>04</span><strong>Suivi dans le temps</strong></li>
-      </ol>
     </div>
   </section>
 
@@ -376,16 +374,15 @@ const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
   .zinzino h2 span, .zinzino__promise strong { color: var(--color-blue-deep); }
   .zinzino__promise { margin: 0 0 1rem; color: var(--color-blue-night); font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.5rem); }
   .zinzino__intro { max-width: 33rem; margin: 0 0 1.75rem; color: var(--color-slate); }
-  .zinzino__cta { display: inline-flex; align-items: center; align-self: flex-start; gap: 1.5rem; padding: 1rem 1.35rem; border-radius: .2rem; color: #fff; background: var(--color-blue-deep); font-weight: 700; text-decoration: none; transition: transform .2s, background-color .2s; }
+  .zinzino__actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .zinzino__cta { display: inline-flex; align-items: center; align-self: flex-start; gap: 1.5rem; padding: 1rem 1.35rem; border: 1px solid var(--color-blue-deep); border-radius: .2rem; color: #fff; background: var(--color-blue-deep); font-weight: 700; text-decoration: none; transition: transform .2s, background-color .2s, color .2s; }
   .zinzino__cta:hover { transform: translateY(-2px); background: var(--color-blue-night); }
+  .zinzino__cta--secondary { color: var(--color-blue-deep); background: #fff; }
+  .zinzino__cta--secondary:hover { color: #fff; }
   .zinzino__disclosure { max-width: 35rem; margin: 1.25rem 0 0; color: #6d7f8a; font-size: .72rem; line-height: 1.5; }
   .zinzino__visual { position: absolute; inset: 0 0 0 37%; overflow: hidden; }
   .zinzino__visual :global(picture), .zinzino__visual :global(img) { width: 100%; height: 100%; }
   .zinzino__visual :global(img) { object-fit: cover; object-position: 72% center; }
-  .zinzino__steps { position: absolute; z-index: 3; top: 2rem; right: 2rem; display: grid; grid-template-columns: repeat(4, minmax(7.5rem, 1fr)); width: min(56%, 49rem); gap: .65rem; padding: 0; margin: 0; list-style: none; }
-  .zinzino__steps li { display: flex; flex-direction: column; gap: .65rem; min-height: 8.5rem; padding: 1rem; border: 1px solid rgba(7, 84, 126, .12); border-radius: .5rem; background: rgba(255,255,255,.92); box-shadow: 0 .5rem 1.5rem rgba(7, 37, 55, .08); backdrop-filter: blur(8px); }
-  .zinzino__steps span { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 50%; color: #fff; background: var(--color-blue-deep); font-family: var(--font-display); font-size: .75rem; font-weight: 700; }
-  .zinzino__steps strong { margin-top: auto; color: var(--color-blue-night); font-size: .85rem; line-height: 1.25; }
 
   .planning-home { background: #e8edef; }
 
@@ -441,8 +438,6 @@ const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
     .zinzino__content { padding: clamp(2.25rem, 8vw, 4rem); background: #fff; }
     .zinzino__visual { position: relative; inset: auto; height: min(75vw, 32rem); order: 2; }
     .zinzino__visual :global(img) { object-position: 72% 58%; }
-    .zinzino__steps { position: relative; inset: auto; grid-template-columns: repeat(2, 1fr); width: auto; padding: 1rem; order: 3; background: #eaf4f8; }
-    .zinzino__steps li { min-height: 7rem; }
     .expertises__list a { grid-template-columns: 3rem 1fr 2rem; }
     .expertises__text { grid-column: 2 / 3; }
     .expertises__arrow { grid-column: 3; grid-row: 1; }
@@ -455,8 +450,6 @@ const zinzinoUrl = 'https://www.zinzino.com/site/fr/fr-fr';
     .trust__grid { grid-template-columns: 1fr 1fr; }
     .trust p { padding: .75rem; }
     .section-head, .final-cta__inner { align-items: flex-start; flex-direction: column; }
-    .zinzino__steps { grid-template-columns: 1fr 1fr; }
-    .zinzino__steps li { min-height: 6.5rem; padding: .8rem; }
     .equipe-home__grid { grid-template-columns: 1fr; }
     .equipe-home__grid li:last-child { grid-column: auto; max-width: none; }
     .news-ticker { min-height: 3.8rem; }
