@@ -47,7 +47,7 @@ jobs:
       # pas de --delete pour ne rien supprimer par erreur lors des premiers essais.
       - name: Déployer sur OVH (SFTP)
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD || secrets.OVH_ACCESS }}
         run: |
           lftp -e "set sftp:auto-confirm yes; \
                    set net:max-retries 2; \

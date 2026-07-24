@@ -18,8 +18,8 @@ le relais.
 1. Créer le secret GitHub Actions `MFP_ADMIN_GITHUB_TOKEN` avec un jeton
    fine-grained limité au dépôt `Inzicv/mfpsport` et à la permission
    `Contents: Read and write`.
-2. Vérifier que `OVH_ACCESS` contient le mot de passe SFTP choisi également pour
-   la connexion de Maxime.
+2. Vérifier que `OVH_ACCESS` contient le mot de passe de connexion de Maxime et
+   que `OVH_FTP_PASSWORD` contient le mot de passe SFTP OVH.
 3. Faire pointer `admin.mfpsport.com` vers le dossier distant de l’application,
    activer le certificat SSL, puis lancer le workflow manuel « Déploiement du
    back-office ».

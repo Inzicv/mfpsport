@@ -38,7 +38,8 @@ sont écrits dans les workflows ; seul le mot de passe est un secret.
 
 | Secret | Description |
 |---|---|
-| `OVH_ACCESS` *(ou `OVH_FTP_PASSWORD`)* | Mot de passe du compte FTP/SFTP OVH `mfpspou` |
+| `OVH_FTP_PASSWORD` | Mot de passe du compte FTP/SFTP OVH `mfpspou` |
+| `OVH_ACCESS` | Mot de passe de connexion au back-office ; son hash est généré pendant le déploiement |
 | `MFP_ADMIN_GITHUB_TOKEN` | Jeton GitHub fine-grained limité au dépôt `Inzicv/mfpsport`, permission `Contents: Read and write`, utilisé uniquement par le back-office |
 | `INSTAGRAM_ACCESS_TOKEN` | Jeton longue durée de l'app Meta liée au compte Instagram pro (optionnel — sans lui, le fil Instagram n'est pas rafraîchi) |
 | `INSTAGRAM_USER_ID` | Identifiant du compte Instagram (optionnel, idem) |

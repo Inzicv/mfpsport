@@ -30,7 +30,7 @@ jobs:
       - name: Générer la configuration privée
         env:
           ADMIN_GITHUB_TOKEN: ${{ secrets.MFP_ADMIN_GITHUB_TOKEN }}
-          ADMIN_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
+          ADMIN_PASSWORD: ${{ secrets.OVH_ACCESS }}
           ADMIN_USERNAME: contact.mfpsport@gmail.com
         run: php scripts/build-admin-config.php "$RUNNER_TEMP/mfpsport-admin.php"
 
@@ -39,7 +39,7 @@ jobs:
 
       - name: Déployer l’administration et sa configuration sur OVH (SFTP)
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD || secrets.OVH_ACCESS }}
         run: |
           lftp -e "set sftp:auto-confirm yes; \
                    set net:max-retries 2; \
