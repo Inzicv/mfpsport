@@ -15,15 +15,19 @@ le relais.
 
 ## Configuration
 
-1. Copier `config.example.php` vers
-   `/home/mfpspou/private/mfpsport-admin.php` sur OVH.
-2. Générer un mot de passe fort et son hash :
-   `php -r "echo password_hash('mot-de-passe', PASSWORD_DEFAULT), PHP_EOL;"`.
-3. Renseigner le compte, le dépôt, la branche, le jeton et le hash dans le fichier
-   privé. Le fichier réel ne doit jamais entrer dans Git ni dans la racine web.
-4. Faire pointer `admin.mfpsport.com` vers le dossier distant de l’application,
+1. Créer le secret GitHub Actions `MFP_ADMIN_GITHUB_TOKEN` avec un jeton
+   fine-grained limité au dépôt `Inzicv/mfpsport` et à la permission
+   `Contents: Read and write`.
+2. Vérifier que `OVH_ACCESS` contient le mot de passe SFTP choisi également pour
+   la connexion de Maxime.
+3. Faire pointer `admin.mfpsport.com` vers le dossier distant de l’application,
    activer le certificat SSL, puis lancer le workflow manuel « Déploiement du
    back-office ».
+
+Le workflow génère le hash du mot de passe et le fichier
+`/home/mfpspou/private/mfpsport-admin.php` dans son environnement temporaire,
+puis le transfère hors de la racine web. Le jeton et le mot de passe ne sont
+jamais affichés ni enregistrés dans Git.
 
 Le chemin de configuration par défaut convient si `admin/` et `private/` sont
 deux dossiers frères. Sinon, définir la variable serveur `MFP_ADMIN_CONFIG` avec

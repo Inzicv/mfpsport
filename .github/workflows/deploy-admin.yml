@@ -7,6 +7,9 @@ concurrency:
   group: deploy-admin
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
   FTP_HOST: ftp.cluster127.hosting.ovh.net
   FTP_USER: mfpspou
@@ -24,12 +27,19 @@ jobs:
           test ! -f admin/config.php
           test ! -d admin/var
 
+      - name: Générer la configuration privée
+        env:
+          ADMIN_GITHUB_TOKEN: ${{ secrets.MFP_ADMIN_GITHUB_TOKEN }}
+          ADMIN_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
+          ADMIN_USERNAME: contact.mfpsport@gmail.com
+        run: php scripts/build-admin-config.php "$RUNNER_TEMP/mfpsport-admin.php"
+
       - name: Installer lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Déployer l’administration sur OVH (SFTP)
+      - name: Déployer l’administration et sa configuration sur OVH (SFTP)
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
         run: |
           lftp -e "set sftp:auto-confirm yes; \
                    set net:max-retries 2; \
@@ -37,4 +47,19 @@ jobs:
                    open sftp://$FTP_HOST; \
                    user $FTP_USER $FTP_PASSWORD; \
                    mirror -R --verbose --exclude config.php --exclude-glob var/** ./admin/ $REMOTE_DIR; \
+                   mkdir -p ./private; \
+                   mkdir -p ./private/mfpsport-admin-state; \
+                   put $RUNNER_TEMP/mfpsport-admin.php -o ./private/mfpsport-admin.php.tmp; \
+                   chmod 600 ./private/mfpsport-admin.php.tmp; \
+                   mv ./private/mfpsport-admin.php.tmp ./private/mfpsport-admin.php; \
+                   chmod 700 ./private/mfpsport-admin-state; \
                    bye"
+
+      - name: Vérifier l’ouverture du back-office
+        run: |
+          PAGE="$(curl --fail --location --silent --show-error --retry 6 --retry-delay 10 https://admin.mfpsport.com/)"
+          echo "$PAGE" | grep -q "Bonjour Maxime"
+          if echo "$PAGE" | grep -q "Administration en cours de configuration"; then
+            echo "La configuration privée n’est pas chargée."
+            exit 1
+          fi

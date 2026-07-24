@@ -47,7 +47,7 @@ jobs:
 
       - name: Envoyer la nouvelle version dans un dossier temporaire
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
         run: |
           RELEASE_DIR="./release-${GITHUB_SHA}"
           echo "RELEASE_DIR=$RELEASE_DIR" >> "$GITHUB_ENV"
@@ -61,7 +61,7 @@ jobs:
 
       - name: Basculer le site en conservant WordPress hors ligne
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
         run: |
           if lftp -e "set sftp:auto-confirm yes; open sftp://$FTP_HOST; user $FTP_USER $FTP_PASSWORD; cls -1 ./www/.mfp-astro-site; bye" >/dev/null 2>&1; then
             BACKUP_DIR="./site-offline-${GITHUB_RUN_ID}"
@@ -88,7 +88,7 @@ jobs:
 
       - name: Rediriger mfpsport.fr vers mfpsport.com
         env:
-          FTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+          FTP_PASSWORD: ${{ secrets.OVH_ACCESS || secrets.OVH_FTP_PASSWORD }}
         run: |
           lftp -e "set sftp:auto-confirm yes; \
                    set net:max-retries 2; \
