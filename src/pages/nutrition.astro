@@ -4,6 +4,7 @@ import PolePros from '../components/PolePros.astro';
 import { Image } from 'astro:assets';
 import balanceTestImage from '../assets/images/zinzino-balancetest.png';
 import balanceOilImage from '../assets/images/zinzino-balanceoil-plus.png';
+import nutritionFeatureImage from '../assets/images/partenariat-zinzino-mfp-sport.png';
 
 const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 ---
@@ -38,6 +39,17 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
       sont entièrement personnalisés, que vous pratiquiez pour le loisir ou la compétition, et
       peuvent inclure une analyse de la composition corporelle avec le Z-Métrix.
     </p>
+
+    <figure class="nutrition-feature">
+      <Image
+        src={nutritionFeatureImage}
+        alt="La démarche nutrition et Zinzino proposée chez MFP Sport"
+        widths={[720, 1080, 1440]}
+        sizes="(max-width: 60rem) 100vw, 76rem"
+        loading="lazy"
+      />
+      <figcaption>Tester, comprendre, ajuster et suivre votre stratégie nutritionnelle.</figcaption>
+    </figure>
 
     <h2>L'hydratation, un pilier trop souvent négligé</h2>
     <p>
@@ -145,6 +157,25 @@ const zinzinoUrl = 'https://www.zinzino.com/2021428826';
 </Layout>
 
 <style>
+  .nutrition-feature {
+    width: min(100%, 76rem);
+    margin: clamp(2.5rem, 6vw, 4.5rem) 0;
+  }
+
+  .nutrition-feature :global(img) {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .nutrition-feature figcaption {
+    margin-top: .8rem;
+    color: var(--color-slate);
+    font-size: .85rem;
+  }
+
   .zinzino-detail {
     position: relative;
     left: 50%;

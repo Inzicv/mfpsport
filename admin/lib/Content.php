@@ -97,6 +97,9 @@ final class Content
             ['key' => 'recuperation-presso', 'title' => 'Récupération — pressothérapie', 'description' => 'La photo des bottes Normatec sur la page Récupération.', 'path' => 'src/assets/images/pressotherapie-jambes-recuperation.jpg'],
             ['key' => 'bilan', 'title' => 'Bilan gratuit', 'description' => 'La photo d’accompagnement du premier bilan.', 'path' => 'src/assets/images/bilan-corporel-consultation.jpg'],
             ['key' => 'salle-arles', 'title' => 'Salle de sport à Arles', 'description' => 'La vue de la zone cardio sur la page locale.', 'path' => 'src/assets/images/zone-cardio-mfp-sport.jpg'],
+            ['key' => 'nutrition-demarche', 'title' => 'Nutrition — démarche', 'description' => 'Le grand visuel Tester, Comprendre, Ajuster, Suivre de la page Nutrition.', 'path' => 'src/assets/images/partenariat-zinzino-mfp-sport.png'],
+            ['key' => 'equipes-collectif', 'title' => 'Équipes & clubs — entraînement collectif', 'description' => 'La grande photo de préparation physique collective.', 'path' => 'src/assets/images/lunges-elastique-duo.jpg'],
+            ['key' => 'equipes-agilite', 'title' => 'Équipes & clubs — agilité', 'description' => 'La seconde photo de travail des appuis et de l’agilité.', 'path' => 'src/assets/images/agilite-piste-interieure.jpg'],
         ];
     }
 

@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import preparationCollective from '../assets/images/lunges-elastique-duo.jpg';
+import travailAgilite from '../assets/images/agilite-piste-interieure.jpg';
 ---
 
 <Layout
@@ -22,6 +25,29 @@ import Layout from '../layouts/Layout.astro';
       Idéal pour compléter vos séances à la carte, préparer une échéance sportive ou retrouver
       un collectif affûté et prêt à l'action.
     </p>
+
+    <section class="club-photos" aria-label="Préparation physique des équipes chez MFP Sport">
+      <figure class="club-photos__main">
+        <Image
+          src={preparationCollective}
+          alt="Deux sportifs travaillent les fentes en préparation physique collective"
+          widths={[520, 780, 1040]}
+          sizes="(max-width: 760px) 100vw, 58vw"
+          loading="lazy"
+        />
+        <figcaption>Des séances collectives adaptées à votre discipline et à votre calendrier.</figcaption>
+      </figure>
+      <figure class="club-photos__secondary">
+        <Image
+          src={travailAgilite}
+          alt="Travail d'agilité sur la piste intérieure de MFP Sport"
+          widths={[420, 640, 820]}
+          sizes="(max-width: 760px) 100vw, 30vw"
+          loading="lazy"
+        />
+        <figcaption>Force, vitesse, appuis et réactivité dans un même espace.</figcaption>
+      </figure>
+    </section>
 
     <h2>Des protocoles et outils de récupération</h2>
     <p>
@@ -51,3 +77,58 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </Layout>
+
+<style>
+  .club-photos {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, .65fr);
+    gap: clamp(1rem, 2.5vw, 2rem);
+    width: min(100%, 76rem);
+    margin: clamp(2.5rem, 6vw, 4.5rem) 0;
+  }
+
+  .club-photos figure {
+    display: flex;
+    min-width: 0;
+    margin: 0;
+    flex-direction: column;
+  }
+
+  .club-photos :global(img) {
+    width: 100%;
+    height: clamp(24rem, 48vw, 38rem);
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .club-photos__main :global(img) {
+    object-position: center 46%;
+  }
+
+  .club-photos__secondary :global(img) {
+    object-position: center 58%;
+  }
+
+  .club-photos figcaption {
+    margin-top: .8rem;
+    color: var(--color-slate);
+    font-size: .85rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 760px) {
+    .club-photos {
+      grid-template-columns: 1fr;
+    }
+
+    .club-photos :global(img) {
+      height: auto;
+      aspect-ratio: 4 / 5;
+    }
+
+    .club-photos__secondary :global(img) {
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>
